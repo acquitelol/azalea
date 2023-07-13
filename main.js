@@ -1,7 +1,7 @@
 (async function() {
     'use strict';
 
-    await importPatcher();
+    const patcher = await import("https://esm.sh/spitroast");
     const labels = await getRecursively(() => document.getElementsByClassName("status-bar-label-text"));
     labels[1].textContent = "Rosie :3";
 
@@ -19,18 +19,9 @@
         dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
     });
 
-    patcher.after("render", findReact(document.getElementsByClassName('wac-overlay')[0]).__proto__, function(_, res) {
-        if (!this.props.options) return;
-        for (const option of this.props.options) {
-            for (const item of option.get("studentAnswer")) {
-                if (localStorageHandler.get(this.props.bookworkCode)[0] === item[1]) {
-                    this.props.onSubmitAnswer('', null, option, false);
-                    return;
-                }
-                
-                alert("Couldn't find this answer in storage! Pray that you can guess it correctly C:");
-            }
-        }
+    patcher.after("render", findReact(document.getElementsByClassName('wac-overlay')[0]).__proto__, function() {
+        const answers = localStorageHandler.get(this.props.bookworkCode);
+        katex.render(answers, document.getElementsByClassName("wac-text")[0], { throwOnError: false });
     })
 
     dynamicSubmitButton?.addEventListener("click", storeAnswers);

@@ -34,7 +34,7 @@
     }],
 
     "web_accessible_resources": [{
-        "resources": ["utilities.js", "main.js"],
+        "resources": ["utilities.js", "main.js", "lib/katex.min.js"],
         "matches": ["<all_urls>"]
     }]
 }

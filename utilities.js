@@ -44,7 +44,6 @@ class LocalStorageHandler {
     }
 }
 
-const importPatcher = async () => window.patcher = await import("https://esm.sh/spitroast");
 const localStorageHandler = new LocalStorageHandler();
 
 const findReact = (element, traverseUp = 0) => {
@@ -163,7 +162,7 @@ const extractAnswers = () => {
     }
 
     const slots = document.querySelectorAll(".slots .slot");
-    build(slots);;
+    build(slots);
 
     const answer = document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected");
     return (build(answer), results);
