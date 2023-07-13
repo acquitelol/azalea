@@ -1,0 +1,40 @@
+{
+    "name": "CutestBypass",
+    "version": "1.0.0",
+    "description": "Gives you access to many useful tools on a specific British Maths website!",
+    "manifest_version": 3,
+    "author": "Rosie",
+
+    "host_permissions": [
+        "*://www.sparxmaths.uk/*",
+        "https://auth.sparxmaths.uk/*"
+    ],
+
+    "icons": {
+        "128": "logo.png"
+    },
+
+    "action": {
+        "default_icon": {
+            "128": "logo.png"
+        },
+        "default_title": "CutestBypass"
+    },
+
+    "permissions": [
+        "activeTab",
+        "storage",
+        "downloads"
+    ],
+
+    "content_scripts": [{
+        "css": ["rosiepink.css"],
+        "js": ["patch.js"],
+        "matches": ["https://*.sparxmaths.uk/*"]
+    }],
+
+    "web_accessible_resources": [{
+        "resources": ["utilities.js", "main.js"],
+        "matches": ["<all_urls>"]
+    }]
+}
