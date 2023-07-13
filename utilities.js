@@ -168,3 +168,13 @@ const extractAnswers = () => {
     const answer = document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected");
     return (build(answer), results);
 }
+
+const storeAnswers = () => {
+    const bookwork = document.querySelector(".bookwork-code")
+        .textContent
+        .replace("Bookwork code: ", "");
+    const answers = extractAnswers();
+
+    console.log({ bookwork, answers });
+    localStorageHandler.set(bookwork, answers);
+}

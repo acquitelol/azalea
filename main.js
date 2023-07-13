@@ -33,16 +33,6 @@
         }
     })
 
-    const storeAnswers = () => {
-        const bookwork = document.querySelector(".bookwork-code")
-            .textContent
-            .replace("Bookwork code: ", "");
-        const answers = extractAnswers();
-
-        console.log({ bookwork, answers });
-        localStorageHandler.set(bookwork, answers);
-    }
-
     dynamicSubmitButton?.addEventListener("click", storeAnswers);
 
     document.addEventListener("keypress", function(event) {
