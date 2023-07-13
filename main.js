@@ -12,8 +12,11 @@
     const SparxWebContainer = Contexts.props.children.props.children[1].type
     const SparxWeb = SparxWebContainer.WrappedComponent.prototype;
 
+    let dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
+
     patcher.after("render", SparxWeb, function(_, res) {
         document.__props = this.props;
+        dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
     });
 
     patcher.after("render", findReact(document.getElementsByClassName('wac-overlay')[0]).__proto__, function(_, res) {
@@ -30,18 +33,21 @@
         }
     })
 
+    const storeAnswers = () => {
+        const bookwork = document.querySelector(".bookwork-code")
+            .textContent
+            .replace("Bookwork code: ", "");
+        const answers = extractAnswers();
+
+        console.log({ bookwork, answers });
+        localStorageHandler.set(bookwork, answers);
+    }
+
+    dynamicSubmitButton?.addEventListener("click", storeAnswers);
+
     document.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            const submitButton = document.querySelector("#skill-delivery-submit-button");
-            
-            if (submitButton) {
-                const bookwork = document.querySelector(".bookwork-code")
-                    .textContent
-                    .replace("Bookwork code: ", "");
-        
-                const answers = extractAnswers();
-                localStorageHandler.set(bookwork, answers);
-            }
+        if (event.key === "Enter" && dynamicSubmitButton) {
+            storeAnswers();
         }
     })
 })();
