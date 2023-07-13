@@ -1,7 +1,7 @@
 {
     "name": "CutestBypass",
     "version": "1.0.0",
-    "description": "Gives you access to many useful tools on a specific British Maths website!",
+    "description": "Gives you access to many useful tools on SparxMaths!",
     "manifest_version": 3,
     "author": "Rosie",
 
@@ -34,7 +34,7 @@
     }],
 
     "web_accessible_resources": [{
-        "resources": ["utilities.js", "main.js", "lib/katex.min.js"],
+        "resources": ["utilities.js", "main.js"],
         "matches": ["<all_urls>"]
     }]
 }
