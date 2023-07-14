@@ -18,8 +18,10 @@
 - Extract the ZIP to a folder on your local FS.
 - Open the **Manage Extensions** tab in your Chromium-based browser.
 - Enable **Developer Mode** if not enabled already.
-- Click on **Load Unpacked** and select the folder that was extracted from the ZIP.
+- Click on **Load Unpacked** and open the folder that was extracted, then select the **src** directory.
 
 <img src="./assets/divider.png">
 
-*Made by Rosie :3*
+<div style="text-align: center">
+    <i>Made by Rosie :3</i>
+</div>
