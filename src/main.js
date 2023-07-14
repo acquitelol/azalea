@@ -93,16 +93,16 @@
         const newItems = [
             {
                 text: "Cycle theme",
-                img: getImage("themes.png"), // Note: This can take in any image link, but the size of the icon isn't predefined
-                hoverImg: getImage("themes_hover.png"),
+                img: getImage("menu_theme.png"), // Note: This can take in any image link, but the size of the icon isn't predefined
+                hoverImg: getImage("menu_theme_hover.png"),
                 action: onCycleTheme.name,
                 keyBinding: null,
                 newBadge: false
             },
             {
                 text: `${preferenceStorage.get("name") ? "Disable" : "Enable"} name`,
-                img: getImage("name.png"),
-                hoverImg: getImage("name_hover.png"),
+                img: getImage("menu_name.png"),
+                hoverImg: getImage("menu_name_hover.png"),
                 action: onToggleName.name,
                 keyBinding: null,
                 newBadge: false
@@ -114,15 +114,12 @@
         // Ensure that the components from this patch haven't been added already
         // Reassign to menuItems because `push` returns a copy of the List
         newItems.forEach(newItem => {
-            let insertIndex = -1;
             for (const [idx, oldItem] of this.props.menuItems.entries()) {
                 newItem.action === oldItem.get("action") 
                     && (this.props.menuItems = this.props.menuItems.delete(idx));
-
-                oldItem.get("action") === "onRequestLogout" && (insertIndex = idx);
             }
 
-            this.props.menuItems = this.props.menuItems.insert(insertIndex, $I.fromJS(newItem));
+            this.props.menuItems = this.props.menuItems.push($I.fromJS(newItem));
         })
 
         return res;
