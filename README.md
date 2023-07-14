@@ -6,9 +6,9 @@
 
 ### **This tool does the following:**
 
-- Stores **bookwork checks** and automatically submits them if possible, otherwise shows you the answer to choose the correct option yourself.
-- Makes Sparx **pink**!
-- Makes the Username say **Rosie :3**
+- <img src="src/assets/logo.png" style="width: 1rem"> Stores **bookwork checks** and automatically submits them if possible, otherwise shows you the answer to choose the correct option yourself.
+- <img src="src/assets/menu_theme.png" style="width: 1rem"> Provides access to **Themes** by going into your **Menu** at the top right! (still **Work in Progress**, expect changes in the coming weeks).
+- <img src="src/assets/menu_name.png" style="width: 1rem"> Makes the Username say **Rosie :3** (toggleable from **Menu**, off by default).
 
 <img src="src/assets/divider.png">
 
