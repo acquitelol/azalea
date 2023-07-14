@@ -1,4 +1,14 @@
+/**
+ * UTILITIES
+ */
+
+// Name used in several places
+const cuteName = "Rosie :3";
+
+// Waits an amount of time in MS
 const wait = (t) => new Promise(r => setTimeout(r, t));
+
+// Continuously tries to get a value from a callback and tries again every specific interval until successful
 const getRecursively = (cb, time = 100) => {
     return new Promise(r => {
         const result = cb();
@@ -11,10 +21,13 @@ const getRecursively = (cb, time = 100) => {
     })
 } 
 
+// Easier LocalStorage handling + keeps all data to one stringified Object
 class LocalStorageHandler {
-    constructor(name) {
-        this.name = typeof name === "string" ? name : "CutestBypassStorage";
-        this.init()
+    constructor(name, shouldLog = true) {
+        this.name = name;
+        this.shouldLog = shouldLog;
+
+        this.init();
     }
 
     init() {
@@ -24,6 +37,7 @@ class LocalStorageHandler {
 
     set(key, value) {
         this.init();
+        this.shouldLog && console.log("SET", { key, value });
 
         const items = JSON.parse(localStorage.getItem(this.name)) ?? {}
         localStorage.setItem(this.name, JSON.stringify({ ...items, [key]: value }));
@@ -31,21 +45,40 @@ class LocalStorageHandler {
 
     delete(key) {
         this.init();
+        this.shouldLog && console.log("DELETE", { key });
 
         const { [key]: _, ...rest } = JSON.parse(localStorage.getItem(this.name)) ?? {};
-        localStorage.setItem(this.name, JSON.stringify({ ...rest }))
+        localStorage.setItem(this.name, JSON.stringify({ ...rest }));
     }
 
     get(key) {
         this.init();
+        this.shouldLog && console.log("GET", { key });
 
         const items = JSON.parse(localStorage.getItem(this.name));
-        return items[key] ?? [];
+        return items[key] ?? null;
+    }
+
+    list() {
+        this.init();
+        this.shouldLog && console.log("LIST", { _: null });
+
+        return JSON.parse(localStorage.getItem(this.name)) ?? {};
     }
 }
 
-const localStorageHandler = new LocalStorageHandler();
+// Used to store all bookworkCodes and their answers to be used later
+const bookworkHandler = new LocalStorageHandler("CutestBypassStorage");
 
+// Used to store any preferences such as using Rosie :3 as the name or not
+const preferenceStorage = new LocalStorageHandler("CutestBypassPreferences");
+
+/**
+ * Finds a React component (if any) by its HTMLNode through React fibers.
+ * @param {HTMLNode} element
+ * @param {number} traverseUp
+ * @returns ReactElement | null
+ */
 const findReact = (element, traverseUp = 0) => {
     const key = Object.keys(element).find(key => {
         return key.startsWith("__reactFiber$")
@@ -84,6 +117,13 @@ const findReact = (element, traverseUp = 0) => {
     return computedFiber.stateNode;
 };
 
+/**
+ * Traverses a tree and attempts to find a result based on a given predicate
+ * @param {object} tree Tree to traverse
+ * @param {function} filter Predicate to determine result
+ * @param {object} options Options to refine result
+ * @returns any | null
+ */
 const findInTree = (tree = {}, filter = _ => _, { ignore = [], walkable = [], maxProperties = 100 } = {}) => {
     let stack = [tree];
     const wrapFilter = function (...args) {
@@ -121,10 +161,22 @@ const findInTree = (tree = {}, filter = _ => _, { ignore = [], walkable = [], ma
     }
 };
 
+/**
+ * Uses specific walkable properties with findInTree as a preset to traverse React trees
+ * @param {object} tree Tree to traverse
+ * @param {function} filter Predicate to determine result
+ * @param {object} options Options to refine result
+ * @returns any | null
+ */
 const findInReactTree = (tree, filter = _ => _, options = {}) => {
     return findInTree(tree, filter, { walkable: ['props', 'children'], ...options })
 }
 
+/**
+ * Extracts all answers (numbers, text, images) from the input area in skill-delivery
+ * @param {HTMLNode} inputs The inputs to search
+ * @returns [] | (string | number)[]
+ */
 const extractAnswers = (inputs = []) => {
     let results = [];
 
@@ -165,6 +217,7 @@ const extractAnswers = (inputs = []) => {
     return results;
 }
 
+// Stores all possible answers into the bookworkHandler
 const storeAnswers = () => {
     const bookwork = document.querySelector(".bookwork-code")
         .textContent
@@ -173,6 +226,5 @@ const storeAnswers = () => {
         document.querySelectorAll(".slots .slot"), 
         document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected")]);
 
-    console.log({ bookwork, answers });
-    localStorageHandler.set(bookwork, answers);
+    bookworkHandler.set(bookwork, answers);
 }

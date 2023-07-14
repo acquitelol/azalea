@@ -1,6 +1,6 @@
 {
     "name": "CutestBypass",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "Gives you access to many useful tools on SparxMaths!",
     "manifest_version": 3,
     "author": "Rosie",
@@ -28,8 +28,8 @@
     ],
 
     "content_scripts": [{
-        "css": ["rosiepink.css"],
         "js": ["patch.js"],
+        "css": ["rosiepink.css"],
         "matches": ["https://*.sparxmaths.uk/*"]
     }],
 
