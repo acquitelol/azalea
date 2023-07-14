@@ -13,8 +13,7 @@ jobs:
       - name: Load version
         id: version
         run: |
-          version=$(grep -oP '(?<="version": ")[^"]+' file.json)
-          echo '__v=$(version)' >> $GITHUB_OUTPUT
+          echo '__v=$(cat src/manifest.json | grep '"version"' | sed -e 's/^.*"version": "\([^"]*\)",.*$/\1/')' >> $GITHUB_OUTPUT
 
       - name: Compress src directory
         id: compress
