@@ -22,17 +22,18 @@
     patcher.after("render", findReact(document.getElementsByClassName('wac-overlay')[0]).__proto__, function(_, res) {
         if (!this.props.options) return;
 
-        const answerRegexp = /[0-9a-zA-Z]/g;
-        const markupRegexp = /\$([0-9a-zA-Z])\$/g;
+        const answerRegexp = /[0-9]/g;
         const answers = localStorageHandler.get(this.props.bookworkCode);
 
         for (const option of this.props.options) {
             const optionMatches = option.get("answerMarkup")?.match(answerRegexp) ?? [];
-            const answerMatches = answers?.join("")?.match(markupRegexp) ?? [];
+            const answerMatches = answers?.join("")?.match(answerRegexp) ?? [];
 
-            if (optionMatches.join("") === answerMatches.join("")) {
+            if (optionMatches.join("").includes(answerMatches.join(""))) {
                 this.props.onSubmitAnswer('', null, option, false);
                 return res;
+            } else {
+                console.warn(`Couldn't find answer! Results follow;`, { optionMatches, answerMatches });
             }
         }
 
@@ -41,7 +42,7 @@
 
         if (!container || !wacText) return;
 
-        wacText[0].innerHTML = `The answer for "${this.props.bookworkCode}" wasn't found and is written below.`
+        container.props.children[0].props.children = `The answer for "${this.props.bookworkCode}" wasn't found and is written below.`
         container.props.children[1].props.children = ["Answer: ", answers.join("")]
 
         return res;
