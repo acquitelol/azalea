@@ -23,7 +23,9 @@ jobs:
 
       - name: Compress src directory
         id: compress
-        run: zip -r CutestBypass.zip src & wait $!;
+        run: |
+          mv src CutestBypass-${{ steps.version.outputs.value }}
+          zip -r CutestBypass.zip CutestBypassExtension & wait $!;
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
