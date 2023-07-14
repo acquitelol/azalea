@@ -125,7 +125,7 @@ const findInReactTree = (tree, filter = _ => _, options = {}) => {
     return findInTree(tree, filter, { walkable: ['props', 'children'], ...options })
 }
 
-const extractAnswers = () => {
+const extractAnswers = (inputs = []) => {
     let results = [];
 
     const build = (clone) => {
@@ -161,18 +161,17 @@ const extractAnswers = () => {
         }
     }
 
-    const slots = document.querySelectorAll(".slots .slot");
-    build(slots);
-
-    const answer = document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected");
-    return (build(answer), results);
+    inputs.forEach(input => build(input));
+    return results;
 }
 
 const storeAnswers = () => {
     const bookwork = document.querySelector(".bookwork-code")
         .textContent
         .replace("Bookwork code: ", "");
-    const answers = extractAnswers();
+    const answers = extractAnswers([
+        document.querySelectorAll(".slots .slot"), 
+        document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected")]);
 
     console.log({ bookwork, answers });
     localStorageHandler.set(bookwork, answers);
