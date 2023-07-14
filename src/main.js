@@ -29,6 +29,9 @@
     Patcher.after("render", SparxWeb, function() {
         document.__props = this.props;
         dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
+
+        dynamicSubmitButton?.removeEventListener("click", storeAnswers);
+        dynamicSubmitButton?.addEventListener("click", storeAnswers);
     });
 
     // Autobookwork check bypass logic
@@ -101,8 +104,6 @@
         return res;
     })
 
-    // Listen to event for pressing the `Enter` Key and for pressing on the `Submit` button.
-    dynamicSubmitButton?.addEventListener("click", storeAnswers);
     document.addEventListener("keypress", function(event) {
         event.key === "Enter" && dynamicSubmitButton && storeAnswers();
     })
