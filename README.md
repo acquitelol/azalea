@@ -2,7 +2,7 @@
 
 ## **The** ***cutest*** **Sparx Client bypass extension for Chromium browsers ~!**
 
-<img src="./assets/divider.png" style="width: 50%">
+<img src="./assets/divider.png">
 
 ### **This tool does the following:**
 
@@ -10,7 +10,7 @@
 - Makes Sparx *pink*!
 - Makes the Username say *Rosie :3*
 
-<img src="./assets/divider.png" style="width: 50%">
+<img src="./assets/divider.png">
 
 ### **How to install:**
 
@@ -19,3 +19,7 @@
 - Open the **Manage Extensions** tab in your Chromium-based browser.
 - Enable **Developer Mode** if not enabled already.
 - Click on **Load Unpacked** and select the folder that was extracted from the ZIP.
+
+<img src="./assets/divider.png">
+
+*Made by Rosie :3*

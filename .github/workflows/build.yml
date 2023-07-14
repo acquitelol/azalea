@@ -19,7 +19,7 @@ jobs:
           manifest="${content//$'\n'/'%0A'}"
           manifest="${content//$'\r'/'%0D'}"
 
-          echo "__manifest=$manifest" >> $GITHUB_OUTPUT
+          echo "$manifest"
 
       - name: Compress src directory
         id: compress
