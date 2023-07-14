@@ -16,7 +16,9 @@ jobs:
 
       - name: Get version
         id: version
-        run: echo `value=$(cat ./src/manifest.json | grep -oE '[ ]+"version": "(.*)",' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')` >> $GITHUB_OUTPUT
+        run: |
+          version=$(cat ./src/manifest.json | grep -oE '[ ]+"version": "(.*)",' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          echo 'value=$($version)' >> $GITHUB_OUTPUT
 
       - name: Compress src directory
         id: compress
