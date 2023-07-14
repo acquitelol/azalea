@@ -11,19 +11,18 @@
 
     Themer.setTheme(labels[0]);
 
-    const AppContainer = document.getElementById("app-container");
-    const ReactRoot = AppContainer._reactRootContainer._internalRoot;
-    const ReactPendingProps = ReactRoot.current.child.pendingProps;
-    const Contexts = ReactPendingProps.children.props.children.props.children[0];
-    const SparxWebContainer = Contexts.props.children.props.children[1].type;
-
     // Component prototypes to patch (Thank god these are all class-based components!)
-    const SparxWeb = SparxWebContainer.WrappedComponent.prototype;
+    const SparxWeb = findReact(document.getElementsByClassName('screen')[0]);
     const WACOverlay = findReact(document.getElementsByClassName('wac-overlay')[0]);
     const StatusBar = findReact(document.getElementsByClassName("status")[0]);
 
     // This will adapt whenever SparxWeb re-renders
     let dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
+
+    // Listen for Enter keypresses and store the answer when the dynamicSubmitButton exists (is in scope)
+    document.addEventListener("keypress", function(event) {
+        event.key === "Enter" && dynamicSubmitButton && storeAnswers();
+    })
 
     // Assigns submit button and props to document for easier access
     Patcher.after("render", SparxWeb, function() {
@@ -123,9 +122,5 @@
         })
 
         return res;
-    })
-
-    document.addEventListener("keypress", function(event) {
-        event.key === "Enter" && dynamicSubmitButton && storeAnswers();
     })
 })();
