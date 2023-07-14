@@ -1,0 +1,35 @@
+name: Compress CutestBypass and release
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Compress CutestBypass and release
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Load manifest.json
+        id: manifest
+        run: |
+          manifest=`cat ./src/manifest.json`
+
+          manifest="${content//'%'/'%25'}"
+          manifest="${content//$'\n'/'%0A'}"
+          manifest="${content//$'\r'/'%0D'}"
+
+          echo "__manifest=$manifest" >> $GITHUB_OUTPUT
+
+      - name: Compress src directory
+        id: compress
+        run: zip -r CutestBypass-${{fromJson(steps.manifest.outputs.__manifest).version}}.zip ./src & wait $!;
+
+      - name: Create release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: cutestbypass_${{fromJson(steps.manifest.outputs.__manifest).version}}
+          title: CutestBypass ${{fromJson(steps.manifest.outputs.__manifest).version}}
+          files: ./*.zip

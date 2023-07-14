@@ -11,12 +11,12 @@
     ],
 
     "icons": {
-        "128": "logo.png"
+        "128": "../assets/logo.png"
     },
 
     "action": {
         "default_icon": {
-            "128": "logo.png"
+            "128": "../assets/logo.png"
         },
         "default_title": "CutestBypass"
     },
