@@ -10,16 +10,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
       - name: Compress src directory
         id: compress
         run: |
-          zip -r CutestBypass-latest.zip ./src & wait $!;
+          zip -r CutestBypass-${{ steps.date.outputs.date }}.zip ./src & wait $!;
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: cutestbypass-latest
-          title: "CutestBypass-Latest"
+          automatic_release_tag: cutestbypass-${{ steps.date.outputs.date }}
+          title: "CutestBypass-${{ steps.date.outputs.date }}"
           files: ./*.zip
