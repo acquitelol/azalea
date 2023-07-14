@@ -13,15 +13,13 @@ jobs:
       - name: Compress src directory
         id: compress
         run: |
-          zip -r `CutestBypass-$(cat ./src/manifest.json | grep '"version"' | sed -e 's/^.*"version": \([^"]*\),.*$/\1/')` ./src ./assets & wait $!;
+          zip -r CutestBypass-latest.zip ./src ./assets & wait $!;
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: |
-            `cutestbypass_$(cat ./src/manifest.json | grep '"version"' | sed -e 's/^.*"version": \([^"]*\),.*$/\1/')`
-          title: |
-            `CutestBypass $(cat ./src/manifest.json | grep '"version"' | sed -e 's/^.*"version": \([^"]*\),.*$/\1/')`
+          automatic_release_tag: cutestbypass-latest
+          title: "CutestBypass-Latest"
           files: ./*.zip
