@@ -3,20 +3,20 @@
 
     // Important imports
     const Patcher = await import("https://esm.sh/spitroast");
-    const Immutable = await import("https://esm.sh/immutable");
-
     const labels = await getRecursively(() => document.getElementsByClassName("status-bar-label-text"));
 
     // Initialization by applying preferences
     preferenceStorage.set("realName", labels[1].textContent)
-    preferenceStorage.get("name") && (labels[1].textContent = "Rosie :3");
+    preferenceStorage.get("name") && (labels[1].textContent = cuteName);
+
+    Themer.setTheme(labels[0]);
 
     const AppContainer = document.getElementById("app-container");
     const ReactRoot = AppContainer._reactRootContainer._internalRoot;
     const ReactPendingProps = ReactRoot.current.child.pendingProps;
     const Contexts = ReactPendingProps.children.props.children.props.children[0];
     const SparxWebContainer = Contexts.props.children.props.children[1].type;
-    
+
     // Component prototypes to patch (Thank god these are all class-based components!)
     const SparxWeb = SparxWebContainer.WrappedComponent.prototype;
     const WACOverlay = findReact(document.getElementsByClassName('wac-overlay')[0]);
@@ -72,6 +72,15 @@
     Patcher.after("render", StatusBar.__proto__, function(_, res) {
         if (!this.props.menuItems) return;
 
+        function onCycleTheme() {
+            preferenceStorage.set(
+                "themeIndex", 
+                Themer.themes[Themer.current + 1] ? Themer.current + 1 : 0
+            )
+
+            Themer.setTheme(labels[0]);
+        }
+
         function onToggleName() {
             const setNameToString = (value) => (labels[1].textContent = value);
 
@@ -83,24 +92,39 @@
 
         const newItems = [
             {
-                text: "Toggle name",
-                img: "./img/menu_faqs.png", // Note: This can take in any image link, but the size of the icon isn't predefined
-                hoverImg: "./img/menu_faqs_hover.png",
+                text: "Cycle theme",
+                img: getImage("themes.png"), // Note: This can take in any image link, but the size of the icon isn't predefined
+                hoverImg: getImage("themes_hover.png"),
+                action: onCycleTheme.name,
+                keyBinding: null,
+                newBadge: false
+            },
+            {
+                text: `${preferenceStorage.get("name") ? "Disable" : "Enable"} name`,
+                img: getImage("name.png"),
+                hoverImg: getImage("name_hover.png"),
                 action: onToggleName.name,
                 keyBinding: null,
                 newBadge: false
             }
         ]
         
-        Object.assign(this.props, { onToggleName });
+        Object.assign(this.props, { onCycleTheme, onToggleName });
 
         // Ensure that the components from this patch haven't been added already
-        for (const item of this.props.menuItems) {
-            if (newItems.some(i => i.text === item.get("text"))) return;
-        }
+        // Reassign to menuItems because `push` returns a copy of the List
+        newItems.forEach(newItem => {
+            let insertIndex = -1;
+            for (const [idx, oldItem] of this.props.menuItems.entries()) {
+                newItem.action === oldItem.get("action") 
+                    && (this.props.menuItems = this.props.menuItems.delete(idx));
 
-        // Reassign to menuItems as `push` returns a copy of the List
-        this.props.menuItems = this.props.menuItems.push(...newItems.map(item => Immutable.fromJS(item)));
+                oldItem.get("action") === "onRequestLogout" && (insertIndex = idx);
+            }
+
+            this.props.menuItems = this.props.menuItems.insert(insertIndex, $I.fromJS(newItem));
+        })
+
         return res;
     })
 

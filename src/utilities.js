@@ -8,6 +8,9 @@ const cuteName = "Rosie :3";
 // Waits an amount of time in MS
 const wait = (t) => new Promise(r => setTimeout(r, t));
 
+// Returns a formatted URL for getting image assets easier
+const getImage = (name) => `https://raw.githubusercontent.com/acquitelol/CutestBypass/main/src/assets/${name}`
+
 // Continuously tries to get a value from a callback and tries again every specific interval until successful
 const getRecursively = (cb, time = 100) => {
     return new Promise(r => {
@@ -20,6 +23,42 @@ const getRecursively = (cb, time = 100) => {
         wait(time).then(() => r(getRecursively(cb)))
     })
 } 
+
+// Allows for cycling between themes. All are static methods.
+class Themer {
+    static themes = [
+        {
+            name: "Pink",
+            colors: {
+                darkest: "#613248",
+                dark: "#a6537a",
+                medium: "#d979a6",
+                light: "#ff94c1"
+            }
+        },
+        {
+            name: "Purple",
+            colors: {
+                darkest: "#61325f",
+                dark: "#9753a6",
+                medium: "#c179d9",
+                light: "#f494ff"
+            }
+        }
+    ];
+
+    static get current() {
+        return preferenceStorage.get("themeIndex") ?? 0
+    };
+    
+    static setTheme(label = null, index = this.current) {
+        Object.keys(this.themes[0].colors).forEach(variable => {
+            document.documentElement.style.setProperty(`--${variable}`, this.themes[index].colors[variable]);
+        })
+
+        label && (label.textContent = `${label.textContent.split("|")[0]} | ${this.themes[this.current].name}`)
+    }
+}
 
 // Easier LocalStorage handling + keeps all data to one stringified Object
 class LocalStorageHandler {
