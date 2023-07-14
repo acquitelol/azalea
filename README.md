@@ -7,8 +7,8 @@
 ### **This tool does the following:**
 
 - Stores **bookwork checks** and automatically submits them if possible, otherwise shows you the answer to choose the correct option yourself.
-- Makes Sparx *pink*!
-- Makes the Username say *Rosie :3*
+- Makes Sparx **pink**!
+- Makes the Username say **Rosie :3**
 
 <img src="./assets/divider.png">
 
