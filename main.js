@@ -22,12 +22,13 @@
     patcher.after("render", findReact(document.getElementsByClassName('wac-overlay')[0]).__proto__, function(_, res) {
         if (!this.props.options) return;
 
-        const answerRegexp = /[0-9]/g;
+        const answerRegexp = /[0-9a-zA-Z]/g;
+        const markupRegexp = /\$([0-9a-zA-Z])\$/g;
         const answers = localStorageHandler.get(this.props.bookworkCode);
 
         for (const option of this.props.options) {
             const optionMatches = option.get("answerMarkup")?.match(answerRegexp) ?? [];
-            const answerMatches = answers.join("")?.match(answerRegexp) ?? [];
+            const answerMatches = answers?.join("")?.match(markupRegexp) ?? [];
 
             if (optionMatches.join("") === answerMatches.join("")) {
                 this.props.onSubmitAnswer('', null, option, false);
