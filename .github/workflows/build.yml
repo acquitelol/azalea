@@ -12,7 +12,7 @@ jobs:
 
       - name: Get current date
         id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        run: echo "date=$(date +'%m-%d-%s')" >> $GITHUB_OUTPUT
 
       - name: Compress src directory
         id: compress
@@ -25,5 +25,5 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           automatic_release_tag: cutestbypass-${{ steps.date.outputs.date }}
-          title: "CutestBypass-${{ steps.date.outputs.date }}"
+          title: "CutestBypass ${{ steps.date.outputs.date }}"
           files: ./*.zip
