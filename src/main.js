@@ -1,6 +1,7 @@
 (async function() {
     'use strict';
-    
+
+    // change label name to Rosie :3
     const patcher = await import("https://esm.sh/spitroast");
     const labels = await getRecursively(() => document.getElementsByClassName("status-bar-label-text"));
     labels[1].textContent = "Rosie :3";
@@ -14,11 +15,13 @@
 
     let dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
 
+    // assign props to document for easy access
     patcher.after("render", SparxWeb, function() {
         document.__props = this.props;
         dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
     });
 
+    // autobookwork check bypass
     patcher.after("render", findReact(document.getElementsByClassName('wac-overlay')[0]).__proto__, function(_, res) {
         if (!this.props.options) return;
 
