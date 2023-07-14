@@ -18,10 +18,12 @@
 - Extract the ZIP to a folder on your local FS.
 - Open the **Manage Extensions** tab in your Chromium-based browser.
 - Enable **Developer Mode** if not enabled already.
-- Click on **Load Unpacked** and open the folder that was extracted, then select the **CutestBypass-(version)** directory.
+- Click on **Load Unpacked**.
+- Open the folder that was extracted, then select the **CutestBypass-(version)** directory.
+- **You're done!** Open Sparx and get to some easier homework!
 
 <img src="src/assets/divider.png">
 
 <div style="text-align: center">
-    <i style="text-align: center">Made by Rosie :3</i>
+    <i>Made by Rosie :3</i>
 </div>
