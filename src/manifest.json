@@ -1,6 +1,6 @@
 {
     "name": "CutestBypass",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "description": "Gives you access to many useful tools on SparxMaths!",
     "manifest_version": 3,
     "author": "Rosie",
@@ -11,12 +11,12 @@
     ],
 
     "icons": {
-        "128": "../assets/logo.png"
+        "128": "assets/logo.png"
     },
 
     "action": {
         "default_icon": {
-            "128": "../assets/logo.png"
+            "128": "assets/logo.png"
         },
         "default_title": "CutestBypass"
     },

@@ -13,7 +13,7 @@ jobs:
       - name: Compress src directory
         id: compress
         run: |
-          zip -r CutestBypass-latest.zip ./src ./assets & wait $!;
+          zip -r CutestBypass-latest.zip ./src & wait $!;
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest

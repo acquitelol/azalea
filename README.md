@@ -1,8 +1,8 @@
-# <img src="./assets/logo.png" style="width: 2rem"> CutestBypass
+# <img src="src/assets/logo.png" style="width: 2rem"> CutestBypass
 
 ## **The** ***cutest*** **Sparx Client bypass extension for Chromium browsers ~!**
 
-<img src="./assets/divider.png">
+<img src="src/assets/divider.png">
 
 ### **This tool does the following:**
 
@@ -10,7 +10,7 @@
 - Makes Sparx **pink**!
 - Makes the Username say **Rosie :3**
 
-<img src="./assets/divider.png">
+<img src="src/assets/divider.png">
 
 ### **How to install:**
 
@@ -20,8 +20,8 @@
 - Enable **Developer Mode** if not enabled already.
 - Click on **Load Unpacked** and open the folder that was extracted, then select the **src** directory.
 
-<img src="./assets/divider.png">
+<img src="src/assets/divider.png">
 
 <div style="text-align: center">
-    <i>Made by Rosie :3</i>
+    <i style="text-align: center">Made by Rosie :3</i>
 </div>
