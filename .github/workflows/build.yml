@@ -20,6 +20,8 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: `cutestbypass_$(cat ./src/manifest.json | grep '"version"' | sed -e 's/^.*"version": \([^"]*\),.*$/\1/')`
-          title: `CutestBypass $(cat ./src/manifest.json | grep '"version"' | sed -e 's/^.*"version": \([^"]*\),.*$/\1/')`
+          automatic_release_tag: |
+            `cutestbypass_$(cat ./src/manifest.json | grep '"version"' | sed -e 's/^.*"version": \([^"]*\),.*$/\1/')`
+          title: |
+            `CutestBypass $(cat ./src/manifest.json | grep '"version"' | sed -e 's/^.*"version": \([^"]*\),.*$/\1/')`
           files: ./*.zip
