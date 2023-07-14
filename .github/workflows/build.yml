@@ -25,7 +25,7 @@ jobs:
         id: compress
         run: |
           mv src CutestBypass-${{ steps.version.outputs.value }}
-          zip -r CutestBypass.zip CutestBypassExtension & wait $!;
+          zip -r CutestBypass.zip CutestBypass-${{ steps.version.outputs.value }} & wait $!;
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
