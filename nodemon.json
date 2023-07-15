@@ -1,0 +1,8 @@
+{
+    "ignore": [
+       "dist/*",
+       "dist"
+    ],
+    "exec": "npm run build",
+    "ext": "*.*"
+} 

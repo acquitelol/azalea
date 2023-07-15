@@ -1,11 +1,11 @@
-name: Compress CutestBypass and release
+name: Build CutestBypass and Release
 on:
   push:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Compress CutestBypass and release
+    name: Build CutestBypass and Release
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,11 +20,21 @@ jobs:
         run: |
           version=$(cat ./src/manifest.json | grep -oE '[ ]+"version": "(.*)",' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
           echo "value=$version" >> $GITHUB_OUTPUT
+        
+      - name: Install dependencies
+        id: dependencies
+        run: |
+          npm i -g pnpm
+          pnpm i
 
-      - name: Compress src directory
+      - name: Build codebase
+        id: build
+        run: pnpm build
+
+      - name: Compress `dist` directory
         id: compress
         run: |
-          mv src CutestBypass-${{ steps.version.outputs.value }}
+          mv dist CutestBypass-${{ steps.version.outputs.value }}
           zip -r CutestBypass.zip CutestBypass-${{ steps.version.outputs.value }} & wait $!;
 
       - name: Create release

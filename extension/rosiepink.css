@@ -1,0 +1,146 @@
+.package-heading {
+    transform: scale(1);
+    filter: blur(1px);
+    transition: all 400ms ease;
+}
+
+.package-heading:hover {
+    filter: blur(0);
+    transform: scale(1.05);
+    margin-bottom: 20px;
+}
+
+:root {
+    --user-select-accessibility-setting: default !important;
+}
+
+.package-container, .play-btn, .sm-button, .login-button  {
+    background: var(--light) !important;
+    border: solid 2px var(--dark) !important;
+    transition: all 400ms ease;
+}
+
+.package-filter-title, .package-filter-details {
+    color: #fff !important;
+}
+
+.sm-button:hover, .login-button:hover {
+    background: var(--medium) !important;  
+}
+
+.package-filter-list {
+    background-color: var(--medium);
+}
+
+.status-bar, .package-filter, .um-header {
+background: var(--dark) !important; 
+    box-shadow:  0 5px 10px 1px #0000003f
+}
+
+.um-login-container {
+    background: linear-gradient(250deg, var(--medium), var(--dark)) !important
+}
+
+.new-user-link, .not-your-school-link, #password-toggle-text {
+    color: var(--light) !important;
+}
+
+.status-bar-menu-button {
+    background-color: var(--dark) !important;
+    border: var(--darkest) !important;
+    filter: brightness(50%);
+}
+
+.package-filter-arrow {
+    border-left-color: var(--dark) !important;
+}
+
+.package-accordion-icon {
+    filter: sepia(90) hue-rotate(280deg) saturate(2)
+}
+
+.package-status {
+    background-color: var(--dark);
+    border-color: var(--medium);
+}
+
+.package-status.complete {
+    background-color: var(--medium) !important;
+    border-color: var(--light) !important;
+}
+
+.task-status {
+    background-color: var(--medium);
+    border-color: var(--light);
+}
+
+.details {
+    background-image: linear-gradient(to right, var(--light), 0%, var(--light), 25%, var(--medium), 25%, var(--medium), 100%) !important;
+}
+
+.package-heading + [aria-expanded="true"] {
+    filter: blur(0px)
+}
+
+.view {
+    background-color: var(--light);
+    color: var(--darkest)
+}
+
+.bookwork-code {
+    background-color: var(--medium);
+    border-color: var(--dark);
+}
+
+.btn {
+    border-color: var(--medium) !important;
+    color: var(--medium) !important;
+    background: #fff !important;
+    transition: all 400ms ease;
+}
+
+.btn:hover {
+    background: #eee !important;
+}
+
+.calculator {
+    border: 1px solid var(--medium) !important;
+}
+
+.calculator-image, .accordion-element-arrow {
+    filter: sepia(90) hue-rotate(280deg) saturate(2)
+}
+
+.calculator-text {
+    color: var(--dark) !important;
+}
+
+.keypad-number-input {
+    border: 4px solid var(--medium) !important;
+}
+
+.back-button {
+    color: var(--light) !important;
+    filter: sepia(90) hue-rotate(280deg) saturate(2)
+}
+
+.pill {
+    border: 2px solid var(--medium) !important;
+    color: var(--medium) !important;
+}
+
+.revision-strand-button {
+    filter: sepia(90) hue-rotate(280deg) saturate(2)
+}
+
+.revision-tab-active {
+    background: var(--dark);
+}
+
+.revision-tabs {
+    border-bottom: 1px solid var(--dark) !important;
+}
+
+[notification-button]:hover {
+    background:  var(--darkest) !important;
+}

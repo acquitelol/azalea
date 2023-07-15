@@ -1,0 +1,22 @@
+{
+    "name": "cutest-bypass",
+    "version": "1.0.0",
+    "repository": "https://github.com/acquitelol/CutestBypass.git",
+    "author": "Rosie",
+    "scripts": {
+        "build": "rollup -c --configPlugin esbuild"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "@rollup/plugin-json": "^6.0.0",
+        "@rollup/plugin-node-resolve": "^15.1.0",
+        "esbuild": "^0.18.13",
+        "immutable": "^4.3.1",
+        "rollup": "^3.26.2",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-esbuild": "^5.0.0"
+    },
+    "dependencies": {
+        "spitroast": "^1.4.3"
+    }
+}

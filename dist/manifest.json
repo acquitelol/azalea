@@ -1,6 +1,6 @@
 {
     "name": "CutestBypass",
-    "version": "1.5.5",
+    "version": "2.0.0",
     "description": "The cutest SparxMaths bookwork-bypass extension for Chromium ~!",
     "manifest_version": 3,
     "author": "Rosie",
@@ -28,13 +28,14 @@
     ],
 
     "content_scripts": [{
-        "js": ["entry.js"],
+        "js": ["index.js"],
         "css": ["rosiepink.css"],
-        "matches": ["https://*.sparxmaths.uk/*"]
+        "matches": ["https://*.sparxmaths.uk/*"],
+        "run_at": "document_start"
     }],
 
     "web_accessible_resources": [{
-        "resources": ["index.js", "utilities.js"],
+        "resources": ["bundle.js"],
         "matches": ["<all_urls>"]
     }]
 }
