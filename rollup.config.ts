@@ -3,9 +3,11 @@ import esbuild from "rollup-plugin-esbuild";
 import commonjs from "rollup-plugin-commonjs";
 import { defineConfig } from "rollup";
 import { execSync } from 'child_process';
+import { mkdirSync, existsSync } from 'fs';
 
 // Move everything else related to the extension like manifest, assets, etc
-execSync("mkdir dist && cp -rf extension/* dist/");
+!existsSync("dist") && mkdirSync("dist");
+execSync("cp -rf extension/* dist/");
 
 export default [
     defineConfig({

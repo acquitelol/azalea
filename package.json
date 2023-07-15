@@ -4,7 +4,7 @@
     "repository": "https://github.com/acquitelol/CutestBypass.git",
     "author": "Rosie",
     "scripts": {
-        "build": "rollup -c --configPlugin esbuild"
+        "build": "rollup -c --configPlugin esbuild --no-watch"
     },
     "license": "MIT",
     "devDependencies": {

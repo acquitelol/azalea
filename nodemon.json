@@ -1,7 +1,9 @@
 {
     "ignore": [
        "dist/*",
-       "dist"
+       "dist",
+       "rollup.config-*.mjs",
+       "package.json"
     ],
     "exec": "npm run build",
     "ext": "*.*"
