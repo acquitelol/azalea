@@ -112,7 +112,7 @@ class LocalStorageHandler {
 const bookworkHandler = new LocalStorageHandler("CutestBypassStorage");
 
 // Used to store any preferences such as using Rosie :3 as the name or not
-const preferenceStorage = new LocalStorageHandler("CutestBypassPreferences");
+const preferenceStorage = new LocalStorageHandler("CutestBypassPreferences", false);
 
 /**
  * Finds a React component (if any) by its HTMLNode through React fibers.

@@ -35,7 +35,7 @@
 
     // Autobookwork check bypass logic
     Patcher.after("render", WACOverlay.__proto__, function(_, res) {
-        this.props.studentFirstName = preferenceStorage.get("name")
+        this.props.wacShowing && (this.props.studentFirstName === preferenceStorage.get("name"))
             ? cuteName
             : preferenceStorage.get("realName").split(" ")[0];
 
