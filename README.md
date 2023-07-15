@@ -19,8 +19,8 @@
 - Open the **Manage Extensions** tab in your Chromium-based browser.
 - Enable **Developer Mode** if not enabled already.
 - Click on **Load Unpacked**.
-- Open the folder that was extracted, then select the **CutestBypass-(version)** directory.
-- **You're done!** Open Sparx and get to some easier homework!
+- Select the **CutestBypass-(version)** directory.
+- **You're done!** Open Sparx and get to doing some easier homework! :D
 
 <img src="src/assets/divider.png">
 
