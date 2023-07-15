@@ -1,17 +1,13 @@
-/**
- * UTILITIES
- */
-
-// Name used in several places
 const cuteName = "Rosie :3";
-
-// Waits an amount of time in MS
 const wait = (t) => new Promise(r => setTimeout(r, t));
-
-// Returns a formatted URL for getting image assets easier
 const getImage = (name) => `https://raw.githubusercontent.com/acquitelol/CutestBypass/main/src/assets/${name}`
 
-// Continuously tries to get a value from a callback and tries again every specific interval until successful
+/**
+ * Continuously tries to get a value from a callback and tries again every specific interval until successful
+ * @param {function} cb The callback to return a value
+ * @param {number} time The interval until trying again after failure in ms
+ * @returns 
+ */
 const getRecursively = (cb, time = 100) => {
     return new Promise(r => {
         const result = cb();
@@ -24,7 +20,11 @@ const getRecursively = (cb, time = 100) => {
     })
 } 
 
-// Allows for cycling between themes. All are static methods.
+/*
+ * Allows for cycling between themes. 
+ * All are static methods because there only ever needs to be a single instance at one time.
+ * A singleton is too much for the simplicity of this class.
+ */
 class Themer {
     static themes = [
         {
@@ -60,7 +60,9 @@ class Themer {
     }
 }
 
-// Easier LocalStorage handling + keeps all data to one stringified Object
+/*
+ * Easier LocalStorage handling + keeps all data to one stringified Object
+ */
 class LocalStorageHandler {
     constructor(name, shouldLog = true) {
         this.name = name;
@@ -256,7 +258,10 @@ const extractAnswers = (inputs = []) => {
     return results;
 }
 
-// Stores all possible answers into the bookworkHandler
+/*
+ * Stores all possible answers into the bookworkHandler
+ * Should only be called on Enter and Submit events where the Answer-input is in scope
+ */
 const storeAnswers = () => {
     const bookwork = document.querySelector(".bookwork-code")
         .textContent

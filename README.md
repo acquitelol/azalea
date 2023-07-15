@@ -1,6 +1,6 @@
 # <img src="src/assets/logo.png" style="width: 2rem"> CutestBypass
 
-## **The** ***cutest*** **Sparx Client bypass extension for Chromium browsers ~!**
+## **The** ***cutest*** **SparxMaths bookwork-bypass extension for Chromium browsers ~!**
 
 <img src="src/assets/divider.png">
 
