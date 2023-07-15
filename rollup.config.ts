@@ -5,7 +5,7 @@ import { defineConfig } from "rollup";
 import { execSync } from 'child_process';
 
 // Move everything else related to the extension like manifest, assets, etc
-execSync("cp -rf extension/* dist/");
+execSync("mkdir dist && cp -rf extension/* dist/");
 
 export default [
     defineConfig({
