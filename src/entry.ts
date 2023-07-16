@@ -2,13 +2,17 @@ import cutest from "./api";
 import utilities from "./api/core/utilities";
 import handlers from "./api/core/handlers";
 
-const { name, lazyModule, findReact } = utilities;
+const { name, lazyModule, getImage } = utilities;
 const { Theming, preferences } = handlers;
 window.cutest = cutest;
 
 (async function() {
     const labelNode = await lazyModule(() => document.querySelector(".status-bar-label-text"));
+    const sparxLogo: HTMLImageElement | null = await lazyModule(() => document.querySelector(".sparx-logo"));
     const Redux = await lazyModule(() => cutest.modules.common.Redux);
+
+    // Apply cuter logo;
+    sparxLogo!.src = getImage("logo.png");
     
     // Initialization by applying preferences
     const user = Redux?.getState().get("user");
@@ -24,5 +28,6 @@ window.cutest = cutest;
             .set("lastName", name.lastName)
     })
     
-    Theming.setTheme(labelNode);
+    Theming.setTheme();
+    Theming.applyLabel(labelNode);
 })();

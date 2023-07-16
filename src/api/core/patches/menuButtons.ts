@@ -15,15 +15,17 @@ export default async function() {
     const StatusBar = findReact(statusNode);
 
     patcher.after("render", StatusBar.__proto__, function(_, res) {
+        Theming.applyLabel(labelNode);
         if (!this.props.menuItems) return;
 
         function onCycleTheme() {
             preferences.set(
                 "themeIndex", 
-                Theming.themes[Theming.current + 1] ? Theming.current + 1 : 0
+                Theming.themes[Theming.index + 1] ? Theming.index + 1 : 0
             )
 
-            Theming.setTheme(labelNode);
+            Theming.setTheme();
+            Theming.applyLabel(labelNode);
         }
 
         function onToggleName() {
@@ -50,7 +52,7 @@ export default async function() {
                 text: "Cycle theme",
                 img: getImage("menu_theme.png"), // Note: This can take in any image link, but the size of the icon isn't predefined
                 hoverImg: getImage("menu_theme_hover.png"),
-                action: onCycleTheme.name,
+                action: "onCycleTheme",
                 keyBinding: null,
                 newBadge: false
             },
@@ -58,7 +60,7 @@ export default async function() {
                 text: `${preferences.get("shouldUseCuteName") ? "Disable" : "Enable"} name`,
                 img: getImage("menu_name.png"),
                 hoverImg: getImage("menu_name_hover.png"),
-                action: onToggleName.name,
+                action: "onToggleName",
                 keyBinding: null,
                 newBadge: false
             },
@@ -66,16 +68,16 @@ export default async function() {
                 text: "Open Garden",
                 img: getImage("menu_garden.png"),
                 hoverImg: getImage("menu_garden_hover.png"),
-                action: onOpenGarden.name,
+                action: "onOpenGarden",
                 keyBinding: null,
                 newBadge: false
             }
         ]
         
         Object.assign(this.props, {
-            [onCycleTheme.name]: onCycleTheme, 
-            [onToggleName.name]: onToggleName,
-            [onOpenGarden.name]: onOpenGarden
+            onCycleTheme, 
+            onToggleName,
+            onOpenGarden
         });
 
         // Ensure that the components from this patch haven't been added already

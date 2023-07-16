@@ -13,12 +13,10 @@ const name = {
 };
 
 const repository = "https://raw.githubusercontent.com/acquitelol/CutestBypass";
-const wait = (time: number) => new Promise(res => setTimeout(res, time));
 const getImage = (name: string) => `${repository}/main/extension/assets/${name}`;
 
 export default {
     name,
     repository,
-    wait,
     getImage
 }

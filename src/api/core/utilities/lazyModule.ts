@@ -1,5 +1,3 @@
-import common from "./common";
-
 /**
  * @description Continuously tries to get a value from a callback and tries again every specific interval until successful or max attempts reached.
  * @param {function} callback - The callback to the module. This should be a function that returns the module which is requested.
@@ -14,7 +12,7 @@ async function lazyModule<T>(callback: () => T, condition?: (result: T | null) =
         const result = callback();
 
         if (condition ? condition(result) : result) return result;
-        await common.wait(time);
+        await new Promise(res => setTimeout(res, time));
 
         attempt++;
     }

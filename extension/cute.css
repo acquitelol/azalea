@@ -1,148 +1,310 @@
-.package-heading {
-    transform: scale(1);
-    filter: blur(1px);
-    transition: all 400ms ease;
-}
-
-.package-heading:hover {
-    filter: blur(0);
-    transform: scale(1.05);
-    margin-bottom: 20px;
-}
-
+/* START DEFAULT COLORS */
 :root {
     --user-select-accessibility-setting: default !important;
     --darkest: #613248;
+    --dark: #9c7280;
+    --medium: #d1869f;
+    --light: #deafc2;
+    --tint: sepia(1) hue-rotate(280deg) saturate(0.80);
 
+    --text-light: #ffedf2;
+    --text-dark: #362e30;
 }
+/* END DEFAULT COLORS */
 
-.package-container, .play-btn, .sm-button, .login-button  {
+/* START BACKGROUND COLORS */
+::-webkit-scrollbar-thumb, 
+.package-container, 
+.play-btn, 
+.sm-button, 
+.login-button,
+.package-filter-list, 
+.other-section-link, 
+.revision-homework-button-container,
+.view,
+.taskitem.done > .action,
+.rewards-progress-level:hover > .rewards-progress-level-label,
+.view-overlay {
     background: var(--light) !important;
-    border: solid 2px var(--dark) !important;
-    transition: all 400ms ease;
 }
 
-.package-filter-title, .package-filter-details {
-    color: #fff !important;
+.package-status.complete,
+.task-status.complete,
+.bookwork-code,
+.videoBanner,
+.taskitem > .action,
+.sm-button:hover, 
+.login-button:hover  {
+    background: var(--medium) !important;
 }
 
-.sm-button:hover, .login-button:hover {
-    background: var(--medium) !important;  
+.package-status,
+.task-status,
+.header,
+.waiting-message-screen-background.transparent,
+.revision-tab-active,
+.taskitem.wrong > .action,
+.status-bar, 
+.package-filter,
+.um-header,
+.status-bar-menu-button, 
+.button-0-2-8:hover,
+.button-d2-0-2-13,
+.wac-overlay,
+.image-zoom-content {
+    background: var(--dark) !important;
 }
 
-.package-filter-list {
-    background-color: var(--medium);
+.btn,
+.banner-0-2-15 {
+    background: var(--text-light) !important;
 }
 
-.status-bar, .package-filter, .um-header {
-background: var(--dark) !important; 
-    box-shadow:  0 5px 10px 1px #0000003f
+.status-bar-menu-item, 
+.status-bar-menu-header {
+    background: var(--text-dark) !important;
 }
+/* END BACKGROUND COLORS */
 
-.um-login-container {
-    background: linear-gradient(250deg, var(--medium), var(--dark)) !important
-}
-
-.new-user-link, .not-your-school-link, #password-toggle-text {
+/* START TEXT COLORS */
+.rewards-progress-level:hover > .rewards-progress-level-label > .rewards-progress-level-label-text,
+.back-button {
     color: var(--light) !important;
 }
 
-.status-bar-menu-button {
-    background-color: var(--dark) !important;
-    border: var(--darkest) !important;
-    filter: brightness(50%);
-}
-
-.package-filter-arrow {
-    border-left-color: var(--dark) !important;
-}
-
-.package-accordion-icon {
-    filter: sepia(90) hue-rotate(280deg) saturate(2)
-}
-
-.package-status {
-    background-color: var(--dark);
-    border-color: var(--medium);
-}
-
-.package-status.complete {
-    background-color: var(--medium) !important;
-    border-color: var(--light) !important;
-}
-
-.task-status {
-    background-color: var(--medium);
-    border-color: var(--light);
-}
-
-.details {
-    background-image: linear-gradient(to right, var(--light), 0%, var(--light), 25%, var(--medium), 25%, var(--medium), 100%) !important;
-}
-
-.package-heading + [aria-expanded="true"] {
-    filter: blur(0px)
-}
-
-.view {
-    background-color: var(--light);
-    color: var(--darkest)
-}
-
-.bookwork-code {
-    background-color: var(--medium);
-    border-color: var(--dark);
-}
-
-.btn {
-    border-color: var(--medium) !important;
+.revision-search-summary-clear,
+.btn,
+.pill {
     color: var(--medium) !important;
-    background: #fff !important;
-    transition: all 400ms ease;
-}
-
-.btn:hover {
-    background: #eee !important;
-}
-
-.calculator {
-    border: 1px solid var(--medium) !important;
-}
-
-.calculator-image, .accordion-element-arrow {
-    filter: sepia(90) hue-rotate(280deg) saturate(2)
 }
 
 .calculator-text {
     color: var(--dark) !important;
 }
 
-.keypad-number-input {
-    border: 4px solid var(--medium) !important;
+.package-filter-title, 
+.package-filter-details,
+.new-user-link, 
+.not-your-school-link, 
+#password-toggle-text,
+.status-bar-menu-button.menu-open,
+.status-bar-menu-item, 
+.status-bar-menu-header,
+.status-bar-menu-button:hover,
+.revision-tab,
+.videoBanner {
+    color: var(--text-light) !important;
 }
 
-.back-button {
-    color: var(--light) !important;
-    filter: sepia(90) hue-rotate(280deg) saturate(2)
+.rewards-progress-level-label-text, 
+.form-title,
+.revision-homework-button,
+.tutorial-bubble-title,
+.view,
+.banner-0-2-15,
+.number-input, 
+.multi-part 
+.gap-container:not(.selected) .keypad-number-input {
+    color: var(--text-dark) !important;
+}
+/* END TEXT COLORS */
+
+/* START BORDER COLORS */
+.package-status.complete,
+.task-status.complete {
+    border-color: var(--light) !important;
 }
 
+.package-status,
+.task-status,
+.btn {
+    border-color: var(--medium) !important;
+}
+
+.bookwork-code {
+    border-color: var(--dark) !important;
+}
+
+.status-bar-menu-button {
+    border-color: var(--darkest) !important;
+}
+/* END BORDER COLORS */
+
+/* START BORDERS */
+.package-filter-arrow,
+.status-bar-menu-button {
+    border: none !important;
+}
+
+.taskitem > .action,
+.rewards-progress-level:hover > .rewards-progress-level-label {
+    border: 2px solid var(--light) !important;
+}
+
+.revision-select-stream-dropdown, 
+.revision-search, 
+.revision-topic-level-container,
+.calculator {
+    border: 1px solid var(--medium) !important;
+}
+
+.number-input, 
+.multi-part 
+.gap-container:not(.selected) .keypad-number-input,
+.multi-part .gap-container:not(.selected) .gap-slot,
 .pill {
     border: 2px solid var(--medium) !important;
-    color: var(--medium) !important;
 }
 
-.revision-strand-button {
-    filter: sepia(90) hue-rotate(280deg) saturate(2)
+.multi-part .gap-container.selected .keypad-number-input,
+.multi-part .gap-container:not(.selected):hover .keypad-number-input,
+.multi-part .gap-container.selected .gap-slot,
+.multi-part .gap-container:not(.selected):hover .gap-slot  {
+    border: 2px dashed var(--medium) !important;
 }
 
-.revision-tab-active {
-    background: var(--dark);
+.taskitem.wrong > .action,
+.package-container, 
+.play-btn, 
+.sm-button, 
+.login-button {
+    border: 2px solid var(--dark) !important;
 }
 
 .revision-tabs {
     border-bottom: 1px solid var(--dark) !important;
 }
 
-[notification-button]:hover {
-    background:  var(--darkest) !important;
+.status-bar-menu-item, 
+.status-bar-menu-header {
+    border: 3px solid var(--text-dark) !important;
 }
+/* END BORDERS */
+
+/* START GRADIENTS */
+.um-login-container {
+    background: linear-gradient(
+        250deg, 
+        var(--medium), 
+        var(--dark)
+    ) !important
+}
+
+.details {
+    background-image: linear-gradient(
+        to right, 
+        var(--light), 0%, 
+        var(--light), 25%, 
+        var(--medium), 25%, 
+        var(--medium), 
+    100%) !important;
+}
+
+#app-container, 
+.waiting-message-screen-background:not(.transparent), 
+.footer-container {
+    background: linear-gradient(
+        124.88deg,
+        var(--medium), 6.72%,
+        var(--light), 81.9%,
+        var(--light), 
+    100%) !important;
+}
+/* END GRADIENTS */
+
+/* START FILTERS */
+.sparx-logo,
+.package-accordion-icon,
+.alert-dismiss-button,
+.calculator-image, 
+.accordion-element-arrow, 
+.revision-topic-start-button, 
+.svg-inline--fa, 
+.rewards-progress-level-label-arrow,
+.back-button,
+.revision-strand-button,
+.icon-0-2-16 {
+    filter: var(--tint) !important;
+}
+
+.package-heading {
+    filter: blur(1px)
+}
+
+.package-heading:hover {
+    filter: blur(0px)
+}
+
+.package-filter.active {
+    filter: brightness(125%) !important;
+}
+
+.status-bar, 
+.package-filter,
+.um-header {
+    filter: brightness(100%) !important;
+}
+
+.status-bar-menu-button {
+    filter: brightness(50%);
+}
+
+.status-bar-menu-button:hover {
+    filter: brightness(75%);
+}
+
+.status-bar-menu-item-img {
+    filter: var(--tint) brightness(75%) !important;
+}
+
+.status-bar-menu-item:hover > .status-bar-menu-item-img {
+    filter: var(--tint) brightness(115%) !important
+}
+
+.package-heading + [aria-expanded="true"] {
+    filter: blur(0px)
+}
+
+.button-0-2-8:hover {
+    filter: brightness(50%);
+}
+/* END FILTERS */
+
+/* START TRANSITIONS */
+.package-heading,
+.package-container, 
+.play-btn, 
+.sm-button, 
+.login-button {
+    transition: all 400ms ease;
+}
+
+.status-bar, 
+.package-filter,
+.um-header,
+.status-bar-menu-button,
+.status-bar-menu-item-img,
+.gap-container {
+    transition: all 100ms ease;
+}
+/* START MISCELLANEOUS */
+.sparx-logo {
+    scale: 0.6;
+    margin-right: 0 !important; 
+}
+
+.package-heading {
+    transform: scale(1);
+}
+
+.package-heading:hover {
+    transform: scale(1.05);
+    margin-bottom: 20px;
+}
+
+.status-bar, 
+.package-filter,
+.um-header {
+    box-shadow: 0 5px 10px 1px #0000003f;
+}
+/* END MISCELLANEOUS */

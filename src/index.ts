@@ -1,9 +1,9 @@
-function loadFromURL(src, async = true) {
+async function loadFromURL(src, async = false) {
     const script = document.createElement('script');
     script.src = src;
     script.async = async;
 
-    (document.head || document.documentElement).prepend(script);
+    (document.head || document.body || document.documentElement).appendChild(script)
 }
 
 loadFromURL(window["chrome"].runtime.getURL("bundle.js"));
