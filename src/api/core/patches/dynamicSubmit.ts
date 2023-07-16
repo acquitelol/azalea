@@ -6,10 +6,7 @@ const { storeAnswers } = bookwork;
 const { findReact, lazyModule } = utilities;
 
 export default async function() {
-    const screenNode = await lazyModule(
-        () => document.querySelector('.screen'),
-        r => r !== null
-    );
+    const screenNode = await lazyModule(() => document.querySelector('.screen'));
     const SparxWeb = findReact(screenNode);
 
     // This will adapt whenever SparxWeb re-renders

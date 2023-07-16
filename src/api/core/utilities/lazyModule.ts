@@ -6,10 +6,12 @@ import common from "./common";
  * @param {number} time The interval until trying again after failure in ms
  * @returns 
  */
-async function lazyModule(callback: () => any, condition: (result) => boolean, time = 100) {
+async function lazyModule<T>(callback: () => T, condition?: (result) => boolean, time = 100): Promise<NonNullable<T>> {
     while (true) {
         const result = callback();
-        if (condition(result)) return result;
+        
+        // @ts-ignore ~ Assume you know more than the linter and that the result cannot be null.
+        if (condition ? condition(result) : result) return result;
         await common.wait(time)
     }
 }

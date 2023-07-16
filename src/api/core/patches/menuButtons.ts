@@ -7,6 +7,7 @@ const { cuteName, lazyModule, findReact, getImage } = utilities;
 const { Theming, preferences } = handlers;
 
 export default async function() {
+    // HTMLNodes that are needed for this patch
     const Nodes = {} as Record<string, Element>;
     const nodeNames = {
         labels: ".status-bar-label-text",
@@ -14,19 +15,14 @@ export default async function() {
     };
 
     for (const [name, value] of Object.entries(nodeNames)) {
-        Nodes[name] = await lazyModule(
-            () => document.querySelector(value),
-            r => r !== null
-        )
+        Nodes[name] = await lazyModule(() => document.querySelector(value))
     }
 
+    // Modules from common that are needed for this patch
     const Modules = {} as Record<string, any>;
 
     for (const key of ["Redux", "Immutable"]) {
-        Modules[key] = await lazyModule(
-            () => modules.common[key],
-            r => r !== null
-        );
+        Modules[key] = await lazyModule(() => modules.common[key]);
     }
 
     const StatusBar = findReact(Nodes.status);
