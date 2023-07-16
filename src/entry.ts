@@ -7,12 +7,8 @@ const { Theming, preferences } = handlers;
 window.cutest = cutest;
 
 (async function() {
-    const labelNode = await lazyModule(() => document.querySelector(".status-bar-label-text")) as Element;
-
-    const Redux = await lazyModule(
-        () => cutest.modules.common["Redux"],
-        r => r !== null
-    );
+    const labelNode = await lazyModule(() => document.querySelector(".status-bar-label-text"));
+    const Redux = await lazyModule(() => cutest.modules.common["Redux"]);
     
     // Initialization by applying preferences
     const user = Redux.getState().get("user");

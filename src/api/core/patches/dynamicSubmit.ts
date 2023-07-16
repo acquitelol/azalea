@@ -19,7 +19,6 @@ export default async function() {
 
     // Assigns submit button and props to document for easier access
     patcher.after("render", SparxWeb, function() {
-        document["__props"] = this.props;
         dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
 
         dynamicSubmitButton?.removeEventListener("click", storeAnswers);
