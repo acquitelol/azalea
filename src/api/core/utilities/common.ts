@@ -1,12 +1,24 @@
-const cuteName = {
-    firstName: "Rosie",
-    lastName: ":3"
+import { storages } from "../handlers/default";
+
+const { preferences } = storages;
+
+const name = {
+    get firstName() {
+        return preferences.get("shouldUseCuteName") ? "Rosie" : preferences.get("firstName")
+    },
+    
+    get lastName() {
+        return preferences.get("shouldUseCuteName") ? ":3" : preferences.get("lastName")
+    }
 };
+
+const repository = "https://raw.githubusercontent.com/acquitelol/CutestBypass";
 const wait = (time: number) => new Promise(res => setTimeout(res, time));
-const getImage = (name: string) => `https://raw.githubusercontent.com/acquitelol/CutestBypass/main/extension/assets/${name}`;
+const getImage = (name: string) => `${repository}/main/extension/assets/${name}`;
 
 export default {
-    cuteName,
+    name,
+    repository,
     wait,
     getImage
 }

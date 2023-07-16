@@ -19,7 +19,34 @@ class Theming {
                 medium: "#c179d9",
                 light: "#f494ff"
             }
-        }
+        },
+        {
+            name: "Blue",
+            colors: {
+                darkest: "#324261",
+                dark: "#5370a6",
+                medium: "#79afd9",
+                light: "#94b1ff"
+            }
+        },
+        {
+            name: "Aqua",
+            colors: {
+                darkest: "#326160",
+                dark: "#53a5a6",
+                medium: "#79d7d9",
+                light: "#94fff8"
+            }
+        },
+        {
+            name: "Green",
+            colors: {
+                darkest: "#326135",
+                dark: "#53a65e",
+                medium: "#79d993",
+                light: "#94ff9f"
+            }
+        },
     ];
 
     static get current() {

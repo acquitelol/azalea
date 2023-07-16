@@ -12,6 +12,8 @@
 
 :root {
     --user-select-accessibility-setting: default !important;
+    --darkest: #613248;
+
 }
 
 .package-container, .play-btn, .sm-button, .login-button  {

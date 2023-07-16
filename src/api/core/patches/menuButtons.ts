@@ -3,14 +3,14 @@ import utilities from "../utilities";
 import handlers from "../handlers";
 import modules from "../modules";
 
-const { cuteName, lazyModule, findReact, getImage } = utilities;
+const { name, lazyModule, findReact, getImage } = utilities;
 const { Theming, preferences } = handlers;
 
 export default async function() {
     const labelNode = await lazyModule(() => document.querySelector(".status-bar-label-text"));
     const statusNode = await lazyModule(() => document.querySelector(".status"));
-    const Redux = await lazyModule(() => modules.common["Redux"]);
-    const Immutable = await lazyModule(() => modules.common["Immutable"]);
+    const Redux = await lazyModule(() => modules.common.Redux);
+    const Immutable = await lazyModule(() => modules.common.Immutable);
 
     const StatusBar = findReact(statusNode);
 
@@ -27,14 +27,21 @@ export default async function() {
         }
 
         function onToggleName() {
-            preferences.set("name", !preferences.get("name"));
+            preferences.set("shouldUseCuteName", !preferences.get("shouldUseCuteName"));
 
-            Redux.dispatch({ 
+            Redux?.dispatch({ 
                 type: "SET_USER", 
-                user: Redux.getState()
+                user: Redux?.getState()
                     .get("user")
-                    .set("firstName", preferences.get("name") ? cuteName.firstName : preferences.get("firstName"))
-                    .set("lastName", preferences.get("name") ? cuteName.lastName : preferences.get("lastName"))
+                    .set("firstName", name.firstName)
+                    .set("lastName", name.lastName)
+            })
+        }
+
+        function onOpenGarden() {
+            Redux?.dispatch({
+                type: "SELECT_GAME",
+                gameType: "gardengame"
             })
         }
 
@@ -48,16 +55,28 @@ export default async function() {
                 newBadge: false
             },
             {
-                text: `${preferences.get("name") ? "Disable" : "Enable"} name`,
+                text: `${preferences.get("shouldUseCuteName") ? "Disable" : "Enable"} name`,
                 img: getImage("menu_name.png"),
                 hoverImg: getImage("menu_name_hover.png"),
                 action: onToggleName.name,
                 keyBinding: null,
                 newBadge: false
+            },
+            {
+                text: "Open Garden",
+                img: getImage("menu_garden.png"),
+                hoverImg: getImage("menu_garden_hover.png"),
+                action: onOpenGarden.name,
+                keyBinding: null,
+                newBadge: false
             }
         ]
         
-        Object.assign(this.props, { onCycleTheme, onToggleName });
+        Object.assign(this.props, {
+            [onCycleTheme.name]: onCycleTheme, 
+            [onToggleName.name]: onToggleName,
+            [onOpenGarden.name]: onOpenGarden
+        });
 
         // Ensure that the components from this patch haven't been added already
         // Reassign to menuItems because `push` returns a copy of the List
@@ -67,7 +86,7 @@ export default async function() {
                     && (this.props.menuItems = this.props.menuItems.delete(idx));
             }
 
-            this.props.menuItems = this.props.menuItems.push(Immutable.fromJS(newItem));
+            this.props.menuItems = this.props.menuItems.push(Immutable?.fromJS(newItem));
         })
 
         return res;
