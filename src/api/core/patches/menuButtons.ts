@@ -7,25 +7,12 @@ const { cuteName, lazyModule, findReact, getImage } = utilities;
 const { Theming, preferences } = handlers;
 
 export default async function() {
-    // HTMLNodes that are needed for this patch
-    const Nodes = {} as Record<string, Element>;
-    const nodeNames = {
-        labels: ".status-bar-label-text",
-        status: ".status"
-    };
+    const labelNode = await lazyModule(() => document.querySelector(".status-bar-label-text"));
+    const statusNode = await lazyModule(() => document.querySelector(".status"));
+    const Redux = await lazyModule(() => modules.common["Redux"]);
+    const Immutable = await lazyModule(() => modules.common["Immutable"]);
 
-    for (const [name, value] of Object.entries(nodeNames)) {
-        Nodes[name] = await lazyModule(() => document.querySelector(value))
-    }
-
-    // Modules from common that are needed for this patch
-    const Modules = {} as Record<string, any>;
-
-    for (const key of ["Redux", "Immutable"]) {
-        Modules[key] = await lazyModule(() => modules.common[key]);
-    }
-
-    const StatusBar = findReact(Nodes.status);
+    const StatusBar = findReact(statusNode);
 
     patcher.after("render", StatusBar.__proto__, function(_, res) {
         if (!this.props.menuItems) return;
@@ -36,15 +23,15 @@ export default async function() {
                 Theming.themes[Theming.current + 1] ? Theming.current + 1 : 0
             )
 
-            Theming.setTheme(Nodes.labels);
+            Theming.setTheme(labelNode);
         }
 
         function onToggleName() {
             preferences.set("name", !preferences.get("name"));
 
-            Modules.Redux.dispatch({ 
+            Redux.dispatch({ 
                 type: "SET_USER", 
-                user: Modules.Redux.getState()
+                user: Redux.getState()
                     .get("user")
                     .set("firstName", preferences.get("name") ? cuteName.firstName : preferences.get("firstName"))
                     .set("lastName", preferences.get("name") ? cuteName.lastName : preferences.get("lastName"))
@@ -80,7 +67,7 @@ export default async function() {
                     && (this.props.menuItems = this.props.menuItems.delete(idx));
             }
 
-            this.props.menuItems = this.props.menuItems.push(Modules.Immutable.fromJS(newItem));
+            this.props.menuItems = this.props.menuItems.push(Immutable.fromJS(newItem));
         })
 
         return res;

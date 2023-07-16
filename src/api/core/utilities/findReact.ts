@@ -4,7 +4,9 @@
  * @param {number} traverseUp
  * @returns ReactElement | null
  */
-const findReact = (element: Element, traverseUp = 0) => {
+const findReact = (element: Element | null, traverseUp = 0) => {
+    if (!element) return null;
+
     const key = Object.keys(element).find(key => {
         return key.startsWith("__reactFiber$")
         || key.startsWith("__reactInternalInstance$");

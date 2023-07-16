@@ -22,7 +22,9 @@ export default [
             }
         ],
     
-        plugins: [esbuild({ minify: true, target: "ES2020" })],
+        plugins: [
+            esbuild({ minify: true, target: "ES2020" })
+        ],
     
         onwarn(warning, warn) {
             if (warning.code === "MISSING_NAME_OPTION_FOR_IIFE_EXPORT") return;
@@ -44,7 +46,7 @@ export default [
         plugins: [
             nodeResolve(),
             commonjs(),
-            esbuild({ minify: false, target: "ES2020" })
+            esbuild({ minify: true, target: "ES2020" })
         ],
     
         onwarn(warning, warn) {
