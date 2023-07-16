@@ -1,14 +1,12 @@
-const data = [
-    {
-        name: "React",
+const data = {
+    React: {
         prop: "useRef",
         filter: null
     },
-    {
-        name: "Redux",
+    Redux: {
         prop: "sagaMonitor",
         filter: null
     }
-];
+};
 
 export default data;
