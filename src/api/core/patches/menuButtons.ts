@@ -7,22 +7,29 @@ const { cuteName, lazyModule, findReact, getImage } = utilities;
 const { Theming, preferences } = handlers;
 
 export default async function() {
-    const labelNodes = await lazyModule(
-        () => document.getElementsByClassName("status-bar-label-text"),
-        r => r.length > 0
-    ) as HTMLCollectionOf<Element>;
+    const Nodes = {} as Record<string, Element>;
+    const nodeNames = {
+        labels: ".status-bar-label-text",
+        status: ".status"
+    };
 
-    const statusNode = await lazyModule(
-        () => document.getElementsByClassName("status"),
-        r => r.length > 0
-    ) as HTMLCollectionOf<Element>;
+    for (const [name, value] of Object.entries(nodeNames)) {
+        Nodes[name] = await lazyModule(
+            () => document.querySelector(value),
+            r => r !== null
+        )
+    }
 
-    const Redux = await lazyModule(
-        () => cutest.modules.common["Redux"],
-        r => r !== null
-    );
+    const Modules = {} as Record<string, any>;
 
-    const StatusBar = findReact(statusNode[0]);
+    for (const key of ["Redux", "Immutable"]) {
+        Modules[key] = await lazyModule(
+            () => modules.common[key],
+            r => r !== null
+        );
+    }
+
+    const StatusBar = findReact(Nodes.status);
 
     patcher.after("render", StatusBar.__proto__, function(_, res) {
         if (!this.props.menuItems) return;
@@ -33,15 +40,15 @@ export default async function() {
                 Theming.themes[Theming.current + 1] ? Theming.current + 1 : 0
             )
 
-            Theming.setTheme(labelNodes[0]);
+            Theming.setTheme(Nodes.labels);
         }
 
         function onToggleName() {
             preferences.set("name", !preferences.get("name"));
 
-            Redux.dispatch({ 
+            Modules.Redux.dispatch({ 
                 type: "SET_USER", 
-                user: Redux.getState()
+                user: Modules.Redux.getState()
                     .get("user")
                     .set("firstName", preferences.get("name") ? cuteName.firstName : preferences.get("firstName"))
                     .set("lastName", preferences.get("name") ? cuteName.lastName : preferences.get("lastName"))
@@ -77,7 +84,7 @@ export default async function() {
                     && (this.props.menuItems = this.props.menuItems.delete(idx));
             }
 
-            this.props.menuItems = this.props.menuItems.push($I.fromJS(newItem));
+            this.props.menuItems = this.props.menuItems.push(Modules.Immutable.fromJS(newItem));
         })
 
         return res;

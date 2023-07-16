@@ -7,13 +7,13 @@ const { findReact, lazyModule } = utilities;
 
 export default async function() {
     const screenNode = await lazyModule(
-        () => document.getElementsByClassName('screen'),
-        r => r.length > 0
+        () => document.querySelector('.screen'),
+        r => r !== null
     );
-    const SparxWeb = findReact(screenNode[0]);
+    const SparxWeb = findReact(screenNode);
 
     // This will adapt whenever SparxWeb re-renders
-    let dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
+    let dynamicSubmitButton: Element | null;
 
     // Listen for Enter keypresses and store the answer when the dynamicSubmitButton exists (is in scope)
     document.addEventListener("keypress", function(event) {

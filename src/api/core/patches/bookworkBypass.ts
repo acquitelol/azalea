@@ -2,22 +2,18 @@ import patcher from "../patcher";
 import utilities from "../utilities";
 import { storages } from "../handlers/default";
 
-const { cuteName, findReact, findInReactTree, lazyModule } = utilities;
-const { preferences, bookwork: answerStore } = storages;
+const { findReact, findInReactTree, lazyModule } = utilities;
+const { bookwork: answerStore } = storages;
 
 export default async function() {
     const wacOverlayNode = await lazyModule(
-        () => document.getElementsByClassName('wac-overlay'),
-        r => r.length > 0
+        () => document.querySelector('.wac-overlay'),
+        r => r !== null
     );
-    const WACOverlay = findReact(wacOverlayNode[0]);
+    const WACOverlay = findReact(wacOverlayNode);
 
     // Autobookwork check bypass logic
     patcher.after("render", WACOverlay.__proto__, function(_, res) {
-        this.props.wacShowing && preferences.get("name")
-            ? cuteName
-            : preferences.get("realName").split(" ")[0];
-
         if (!this.props.options) return;
 
         const answerRegexp = /[0-9]/g;

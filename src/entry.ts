@@ -7,10 +7,10 @@ const { Theming, preferences } = handlers;
 window.cutest = cutest;
 
 (async function() {
-    const labelNodes = await lazyModule(
-        () => document.getElementsByClassName("status-bar-label-text"),
-        r => r.length > 0
-    ) as HTMLCollectionOf<Element>;
+    const labelNode = await lazyModule(
+        () => document.querySelector(".status-bar-label-text"),
+        r => r !== null
+    ) as Element;
 
     const Redux = await lazyModule(
         () => cutest.modules.common["Redux"],
@@ -29,5 +29,5 @@ window.cutest = cutest;
             .set("lastName", cuteName.lastName)
     })
     
-    Theming.setTheme(labelNodes[0]);
+    Theming.setTheme(labelNode);
 })()

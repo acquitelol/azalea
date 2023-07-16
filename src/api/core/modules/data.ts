@@ -1,4 +1,11 @@
-const data = {
+type Module = {
+    prop: string;
+    filter: ((self) => boolean | void) | null;
+}
+
+type ModuleRecord = Record<string, Module>;
+
+const exfiltratedModules = {
     React: {
         prop: "useRef",
         filter: null
@@ -7,6 +14,13 @@ const data = {
         prop: "sagaMonitor",
         filter: null
     }
-};
+} satisfies ModuleRecord;
 
-export default data;
+const globalModules = {
+    Immutable: {
+        prop: "$I",
+        filter: null
+    }
+} satisfies ModuleRecord;
+
+export { exfiltratedModules, globalModules };
