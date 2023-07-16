@@ -7,11 +7,27 @@ const { Theming, preferences } = handlers;
 window.cutest = cutest;
 
 (async function() {
-    const labelNodes = await lazyModule(() => document.getElementsByClassName("status-bar-label-text")) as HTMLCollectionOf<Element>;
+    const labelNodes = await lazyModule(
+        () => document.getElementsByClassName("status-bar-label-text"),
+        r => r.length > 0
+    ) as HTMLCollectionOf<Element>;
+
+    const Redux = await lazyModule(
+        () => cutest.modules.common["Redux"],
+        r => r !== null
+    );
     
     // Initialization by applying preferences
-    preferences.set("realName", labelNodes[1].textContent)
-    preferences.get("name") && (labelNodes[1].textContent = cuteName);
+    const user = Redux.getState().get("user");
+
+    preferences.set("firstName", user.get("firstName"))
+    preferences.set("lastName", user.get("lastName"))
+    preferences.get("name") && Redux.dispatch({ 
+        type: "SET_USER", 
+        user: user
+            .set("firstName", cuteName.firstName)
+            .set("lastName", cuteName.lastName)
+    })
     
     Theming.setTheme(labelNodes[0]);
 })()

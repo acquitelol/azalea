@@ -7,22 +7,10 @@ import patches from "./core/patches";
 
 const cutest = {
     patcher,
-    modules: {
-        ...modules,
-        common: []
-    },
+    modules,
     handlers,
     bookwork,
     utilities,
     patches
 }
-
-// Load modules by exfiltrating them by setting a prop
-modules.data.forEach(module => {
-    cutest.modules.common[module.name] = null;
-
-    modules.exfiltrate(module.prop, module.filter)
-        .then(res => (cutest.modules.common[module.name] = res));
-})
-
 export default cutest;

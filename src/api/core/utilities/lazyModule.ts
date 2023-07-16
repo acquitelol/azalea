@@ -6,9 +6,10 @@ import common from "./common";
  * @param {number} time The interval until trying again after failure in ms
  * @returns 
  */
-async function lazyModule(cb, time = 100) {
+async function lazyModule(callback: () => any, condition: (result) => boolean, time = 100) {
     while (true) {
-        if (cb().length > 0) return cb();;
+        const result = callback();
+        if (condition(result)) return result;
         await common.wait(time)
     }
 }

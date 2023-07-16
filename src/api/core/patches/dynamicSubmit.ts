@@ -6,7 +6,10 @@ const { storeAnswers } = bookwork;
 const { findReact, lazyModule } = utilities;
 
 export default async function() {
-    const screenNode = await lazyModule(() => document.getElementsByClassName('screen'));
+    const screenNode = await lazyModule(
+        () => document.getElementsByClassName('screen'),
+        r => r.length > 0
+    );
     const SparxWeb = findReact(screenNode[0]);
 
     // This will adapt whenever SparxWeb re-renders
@@ -19,6 +22,7 @@ export default async function() {
 
     // Assigns submit button and props to document for easier access
     patcher.after("render", SparxWeb, function() {
+        document["__props"] = this.props;
         dynamicSubmitButton = document.getElementById("skill-delivery-submit-button");
 
         dynamicSubmitButton?.removeEventListener("click", storeAnswers);

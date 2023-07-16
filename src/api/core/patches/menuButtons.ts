@@ -1,13 +1,27 @@
 import patcher from "../patcher";
 import utilities from "../utilities";
 import handlers from "../handlers";
+import modules from "../modules";
 
 const { cuteName, lazyModule, findReact, getImage } = utilities;
 const { Theming, preferences } = handlers;
 
 export default async function() {
-    const labelNodes = await lazyModule(() => document.getElementsByClassName("status-bar-label-text")) as HTMLCollectionOf<Element>;
-    const statusNode = await lazyModule(() => document.getElementsByClassName("status"));
+    const labelNodes = await lazyModule(
+        () => document.getElementsByClassName("status-bar-label-text"),
+        r => r.length > 0
+    ) as HTMLCollectionOf<Element>;
+
+    const statusNode = await lazyModule(
+        () => document.getElementsByClassName("status"),
+        r => r.length > 0
+    ) as HTMLCollectionOf<Element>;
+
+    const Redux = await lazyModule(
+        () => cutest.modules.common["Redux"],
+        r => r !== null
+    );
+
     const StatusBar = findReact(statusNode[0]);
 
     patcher.after("render", StatusBar.__proto__, function(_, res) {
@@ -23,12 +37,15 @@ export default async function() {
         }
 
         function onToggleName() {
-            const setNameToString = (value: string) => (labelNodes[1].textContent = value);
-
             preferences.set("name", !preferences.get("name"));
-            preferences.get("name") 
-                ? setNameToString(cuteName) 
-                : setNameToString(preferences.get("realName"));
+
+            Redux.dispatch({ 
+                type: "SET_USER", 
+                user: Redux.getState()
+                    .get("user")
+                    .set("firstName", preferences.get("name") ? cuteName.firstName : preferences.get("firstName"))
+                    .set("lastName", preferences.get("name") ? cuteName.lastName : preferences.get("lastName"))
+            })
         }
 
         const newItems = [

@@ -6,7 +6,10 @@ const { cuteName, findReact, findInReactTree, lazyModule } = utilities;
 const { preferences, bookwork: answerStore } = storages;
 
 export default async function() {
-    const wacOverlayNode = await lazyModule(() => document.getElementsByClassName('wac-overlay'));
+    const wacOverlayNode = await lazyModule(
+        () => document.getElementsByClassName('wac-overlay'),
+        r => r.length > 0
+    );
     const WACOverlay = findReact(wacOverlayNode[0]);
 
     // Autobookwork check bypass logic
