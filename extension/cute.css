@@ -13,6 +13,10 @@
 /* END DEFAULT COLORS */
 
 /* START BACKGROUND COLORS */
+.um-footer > .footer-container {
+    background: none !important;
+}
+
 ::-webkit-scrollbar-thumb, 
 .package-container, 
 .play-btn, 
@@ -201,14 +205,14 @@
 }
 
 #app-container, 
-.waiting-message-screen-background:not(.transparent), 
-.footer-container {
+#footer-cookie-banner
+.waiting-message-screen-background:not(.transparent),
+.um-student {
     background: linear-gradient(
         124.88deg,
         var(--medium), 6.72%,
         var(--light), 81.9%,
-        var(--light), 
-    100%) !important;
+        var(--light)) !important;
 }
 /* END GRADIENTS */
 
