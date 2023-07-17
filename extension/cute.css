@@ -28,7 +28,8 @@
 .view,
 .taskitem.done > .action,
 .rewards-progress-level:hover > .rewards-progress-level-label,
-.view-overlay {
+.view-overlay,
+.alert-overlay {
     background: var(--light) !important;
 }
 
@@ -108,7 +109,9 @@
 .banner-0-2-15,
 .number-input, 
 .multi-part 
-.gap-container:not(.selected) .keypad-number-input {
+.gap-container:not(.selected) .keypad-number-input,
+.alert-title,
+.alert-box-content {
     color: var(--text-dark) !important;
 }
 /* END TEXT COLORS */

@@ -13,6 +13,9 @@ window.azalea = azalea;
 
     // Apply cuter logo;
     sparxLogo!.src = getImage("logo.png");
+
+    // Default autoBookwork to true, disableable from Menu.
+    preferences.get("autoBookwork") ?? preferences.set("autoBookwork", true);
     
     // Initialization by applying preferences
     const user = Redux?.getState().get("user");
