@@ -1,15 +1,15 @@
-import cutest from "./api";
+import azalea from "./api";
 import utilities from "./api/core/utilities";
 import handlers from "./api/core/handlers";
 
 const { name, lazyModule, getImage } = utilities;
 const { Theming, preferences } = handlers;
-window.cutest = cutest;
+window.azalea = azalea;
 
 (async function() {
     const labelNode = await lazyModule(() => document.querySelector(".status-bar-label-text"));
     const sparxLogo: HTMLImageElement | null = await lazyModule(() => document.querySelector(".sparx-logo"));
-    const Redux = await lazyModule(() => cutest.modules.common.Redux);
+    const Redux = await lazyModule(() => azalea.modules.common.Redux);
 
     // Apply cuter logo;
     sparxLogo!.src = getImage("logo.png");

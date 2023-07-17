@@ -1,4 +1,4 @@
-# <img src="extension/assets/logo.png" style="width: 2rem"> Aster
+# <img src="extension/assets/logo.png" style="width: 2rem"> Azalea
 
 ## **The** ***cutest*** **SparxMaths bookwork-bypass extension for Chromium ~!**
 
@@ -15,12 +15,12 @@
 
 ### **How to install:**
 
-- Go to [**Releases**](https://github.com/acquitelol/aster/releases/) > **Latest** and click on **Aster-(version).zip** to download the extension ZIP file.
+- Go to [**Releases**](https://github.com/acquitelol/azalea/releases/) > **Latest** and click on **Azalea-(version).zip** to download the extension ZIP file.
 - Extract the ZIP to a folder on your local FS.
 - Open the **Manage Extensions** tab in your Chromium-based browser.
 - Enable **Developer Mode** if not enabled already.
 - Click on **Load Unpacked**.
-- Select the **Aster-(version)** directory.
+- Select the **Azalea-(version)** directory.
 - **You're done!** Open Sparx and get to doing some easier homework! :D
 
 <img src="extension/assets/divider.png">

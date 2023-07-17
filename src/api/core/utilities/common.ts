@@ -12,7 +12,7 @@ const name = {
     }
 };
 
-const repository = "https://raw.githubusercontent.com/acquitelol/aster";
+const repository = "https://raw.githubusercontent.com/acquitelol/azalea";
 const getImage = (name: string) => `${repository}/main/extension/assets/${name}`;
 
 export default {

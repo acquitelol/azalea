@@ -1,7 +1,7 @@
 {
-    "name": "aster",
+    "name": "zinnia",
     "version": "1.0.0",
-    "repository": "https://github.com/acquitelol/aster.git",
+    "repository": "https://github.com/acquitelol/zinnia.git",
     "author": "Rosie",
     "scripts": {
         "build": "rollup -c --configPlugin esbuild --no-watch"

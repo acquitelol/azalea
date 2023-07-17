@@ -5,7 +5,7 @@ import bookwork from "./core/bookwork";
 import utilities from "./core/utilities";
 import patches from "./core/patches";
 
-const cutest = {
+const azalea = {
     patcher,
     modules,
     handlers,
@@ -13,4 +13,5 @@ const cutest = {
     utilities,
     patches
 }
-export default cutest;
+
+export default azalea;
