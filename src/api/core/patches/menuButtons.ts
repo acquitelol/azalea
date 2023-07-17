@@ -31,6 +31,23 @@ export default async function() {
 
         const newMenuItems = [
             {
+                text: "Cycle theme",
+                img: getImage("menu_theme.png"),
+                hoverImg: getImage("menu_theme_hover.png"),
+                action: "onCycleTheme",
+                keyBinding: null,
+                newBadge: false,
+                callback() {
+                    preferences.set(
+                        "themeIndex", 
+                        Theming.themes[Theming.index + 1] ? Theming.index + 1 : 0
+                    )
+        
+                    Theming.setTheme();
+                    Theming.applyLabel(labelNode);
+                }
+            },
+            {
                 text: `${preferences.get("autoBookwork") ? "Disable" : "Enable"} bookwork`,
                 img: getImage("menu_bookwork.png"),
                 hoverImg: getImage("menu_bookwork_hover.png"),
@@ -76,23 +93,6 @@ export default async function() {
                             .set("lastName", name.lastName)
                     })
                 },
-            },
-            {
-                text: "Cycle theme",
-                img: getImage("menu_theme.png"),
-                hoverImg: getImage("menu_theme_hover.png"),
-                action: "onCycleTheme",
-                keyBinding: null,
-                newBadge: false,
-                callback() {
-                    preferences.set(
-                        "themeIndex", 
-                        Theming.themes[Theming.index + 1] ? Theming.index + 1 : 0
-                    )
-        
-                    Theming.setTheme();
-                    Theming.applyLabel(labelNode);
-                }
             },
             {
                 text: "Open Garden",
