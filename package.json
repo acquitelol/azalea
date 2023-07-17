@@ -1,7 +1,7 @@
 {
-    "name": "cutest-bypass",
+    "name": "aster",
     "version": "1.0.0",
-    "repository": "https://github.com/acquitelol/CutestBypass.git",
+    "repository": "https://github.com/acquitelol/aster.git",
     "author": "Rosie",
     "scripts": {
         "build": "rollup -c --configPlugin esbuild --no-watch"

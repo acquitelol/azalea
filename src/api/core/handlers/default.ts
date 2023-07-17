@@ -1,6 +1,6 @@
 import LocalStorageHandler from "./storage";
 
 export const storages = {
-    preferences: new LocalStorageHandler("CutestBypassPreferences", false),
-    bookwork: new LocalStorageHandler("CutestBypassStorage")
+    preferences: new LocalStorageHandler("AsterPreferences", false),
+    bookwork: new LocalStorageHandler("AsterBookwork")
 }

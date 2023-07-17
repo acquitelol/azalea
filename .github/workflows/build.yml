@@ -1,11 +1,11 @@
-name: Build CutestBypass and Release
+name: Build Aster and Release
 on:
   push:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build CutestBypass and Release
+    name: Build codebase and release
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,14 +34,14 @@ jobs:
       - name: Compress `dist` directory
         id: compress
         run: |
-          mv dist CutestBypass-${{ steps.version.outputs.value }}
-          zip -r CutestBypass.zip CutestBypass-${{ steps.version.outputs.value }} & wait $!;
+          mv dist Aster-${{ steps.version.outputs.value }}
+          zip -r Aster.zip Aster-${{ steps.version.outputs.value }} & wait $!;
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: cutestbypass-${{ steps.unix.outputs.value }}
-          title: "CutestBypass ${{ steps.version.outputs.value }}"
+          automatic_release_tag: aster-${{ steps.unix.outputs.value }}
+          title: "Aster ${{ steps.version.outputs.value }}"
           files: ./*.zip
