@@ -11,12 +11,10 @@
 - Go to [**Releases**](https://github.com/acquitelol/azalea/releases/) > **[Latest](https://github.com/acquitelol/azalea/releases/latest)** or click on **[Azalea.zip](https://github.com/acquitelol/azalea/releases/latest/download/Azalea.zip)** to download the **compressed extension bundle** containing all the things to be injected into Sparx!
     <hr />
 - Extract the ZIP to a folder onto your local file system.
-    <hr />
 - Open the **Manage Extensions** tab in your Chromium-based browser
   - (This can be any browser ranging from `Chrome` to `Edge` to `Opera` to `Arc`).
   <hr />
-- (Enable **Developer Mode** if not enabled already.)
-  <hr />
+- *(Enable* ***Developer Mode*** *if not enabled already.)*
 - Click on **Load Unpacked**.
 - Select the **Azalea-(version)** directory.
   <hr />
