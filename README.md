@@ -40,15 +40,15 @@
     <hr />
   - *Note:* ***you cannot select a specific theme (for now)***, *only cycle through them. Adding a specific theme selector is, of course, quite simple, and* ***will be added future updates.***
 
-    <hr />
+  <hr />
 
 - <img src="extension/assets/menu_bookwork.png" style="width: 1rem"> Stores **bookwork checks** and automatically submits them if possible (this is *on* by default, and can be disabled from **Menu**), otherwise shows you the answer to choose the correct option yourself.
 
-    <hr />
+  <hr />
 
 - <img src="extension/assets/menu_name.png" style="width: 1rem"> Allows you to anonymize your username by setting it to **Rosie :3** (toggleable from **Menu**, off by default) and anonymizes your ID to `1nitiat3-cut3-m0d3-f0r-5parx-m4ths`. This aims to make Sparx a place where you cannot be doxxed by showing a screenshot asking for help!
 
-    <hr />
+  <hr />
 
 - <img src="extension/assets/menu_garden.png" style="width: 1rem"> Adds a button in the **Menu** allowing you to open garden game. This is meant for if your school disabled times tables minigames and you had progress on Garden Game beforehand, or want to try the game out!
 
@@ -74,22 +74,22 @@
 - Fork **[this repository](https://github.com/acquitelol/azalea)**
 - Clone the fork locally using:
 
-```sh
-git clone https://github.com/[YOU]/[FORK]
-```
+    ```sh
+    git clone https://github.com/[YOU]/[FORK]
+    ```
 
 - Open up the repository, and checkout a new branch:
 
-```sh
-git checkout -b feature/cuter
-```
+    ```sh
+    git checkout -b feature/cuter
+    ```
 
 - Add your amazing feature(s) and **commit & push to the branch**:
 
-```sh
-git commit -m 'Added cutest new feature! :3'
-git push origin feature/cuter
-```
+    ```sh
+    git commit -m 'Added cutest new feature! :3'
+    git push origin feature/cuter
+    ```
 
 - Create a **[pull request](https://github.com/acquitelol/azalea/pulls)** and wait for it to be reviewed
 - ***You're done!*** **Thanks for your contribution! :D**
