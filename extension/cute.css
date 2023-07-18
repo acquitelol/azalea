@@ -294,6 +294,8 @@
 .gap-container {
     transition: all 100ms ease;
 }
+/* END TRANSITIONS */
+
 /* START MISCELLANEOUS */
 .sparx-logo {
     scale: 0.6;

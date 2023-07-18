@@ -6,7 +6,7 @@
 
 ### **This tool does the following:**
 
-- <img src="extension/assets/logo.png" style="width: 1rem"> Stores **bookwork checks** and automatically submits them if possible (this is *on* by default, can be disabled from **Menu**), otherwise shows you the answer to choose the correct option yourself.
+- <img src="extension/assets/menu_bookwork.png" style="width: 1rem"> Stores **bookwork checks** and automatically submits them if possible (this is *on* by default, can be disabled from **Menu**), otherwise shows you the answer to choose the correct option yourself.
 - <img src="extension/assets/menu_theme.png" style="width: 1rem"> Provides access to **Themes** by going into your **Menu** at the top right!
 - <img src="extension/assets/menu_name.png" style="width: 1rem"> Allows you to anonymize your username by setting it to **Rosie :3** (toggleable from **Menu**, off by default).
 - <img src="extension/assets/menu_garden.png" style="width: 1rem"> Adds a button in the **Menu** allowing you to open garden game. This is meant for if you do not have access to the times tables mini-games originally.

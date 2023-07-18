@@ -61,15 +61,12 @@ export default async function() {
                         type: "START_ALERT",
                         alert: Immutable?.Map({
                             title: "Disabled Auto-bookwork",
-                            message: React?.createElement("p", {
-                                children: [
-                                    "Answers will no longer be submitted automatically if the answer provided matches an option.",
-                                    React?.createElement("br"),
-                                    React?.createElement("br"),
-                                    "They will still be saved and displayed in bookwork checks for you to choose the correct option manually regardless."
-                                ],
-                                style: { textAlign: "center" }
-                            }),
+                            message: <p style={{ textAlign: "center" }}>
+                                Answers will no longer be submitted automatically if the answer provided matches an option.
+                                <br />
+                                <br />
+                                They will still be saved and displayed in bookwork checks for you to choose the option manually.
+                            </p>,
                             type: "innerComponent"
                         })
                     })
