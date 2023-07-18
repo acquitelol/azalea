@@ -1,4 +1,4 @@
-import { storages } from "./handlers/default";
+import { storages } from "./handlers/state";
 
 class bookwork {
     static extractAnswers(inputs: NodeListOf<Element>[] = []) {
@@ -49,7 +49,11 @@ class bookwork {
             document.querySelectorAll(".slots .slot"), 
             document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected")]);
 
-        storages.bookwork.set(bookworkCode, answers);
+        // We can assert that the bookwork code is always available here 
+        // because this function should only be called when the user submits a question
+        // If this is somehow called when the user is not in skill-delivery-view, 
+        // then that case is handled in the StorageHandler so no issues should happen
+        storages.bookwork.set(bookworkCode!, answers);
     }
 }
 

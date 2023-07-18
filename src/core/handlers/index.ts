@@ -1,10 +1,10 @@
 import Theming from "./theming";
-import LocalStorageHandler from "./storage";
-import { storages } from "./default"
+import StorageHandler from "./storage";
+import { storages } from "./state"
 
 const handlers = {
     Theming,
-    LocalStorageHandler,
+    StorageHandler,
     ...storages
 }
 

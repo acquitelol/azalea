@@ -13,7 +13,7 @@ const modules = {
     common: {} as CommonModules
 }
 
-// Load modules by exfiltrating them by setting a prop
+// Load modules by exfiltrating them through `proto` magic
 Object.entries(exfiltratedModules).forEach(([name, mdl]) => {
     modules.exfiltrate(mdl.prop, mdl.filter)
         .then(res => Object.assign(modules.common, { [name]: res }));

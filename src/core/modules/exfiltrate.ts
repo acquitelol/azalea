@@ -2,7 +2,7 @@
 // https://github.com/uwu/shelter/blob/main/packages/shelter/src/exfiltrate.ts
 function exfiltrate(prop: string, filter?: ((self: any) => boolean) | null) {
     const protoKey = Symbol(prop);
-    let hitProto = false;
+    let reachedProto = false;
 
     return new Promise((res) => {
         Object.defineProperty(Object.prototype, prop, {
@@ -11,7 +11,7 @@ function exfiltrate(prop: string, filter?: ((self: any) => boolean) | null) {
 
             set(v) {
                 if (this === Object.prototype) {
-                    hitProto = true;
+                    reachedProto = true;
                     Object.prototype[protoKey] = v;
                     return;
                 }
@@ -25,7 +25,7 @@ function exfiltrate(prop: string, filter?: ((self: any) => boolean) | null) {
 
                 if (!filter || filter(this)) {
                     res(this);
-                    if (!hitProto) delete Object.prototype[prop];
+                    if (!reachedProto) delete Object.prototype[prop];
                 }
             },
 

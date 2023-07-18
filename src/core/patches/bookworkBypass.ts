@@ -1,9 +1,9 @@
 import patcher from "../patcher";
 import utilities from "../utilities";
-import { storages } from "../handlers/default";
+import { storages } from "../handlers/state";
 
 const { findReact, findInReactTree, lazyModule } = utilities;
-const { bookwork: answerStore, preferences } = storages;
+const { bookwork, preferences } = storages;
 
 export default async function() {
     const wacOverlayNode = await lazyModule(() => document.querySelector('.wac-overlay'));
@@ -13,7 +13,7 @@ export default async function() {
         if (!this.props.options) return;
 
         const answerRegexp = /[0-9]/g;
-        const answers = answerStore.get(this.props.bookworkCode);
+        const answers = bookwork.get(this.props.bookworkCode);
 
         for (const option of this.props.options) {
             const optionMatches = option.get("answerMarkup")?.match(answerRegexp);
@@ -25,10 +25,9 @@ export default async function() {
                 this.props.onSubmitAnswer('', null, option, false);
                 return res;
             }
-
-            console.warn(`Couldn't find answer! Results follow;`, { optionMatches, answerMatches });
         }
 
+        console.warn("Couldn't submit answer automatically or answer wasn't found!");
         const container = findInReactTree(res, r => r.props.children[1].props.className?.includes("bookwork-code"));
         if (!container) return;
 

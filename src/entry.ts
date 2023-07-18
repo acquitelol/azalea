@@ -1,6 +1,6 @@
-import azalea from "./api";
-import utilities from "./api/core/utilities";
-import handlers from "./api/core/handlers";
+import azalea from "./core";
+import utilities from "./core/utilities";
+import handlers from "./core/handlers";
 
 const { name, lazyModule, getImage } = utilities;
 const { Theming, preferences } = handlers;

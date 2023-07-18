@@ -1,4 +1,4 @@
-import { storages } from "./default";
+import { storages } from "./state";
 
 class Theming {
     static themes = [

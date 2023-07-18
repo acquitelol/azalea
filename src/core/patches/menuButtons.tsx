@@ -13,12 +13,13 @@ type MenuItem = {
     action: string;
     keyBinding: string | null;
     newBadge: boolean;
-    callback: () => any | void;
+    callback(): any | void;
 }
 
 export default async function() {
     const labelNode = await lazyModule(() => document.querySelector(".status-bar-label-text"));
     const statusNode = await lazyModule(() => document.querySelector(".status"));
+
     const Redux = await lazyModule(() => modules.common.Redux);
     const React = await lazyModule(() => modules.common.React);
     const Immutable = await lazyModule(() => modules.common.Immutable);
@@ -26,7 +27,9 @@ export default async function() {
     const StatusBar = findReact(statusNode);
 
     patcher.after("render", StatusBar.__proto__, function(_, res) {
+        // Apply label again, in-case the XP of the user changes
         Theming.applyLabel(labelNode);
+        
         if (!this.props.menuItems) return;
 
         const newMenuItems = [
@@ -55,17 +58,17 @@ export default async function() {
                 keyBinding: null,
                 newBadge: false,
                 callback() {
-                    preferences.set("autoBookwork", !preferences.get("autoBookwork"));
+                    preferences.toggle("autoBookwork");
 
                     !preferences.get("autoBookwork") && Redux?.dispatch({
                         type: "START_ALERT",
                         alert: Immutable?.Map({
                             title: "Disabled Auto-bookwork",
                             message: <p style={{ textAlign: "center" }}>
-                                Answers will no longer be submitted automatically if the answer provided matches an option.
+                                <strong>Answers will no longer be submitted automatically</strong> if the answer provided matches a bookwork-check option.
                                 <br />
                                 <br />
-                                They will still be saved and displayed in bookwork checks for you to choose the option manually.
+                                They will still be <strong>saved</strong> and <strong>displayed in bookwork checks</strong> for you to choose the option manually.
                             </p>,
                             type: "innerComponent"
                         })
@@ -80,7 +83,7 @@ export default async function() {
                 keyBinding: null,
                 newBadge: false,
                 callback() {
-                    preferences.set("shouldUseCuteName", !preferences.get("shouldUseCuteName"));
+                    preferences.toggle("shouldUseCuteName");
 
                     Redux?.dispatch({ 
                         type: "SET_USER", 
