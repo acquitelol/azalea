@@ -141,7 +141,9 @@ class Theming {
     }
 
     static applyLabel(label: Element | null) {
-        label && (label.textContent = `${label?.textContent?.split("|")[0]} | ${this.theme.name}`)
+        if (!label) return;
+
+        label.textContent = `${label?.textContent?.split("|")[0]} | ${this.theme.name}`
     }
     
     static setTheme() {

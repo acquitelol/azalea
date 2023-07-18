@@ -110,14 +110,14 @@ export default async function() {
             }
         ] satisfies MenuItem[];
 
-        // Iterate through every new item
-        newMenuItems.forEach(newMenuItem => {
+        // Iterate through every new item and add it to the menuItems Immutable Map
+        newMenuItems.reverse().forEach(newMenuItem => {
             for (const [idx, oldMenuItem] of this.props.menuItems.entries()) {
                 newMenuItem.action === oldMenuItem.get("action") 
                     && (this.props.menuItems = this.props.menuItems.delete(idx));
             }
 
-            this.props.menuItems = this.props.menuItems.push(Immutable?.fromJS(newMenuItem));
+            this.props.menuItems = this.props.menuItems.unshift(Immutable?.fromJS(newMenuItem));
             Object.assign(this.props, { [newMenuItem.action]: newMenuItem.callback });
         })
 
