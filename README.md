@@ -34,7 +34,7 @@
 
 - <img src="extension/assets/menu_theme.png" style="width: 1rem"> Provides access to **Themes** by going into your **Menu** at the top right!
   - Currently the **themes available** include:
-  - Pink (Default ✓), Purple, Blue, Aqua, Green, Creme, Dusk, Noir
+  - Pink (Default ✓), Purple, Blue, Aqua, Green, Creme, Dusk
     <hr />
   - *Note:* ***you cannot select a specific theme (for now)***, *only cycle through them. Adding a specific theme selector is, of course, quite simple, and* ***will be added future updates.***
 

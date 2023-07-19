@@ -19,19 +19,19 @@ class Theming {
             }
         },
         {
-            name: "Purple",
+            name: "Violet",
             colors: {
-                darkest: "#58405e",
-                dark: "#96729d",
-                medium: "#c485d1",
-                light: "#d3afde",
+                darkest: "#4e405e",
+                dark: "#87729d",
+                medium: "#ab85d1",
+                light: "#c4afde",
                 tint: {
-                    color: "230deg",
+                    color: "210deg",
                     saturation: 0.8
                 },
 
-                "text-light": "#fdebff",
-                "text-dark": "#362f37"
+                "text-light": "#f6ebff",
+                "text-dark": "#332f37"
             }
         },
         {
@@ -113,23 +113,7 @@ class Theming {
                 "text-light": "#f5f5f5",
                 "text-dark": "#1a1a1a"
             }
-        },
-        {
-            name: "Noir",
-            colors: {
-                darkest: "#000000",
-                dark: "#212121",
-                medium: "#454545",
-                light: "#0d0d0d",
-                tint: {
-                    color: "0deg",
-                    saturation: 0
-                },
-
-                "text-light": "#f5f5f5",
-                "text-dark": "#1a1a1a"
-            }
-        },
+        }
     ];
 
     static get index() {
