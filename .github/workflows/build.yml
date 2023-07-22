@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Get current unix seconds
+        id: unix
+        run: |
+          echo "value=$(date +'%s')" >> $GITHUB_OUTPUT
+
       - name: Get version
         id: version
         run: |
