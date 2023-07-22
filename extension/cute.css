@@ -1,11 +1,12 @@
 /* START DEFAULT COLORS */
 :root {
     --user-select-accessibility-setting: default !important;
-    --darkest: #613248;
-    --dark: #9c7280;
-    --medium: #d1869f;
-    --light: #deafc2;
-    --tint: sepia(1) hue-rotate(280deg) saturate(0.80);
+    --raw-darkest: #613248;
+    --raw-dark: #9c7280;
+    --raw-medium: #d1869f;
+    --raw-light: #deafc2;
+
+    --tint: sepia(1) hue-rotate(280deg) saturate(0.8);
 
     --text-light: #ffedf2;
     --text-dark: #362e30;
@@ -30,7 +31,7 @@
 .rewards-progress-level:hover > .rewards-progress-level-label,
 .view-overlay,
 .alert-overlay {
-    background: var(--light) !important;
+    background: var(--raw-light) !important;
 }
 
 .package-status.complete,
@@ -40,7 +41,7 @@
 .taskitem > .action,
 .sm-button:hover, 
 .login-button:hover  {
-    background: var(--medium) !important;
+    background: var(--raw-medium) !important;
 }
 
 .package-status,
@@ -56,8 +57,9 @@
 .button-0-2-8:hover,
 .button-d2-0-2-13,
 .wac-overlay,
-.image-zoom-content {
-    background: var(--dark) !important;
+.image-zoom-content,
+.faqs-questions-section h2 {
+    background: var(--raw-dark) !important;
 }
 
 .btn,
@@ -73,18 +75,19 @@
 
 /* START TEXT COLORS */
 .rewards-progress-level:hover > .rewards-progress-level-label > .rewards-progress-level-label-text,
-.back-button {
-    color: var(--light) !important;
+.back-button,
+a {
+    color: var(--raw-light) !important;
 }
 
 .revision-search-summary-clear,
 .btn,
 .pill {
-    color: var(--medium) !important;
+    color: var(--raw-medium) !important;
 }
 
 .calculator-text {
-    color: var(--dark) !important;
+    color: var(--raw-dark) !important;
 }
 
 .package-filter-title, 
@@ -119,21 +122,21 @@
 /* START BORDER COLORS */
 .package-status.complete,
 .task-status.complete {
-    border-color: var(--light) !important;
+    border-color: var(--raw-light) !important;
 }
 
 .package-status,
 .task-status,
 .btn {
-    border-color: var(--medium) !important;
+    border-color: var(--raw-medium) !important;
 }
 
 .bookwork-code {
-    border-color: var(--dark) !important;
+    border-color: var(--raw-dark) !important;
 }
 
 .status-bar-menu-button {
-    border-color: var(--darkest) !important;
+    border-color: var(--raw-darkest) !important;
 }
 /* END BORDER COLORS */
 
@@ -145,14 +148,14 @@
 
 .taskitem > .action,
 .rewards-progress-level:hover > .rewards-progress-level-label {
-    border: 2px solid var(--light) !important;
+    border: 2px solid var(--raw-light) !important;
 }
 
 .revision-select-stream-dropdown, 
 .revision-search, 
 .revision-topic-level-container,
 .calculator {
-    border: 1px solid var(--medium) !important;
+    border: 1px solid var(--raw-medium) !important;
 }
 
 .number-input, 
@@ -160,14 +163,14 @@
 .gap-container:not(.selected) .keypad-number-input,
 .multi-part .gap-container:not(.selected) .gap-slot,
 .pill {
-    border: 2px solid var(--medium) !important;
+    border: 2px solid var(--raw-medium) !important;
 }
 
 .multi-part .gap-container.selected .keypad-number-input,
 .multi-part .gap-container:not(.selected):hover .keypad-number-input,
 .multi-part .gap-container.selected .gap-slot,
 .multi-part .gap-container:not(.selected):hover .gap-slot  {
-    border: 2px dashed var(--medium) !important;
+    border: 2px dashed var(--raw-medium) !important;
 }
 
 .taskitem.wrong > .action,
@@ -175,16 +178,20 @@
 .play-btn, 
 .sm-button, 
 .login-button {
-    border: 2px solid var(--dark) !important;
+    border: 2px solid var(--raw-dark) !important;
 }
 
 .revision-tabs {
-    border-bottom: 1px solid var(--dark) !important;
+    border-bottom: 1px solid var(--raw-dark) !important;
 }
 
 .status-bar-menu-item, 
 .status-bar-menu-header {
     border: 3px solid var(--text-dark) !important;
+}
+
+.faqs-triangle {
+    border-left: 12px solid var(--raw-light) !important;
 }
 /* END BORDERS */
 
@@ -192,18 +199,18 @@
 .um-login-container {
     background: linear-gradient(
         250deg, 
-        var(--medium), 
-        var(--dark)
+        var(--raw-medium), 
+        var(--raw-dark)
     ) !important
 }
 
 .details {
     background-image: linear-gradient(
         to right, 
-        var(--light), 0%, 
-        var(--light), 25%, 
-        var(--medium), 25%, 
-        var(--medium), 
+        var(--raw-light), 0%, 
+        var(--raw-light), 25%, 
+        var(--raw-medium), 25%, 
+        var(--raw-medium), 
     100%) !important;
 }
 
@@ -213,9 +220,9 @@
 .um-student {
     background: linear-gradient(
         124.88deg,
-        var(--medium), 6.72%,
-        var(--light), 81.9%,
-        var(--light)) !important;
+        var(--raw-medium), 6.72%,
+        var(--raw-light), 81.9%,
+        var(--raw-light)) !important;
 }
 /* END GRADIENTS */
 
@@ -315,5 +322,57 @@
 .package-filter,
 .um-header {
     box-shadow: 0 5px 10px 1px #0000003f;
+}
+
+.cycle-theme-btn {
+    font-size: unset !important;
+    user-select: none !important;
+    margin-left: 0.5em;
+}
+
+.clear-custom-btn,
+.special-btn {
+    font-size: unset !important;
+    user-select: none !important;
+    margin-left: 0 !important;
+}
+
+.theme-select {
+    margin-right: 0.5em !important;
+}
+
+.cycle-theme-btn:focus, 
+.clear-custom-btn:focus,
+.special-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.clear-custom-btn {
+    transform: scale(0.75);
+}
+
+.clear-custom-btn:active {
+    transform: translateY(2px) scale(0.75) !important;
+}
+
+.alert-box-content {
+    overflow-y: unset !important;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+.revision-search {
+    width: fit-content !important;
+    height: fit-content;
+    max-height: 2rem;
+    font-size: 1.5rem;
+    margin-right: 1rem
+}
+
+.btn-secondary {
+    padding: 8px !important;
 }
 /* END MISCELLANEOUS */

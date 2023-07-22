@@ -1,123 +1,193 @@
-import { storages } from "./state";
+import { storages } from "./state"
+
+const { preferences, colors } = storages;
+
+export const spec = {
+    raw: [
+        "darkest",
+        "dark",
+        "medium",
+        "light"
+    ],
+
+    tint: [
+        "hue",
+        "intensity"
+    ],
+
+    text: [
+        "light",
+        "dark"
+    ]
+};
 
 class Theming {
     static themes = [
         {
             name: "Pink",
             colors: {
-                darkest: "#5e404b",
-                dark: "#9c7280",
-                medium: "#d1869f",
-                light: "#deafc2",
-                tint: {
-                    color: "280deg",
-                    saturation: 0.8
+                raw: {
+                    darkest: "#5e404b",
+                    dark: "#9c7280",
+                    medium: "#d1869f",
+                    light: "#deafc2",
                 },
 
-                "text-light": "#ffedf2",
-                "text-dark": "#362e30"
+                tint: {
+                    hue: "280deg",
+                    intensity: 0.8
+                },
+
+                text: {
+                    light: "#ffedf2",
+                    dark: "#362e30"
+                }
             }
         },
         {
             name: "Violet",
             colors: {
-                darkest: "#4e405e",
-                dark: "#87729d",
-                medium: "#ab85d1",
-                light: "#c4afde",
-                tint: {
-                    color: "210deg",
-                    saturation: 0.8
+                raw: {
+                    darkest: "#4e405e",
+                    dark: "#87729d",
+                    medium: "#ab85d1",
+                    light: "#c4afde",
                 },
 
-                "text-light": "#f6ebff",
-                "text-dark": "#332f37"
+                tint: {
+                    hue: "210deg",
+                    intensity: 0.8
+                },
+
+                text: {
+                    light: "#f6ebff",
+                    dark: "#332f37"
+                }
             }
         },
         {
             name: "Blue",
             colors: {
-                darkest: "#404b5e",
-                dark: "#72809d",
-                medium: "#859ed1",
-                light: "#afc2de",
-                tint: {
-                    color: "150deg",
-                    saturation: 0.8
+                raw: {
+                    darkest: "#404b5e",
+                    dark: "#72809d",
+                    medium: "#859ed1",
+                    light: "#afc2de",
                 },
 
-                "text-light": "#ebf0ff",
-                "text-dark": "#2f3137"
+                tint: {
+                    hue: "150deg",
+                    intensity: 0.8
+                },
+
+                text: {
+                    light: "#ebf0ff",
+                    dark: "#2f3137"
+                }
             }
         },
         {
             name: "Aqua",
             colors: {
-                darkest: "#405e58",
-                dark: "#729d96",
-                medium: "#85d1c4",
-                light: "#afded3",
-                tint: {
-                    color: "125deg",
-                    saturation: 0.8
+                raw: {
+                    darkest: "#405e58",
+                    dark: "#729d96",
+                    medium: "#85d1c4",
+                    light: "#afded3",
                 },
 
-                "text-light": "#ebfffd",
-                "text-dark": "#2f3736"
+                tint: {
+                    hue: "125deg",
+                    intensity: 0.8
+                },
+
+                text: {
+                    light: "#ebfffd",
+                    dark: "#2f3736"
+                }
             }
         },
         {
             name: "Green",
             colors: {
-                darkest: "#415e40",
-                dark: "#729d72",
-                medium: "#85d185",
-                light: "#b2deaf",
-                tint: {
-                    color: "80deg",
-                    saturation: 0.8
+                raw: {
+                    darkest: "#415e40",
+                    dark: "#729d72",
+                    medium: "#85d185",
+                    light: "#b2deaf",
                 },
 
-                "text-light": "#ebffec",
-                "text-dark": "#2f372f"
+                tint: {
+                    hue: "80deg",
+                    intensity: 0.8
+                },
+
+                text: {
+                    light: "#ebffec",
+                    dark: "#2f372f"
+                }
             }
         },
         {
             name: "Creme",
             colors: {
-                darkest: "#5e4940",
-                dark: "#9d7f72",
-                medium: "#d19e85",
-                light: "#debdaf",
-                tint: {
-                    color: "330deg",
-                    saturation: 0.8
+                raw: {
+                    darkest: "#5e4940",
+                    dark: "#9d7f72",
+                    medium: "#d19e85",
+                    light: "#debdaf",
                 },
 
-                "text-light": "#fff2eb",
-                "text-dark": "#37322f"
+                tint: {
+                    hue: "330deg",
+                    intensity: 0.8
+                },
+
+                text: {
+                    light: "#fff2eb",
+                    dark: "#37322f"
+                }
             }
         },
         {
             name: "Dusk",
             colors: {
-                darkest: "#030303",
-                dark: "#3b3b3b",
-                medium: "#5e5e5e",
-                light: "#2e2e2e",
-                tint: {
-                    color: "0deg",
-                    saturation: 0
+                raw: {
+                    darkest: "#030303",
+                    dark: "#3b3b3b",
+                    medium: "#5e5e5e",
+                    light: "#2e2e2e",
                 },
 
-                "text-light": "#f5f5f5",
-                "text-dark": "#1a1a1a"
+                tint: {
+                    hue: "0deg",
+                    intensity: 0
+                },
+
+                text: {
+                    light: "#f5f5f5",
+                    dark: "#1a1a1a"
+                }
+            }
+        },
+        {
+            name: "Custom",
+            get colors() {
+                return Object.keys(spec).reduce((acc, key) => ({
+                    ...acc,
+                    [key]: spec[key].reduce((acc, item) => {
+                        return { 
+                            ...acc, 
+                            [item]: colors.get(`${key}-${item}`)
+                        }
+                    }, {})
+                }), {})
             }
         }
-    ];
+    ] as const;
 
     static get index() {
-        return storages.preferences.get("themeIndex") ?? 0
+        return preferences.get("themeIndex") ?? 0
     };
 
     static get theme() {
@@ -131,18 +201,19 @@ class Theming {
     }
     
     static setTheme() {
-        Object.entries(this.theme.colors)
-            .map(([variable, color]) => {
-                if (variable === "tint") {
-                    const tintObject = color as Record<string, any>;
-                    return [variable, `sepia(1) hue-rotate(${tintObject.color}) saturate(${tintObject.saturation})`]
-                }
+        Object.entries(this.theme.colors).forEach(([colorType, colors]) => {
+            if (colorType === "tint") {
+                const hue = colors.hue || "280deg";
+                const intensity = colors.intensity !== 0 && !colors.intensity ? "0.8" : colors.intensity;
 
-                return [variable, color];
+                const color = `sepia(1) hue-rotate(${hue}) saturate(${intensity})`;
+                return document.documentElement.style.setProperty(`--${colorType}`, color as string);
+            }
+
+            Object.entries(colors).forEach(([key, color]) => {
+                document.documentElement.style.setProperty(`--${colorType}-${key}`, color as string);
             })
-            .forEach(([variable, color]) => {
-                document.documentElement.style.setProperty(`--${variable}`, color as string);
-            })
+        })
     }
 };
 

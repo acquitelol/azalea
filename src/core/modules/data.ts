@@ -1,9 +1,4 @@
-type Module = {
-    prop: string;
-    filter: ((r: any) => boolean | void) | null;
-}
-
-type ModuleRecord = Record<string, Module | string>;
+import { ModuleRecord } from "@azalea/types";
 
 const exfiltratedModules = {
     React: {
@@ -15,12 +10,8 @@ const exfiltratedModules = {
         filter: r => "createPortal" in r
     },
     Redux: {
-        prop: "sagaMonitor",
-        filter: r => "getState" in r && "dispatch" in r
-    },
-    Effects: {
-        prop: "take",
-        filter: r => "@@redux-saga/MULTICAST" in r
+        prop: "getState",
+        filter: r => "dispatch" in r
     },
     Protobuf: {
         prop: "FileDescriptorProto",

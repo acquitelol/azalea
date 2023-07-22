@@ -1,5 +1,5 @@
 async function loadFromURL(src, async = false) {
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = src;
     script.async = async;
 

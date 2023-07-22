@@ -5,7 +5,7 @@ import { storages } from "./state"
 const handlers = {
     Theming,
     StorageHandler,
-    ...storages
+    storages
 }
 
 export default handlers;

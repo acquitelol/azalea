@@ -8,7 +8,7 @@ import findInTree from "./findInTree";
  * @return {any} Returns null if nothing is filtered or the value that is filtered.
  */
 function findInReactTree(tree: object, filter: Function = _ => _, options = {}) {
-  return findInTree(tree, filter, { walkable: ['props', 'children'], ...options });
+  return findInTree(tree, filter, { walkable: ["props', 'children"], ...options });
 };
 
 export default findInReactTree;

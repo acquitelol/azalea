@@ -24,7 +24,7 @@ function findInTree(tree: object | any[] = {}, filter: Function = _ => _, { igno
     
         if (Array.isArray(node)) {
             stack.push(...node);
-        } else if (typeof node === 'object' && node !== null) {
+        } else if (typeof node === "object" && node !== null) {
             if (walkable.length) {
                 for (const key in node) {
                     const value = node[key];

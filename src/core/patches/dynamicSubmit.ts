@@ -1,12 +1,12 @@
-import patcher from "../patcher";
-import bookwork from "../bookwork";
-import utilities from "../utilities";
+import patcher from "@core/patcher";
+import bookwork from "@core/bookwork";
+import utilities from "@utilities";
 
 const { storeAnswers } = bookwork;
 const { findReact, lazyModule } = utilities;
 
 export default async function() {
-    const screenNode = await lazyModule(() => document.querySelector('.screen'));
+    const screenNode = await lazyModule(() => document.querySelector(".screen"));
     const SparxWeb = findReact(screenNode);
 
     // This will adapt whenever SparxWeb re-renders

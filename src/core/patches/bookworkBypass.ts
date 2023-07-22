@@ -1,12 +1,12 @@
-import patcher from "../patcher";
-import utilities from "../utilities";
-import { storages } from "../handlers/state";
+import patcher from "@core/patcher"
+import utilities from "@utilities"
+import { storages } from "@handlers/state";
 
 const { findReact, findInReactTree, lazyModule } = utilities;
 const { bookwork, preferences } = storages;
 
 export default async function() {
-    const wacOverlayNode = await lazyModule(() => document.querySelector('.wac-overlay'));
+    const wacOverlayNode = await lazyModule(() => document.querySelector(".wac-overlay"));
     const WACOverlay = findReact(wacOverlayNode);
 
     patcher.after("render", WACOverlay.__proto__, function(_, res) {
@@ -22,7 +22,7 @@ export default async function() {
             // If it thinks it has the correct answer, then submit that answer
             // This only works for Number-based answers, so images and text won't be submitted automatically
             if (optionMatches?.join("")?.includes(answerMatches?.join("")) && preferences.get("autoBookwork")) {
-                this.props.onSubmitAnswer('', null, option, false);
+                this.props.onSubmitAnswer("", null, option, false);
                 return res;
             }
         }

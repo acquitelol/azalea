@@ -1,4 +1,4 @@
-class LocalStorageHandler {
+class StorageHandler {
     protected name = "Storage";
     protected shouldLog = true;
 
@@ -83,4 +83,4 @@ class LocalStorageHandler {
     }
 };
 
-export default LocalStorageHandler
+export default StorageHandler;

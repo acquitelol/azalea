@@ -1,4 +1,4 @@
-import { storages } from "./handlers/state";
+import { storages } from "@handlers/state"
 
 class bookwork {
     static extractAnswers(inputs: NodeListOf<Element>[] = []) {
@@ -19,7 +19,7 @@ class bookwork {
                     }
                 }
 
-                const current = clone[i].querySelector('[data-test-target="image-img"]');
+                const current = clone[i].querySelector("[data-test-target='image-img']");
 
                 if (current) {
                     text += current.currentSrc.toString();
