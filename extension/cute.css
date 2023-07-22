@@ -75,14 +75,14 @@
 
 /* START TEXT COLORS */
 .rewards-progress-level:hover > .rewards-progress-level-label > .rewards-progress-level-label-text,
-.back-button,
-a {
+.back-button {
     color: var(--raw-light) !important;
 }
 
 .revision-search-summary-clear,
 .btn,
-.pill {
+.pill,
+a {
     color: var(--raw-medium) !important;
 }
 
