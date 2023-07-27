@@ -9,20 +9,23 @@ class bookwork {
 
             for (let i = 0; i < clone.length; i++) {
                 let text = "";
-                const popup = clone[i].querySelector("span.text");
 
-                if (popup) {
-                    for (let i = 0; i < popup.childNodes.length; i++) {
-                        popup.childNodes[i].className == "katex"
-                            ? text += popup.childNodes[i].querySelector("annotation")?.textContent
-                        : text += popup.childNodes[i].textContent;
+                const spans = clone[i].querySelector("span.text");
+
+                if (spans) {
+                    for (let j = 0; j < spans.childNodes.length; j++) {
+                        const child = spans.childNodes[j];
+
+                        child.className == "katex"
+                            ? text += child.querySelector("annotation")?.textContent
+                            : text += child.textContent;
                     }
                 }
 
-                const current = clone[i].querySelector("[data-test-target='image-img']");
+                const image = clone[i].querySelector("[data-test-target='image-img']");
 
-                if (current) {
-                    text += current.currentSrc.toString();
+                if (image) {
+                    text += image.currentSrc.toString();
                 }
 
                 results.push(text);
@@ -45,6 +48,7 @@ class bookwork {
         const bookworkCode = document.querySelector(".bookwork-code")
             ?.textContent
             ?.replace("Bookwork code: ", "");
+            
         const answers = bookwork.extractAnswers([
             document.querySelectorAll(".slots .slot"), 
             document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected")]);

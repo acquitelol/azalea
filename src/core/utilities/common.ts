@@ -3,15 +3,20 @@ import { storages } from "@handlers/state"
 const { preferences } = storages;
 
 const name = {
+    defaults: {
+        firstName: "Rosie",
+        lastName: ":3"
+    },
+
     get firstName() {
         return preferences.get("shouldUseCuteName") 
-            ? preferences.get("cuterFirstName") || "Rosie" 
+            ? preferences.get("cuterFirstName") || this.defaults.firstName
             : preferences.get("firstName")
     },
     
     get lastName() {
         return preferences.get("shouldUseCuteName")
-            ? preferences.get("cuterLastName") || ":3"
+            ? preferences.get("cuterLastName") || this.defaults.lastName
             : preferences.get("lastName")
     }
 };

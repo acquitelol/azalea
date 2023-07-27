@@ -1,11 +1,11 @@
 import bookworkBypass from "./bookworkBypass";
-import dynamicSubmit from "./dynamicSubmit";
+import captureAnswers from "./captureAnswers";
 import menuButtons from "./menuButtons";
 
 const patches = (async function() {
     return [
         await bookworkBypass(),
-        await dynamicSubmit(),
+        await captureAnswers(),
         await menuButtons()
     ]
 })()

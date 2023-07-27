@@ -100,12 +100,10 @@ const ToggleBookwork = () => {
     </div>
 }
 
-const NameInput = ({ type, label, placeholder }) => {
+const NameInput = ({ type, label, placeholder, user }) => {
     const [value, setValue] = useStorageValue(type, "preferences");
 
     React.useEffect(() => {
-        const user = Redux?.getState().get("user");
-
         Redux?.dispatch({ 
             type: "SET_USER",
             user: user
@@ -141,7 +139,7 @@ const NameInput = ({ type, label, placeholder }) => {
     </div>
 }
 
-const NameInputs = () => {
+const NameInputs = ({ user }) => {
     const [shouldUseCuteName, setShouldUseCuteName] = useStorageValue("shouldUseCuteName", "preferences");
 
     return <>
@@ -171,12 +169,14 @@ const NameInputs = () => {
             <NameInput 
                 type={"cuterFirstName"} 
                 label={"First Name"} 
-                placeholder={"Rosie"}
+                placeholder={name.defaults.firstName}
+                user={user}
             />
             <NameInput 
                 type={"cuterLastName"} 
                 label={"Last Name"}
-                placeholder={":3"} 
+                placeholder={name.defaults.lastName} 
+                user={user}
             />
         </div>
     </>
@@ -213,10 +213,10 @@ const Buttons = () => {
     </div>
 }
 
-const Settings = () => (
+const Settings = ({ user }) => (
     <>
         <ToggleBookwork />
-        <NameInputs />
+        <NameInputs user={user} />
         <br />
         <Buttons />
     </>
@@ -231,11 +231,13 @@ export default class Item implements BaseItem {
 
     action = "onOpenPreferences";
     callback() {
+        const user = Redux.getState().get("user");
+
         Redux.dispatch({
             type: "START_ALERT",
             alert: Immutable.Map({
-                title: `Welcome to Azalea, ${Redux.getState().get("user").get("firstName")}!`,
-                message: <Settings />,
+                title: `Welcome to Azalea, ${user.get("firstName")}!`,
+                message: <Settings user={user} />,
                 type: "innerComponent",
                 noDefaultButton: true
             })

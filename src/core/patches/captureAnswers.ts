@@ -17,7 +17,8 @@ export default async function() {
         event.key === "Enter" && dynamicSubmitButton && storeAnswers();
     })
 
-    // Assigns submit button and props to document for easier access
+    // Assigns `storeAnswers` on click to Submit button on every SparxWeb render
+    // This then captures the answer(s) in the input whenever the button does exist
     patcher.after("render", SparxWeb, function() {
         dynamicSubmitButton = document.querySelector("#skill-delivery-submit-button");
 

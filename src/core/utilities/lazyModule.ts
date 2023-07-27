@@ -8,6 +8,7 @@
  */
 async function lazyModule<T>(callback: () => T, condition?: (result: T | null) => boolean, maxAttempts = 100, time = 100): Promise<T | null> {
     let attempt = 0;
+    
     while (attempt < maxAttempts) {
         const result = callback();
 
