@@ -7,7 +7,7 @@ import utilities from "@utilities";
 import manifest from "@extension/manifest.json";
 import { BaseItem } from "@azalea/types";
 
-const { Redux, React, Immutable } = common;
+const { React, Immutable } = common;
 const { repository, noop, name, getImage } = utilities;
 const { preferences } = storages
 
@@ -224,12 +224,6 @@ const Settings = ({ user }) => (
 
 export default class Item implements BaseItem {
     text = "Settings";
-
-    img = "menu_name.png";
-    hoverImg = "menu_name_hover.png";
-    keyBinding = null;
-
-    action = "onOpenPreferences";
     callback() {
         const user = Redux.getState().get("user");
 

@@ -1,41 +1,49 @@
 {
     "name": "Azalea",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "description": "The cutest SparxMaths bookwork-bypass extension for Chromium ~!",
     "manifest_version": 3,
     "author": "Rosie",
-
     "host_permissions": [
         "*://www.sparxmaths.uk/*",
         "https://auth.sparxmaths.uk/*"
     ],
-
     "icons": {
         "128": "assets/logo.png"
     },
-
     "action": {
         "default_icon": {
             "128": "assets/logo.png"
         },
         "default_title": "Azalea"
     },
-
     "permissions": [
         "activeTab",
         "storage",
         "downloads"
     ],
-
-    "content_scripts": [{
-        "js": ["index.js"],
-        "css": ["cute.css"],
-        "matches": ["https://*.sparxmaths.uk/*"],
-        "run_at": "document_start"
-    }],
-
-    "web_accessible_resources": [{
-        "resources": ["bundle.js"],
-        "matches": ["<all_urls>"]
-    }]
+    "content_scripts": [
+        {
+            "js": [
+                "index.js"
+            ],
+            "css": [
+                "cute.css"
+            ],
+            "matches": [
+                "https://*.sparxmaths.uk/*"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "bundle.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
 }

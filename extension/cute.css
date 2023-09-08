@@ -1,378 +1,51 @@
-/* START DEFAULT COLORS */
 :root {
     --user-select-accessibility-setting: default !important;
     --raw-darkest: #613248;
     --raw-dark: #9c7280;
     --raw-medium: #d1869f;
     --raw-light: #deafc2;
+    --raw-lightest: #fddae8;
+    --raw-shine: #fff0f6;
 
     --tint: sepia(1) hue-rotate(280deg) saturate(0.8);
 
-    --text-light: #ffedf2;
-    --text-dark: #362e30;
-}
-/* END DEFAULT COLORS */
-
-/* START BACKGROUND COLORS */
-.um-footer > .footer-container {
-    background: none !important;
-}
-
-::-webkit-scrollbar-thumb, 
-.package-container, 
-.play-btn, 
-.sm-button, 
-.login-button,
-.package-filter-list, 
-.other-section-link, 
-.revision-homework-button-container,
-.view,
-.taskitem.done > .action,
-.rewards-progress-level:hover > .rewards-progress-level-label,
-.view-overlay,
-.alert-overlay {
-    background: var(--raw-light) !important;
-}
-
-.package-status.complete,
-.task-status.complete,
-.bookwork-code,
-.videoBanner,
-.taskitem > .action,
-.sm-button:hover, 
-.login-button:hover  {
-    background: var(--raw-medium) !important;
+    --palette-dark-blue: var(--raw-darkest) !important;
+    --palette-dark-blue-90: var(--raw-dark) !important;
+    --palette-light-blue: var(--raw-medium) !important;
+    --palette-light-blue-20: var(--raw-lightest) !important;
+    --palette-green: var(--raw-light) !important;
+    --palette-md-green: var(--raw-medium) !important;
+    --palette-md-green-20: var(--raw-lightest) !important;
+    --palette-dark-green: var(--raw-darkest) !important;
+    --palette-amber: var(--raw-dark) !important;
+    --palette-amber-20: var(--raw-light) !important;
+    --palette-red: var(--raw-medium) !important;
+    --palette-red-20: var(--raw-lightest) !important;
+    --palette-purple: var(--raw-medium) !important;
+    --palette-purple-20: var(--raw-lightest) !important;
+    --palette-dark-purple: var(--raw-dark) !important;
+    --palette-blue-grey: var(--raw-lightest) !important;
+    --palette-light-grey: var(--raw-shine) !important;
+    --palette-dark-blue-90-opacity: var(--raw-dark) !important;
+    --palette-green-gradient-start: var(--raw-medium) !important;
+    --palette-green-gradient-stop: var(--palette-green) !important;
+    --palette-blue-gradient-start: var(--raw-light) !important;
+    --palette-blue-gradient-stop: var(--raw-medium) !important;
+    --palette-blue-gradient-stop-light: var(--raw-light) !important;
+    --palette-orange-gradient-start: var(--raw-medium) !important;
+    --palette-orange-gradient-stop: var(--raw-light) !important;
 }
 
-.package-status,
-.task-status,
-.header,
-.waiting-message-screen-background.transparent,
-.revision-tab-active,
-.taskitem.wrong > .action,
-.status-bar, 
-.package-filter,
-.um-header,
-.status-bar-menu-button, 
-.button-0-2-8:hover,
-.button-d2-0-2-13,
-.wac-overlay,
-.image-zoom-content,
-.faqs-questions-section h2 {
-    background: var(--raw-dark) !important;
-}
-
-.btn,
-.banner-0-2-15 {
-    background: var(--text-light) !important;
-}
-
-.status-bar-menu-item, 
-.status-bar-menu-header {
-    background: var(--text-dark) !important;
-}
-/* END BACKGROUND COLORS */
-
-/* START TEXT COLORS */
-.rewards-progress-level:hover > .rewards-progress-level-label > .rewards-progress-level-label-text,
-.back-button {
-    color: var(--raw-light) !important;
-}
-
-.revision-search-summary-clear,
-.btn,
-.pill,
-a {
-    color: var(--raw-medium) !important;
-}
-
-.calculator-text {
-    color: var(--raw-dark) !important;
-}
-
-.package-filter-title, 
-.package-filter-details,
-.new-user-link, 
-.not-your-school-link, 
-#password-toggle-text,
-.status-bar-menu-button.menu-open,
-.status-bar-menu-item, 
-.status-bar-menu-header,
-.status-bar-menu-button:hover,
-.revision-tab,
-.videoBanner {
-    color: var(--text-light) !important;
-}
-
-.rewards-progress-level-label-text, 
-.form-title,
-.revision-homework-button,
-.tutorial-bubble-title,
-.view,
-.banner-0-2-15,
-.number-input, 
-.multi-part 
-.gap-container:not(.selected) .keypad-number-input,
-.alert-title,
-.alert-box-content {
-    color: var(--text-dark) !important;
-}
-/* END TEXT COLORS */
-
-/* START BORDER COLORS */
-.package-status.complete,
-.task-status.complete {
-    border-color: var(--raw-light) !important;
-}
-
-.package-status,
-.task-status,
-.btn {
-    border-color: var(--raw-medium) !important;
-}
-
-.bookwork-code {
-    border-color: var(--raw-dark) !important;
-}
-
-.status-bar-menu-button {
-    border-color: var(--raw-darkest) !important;
-}
-/* END BORDER COLORS */
-
-/* START BORDERS */
-.package-filter-arrow,
-.status-bar-menu-button {
-    border: none !important;
-}
-
-.taskitem > .action,
-.rewards-progress-level:hover > .rewards-progress-level-label {
-    border: 2px solid var(--raw-light) !important;
-}
-
-.revision-select-stream-dropdown, 
-.revision-search, 
-.revision-topic-level-container,
-.calculator {
-    border: 1px solid var(--raw-medium) !important;
-}
-
-.number-input, 
-.multi-part 
-.gap-container:not(.selected) .keypad-number-input,
-.multi-part .gap-container:not(.selected) .gap-slot,
-.pill {
-    border: 2px solid var(--raw-medium) !important;
-}
-
-.multi-part .gap-container.selected .keypad-number-input,
-.multi-part .gap-container:not(.selected):hover .keypad-number-input,
-.multi-part .gap-container.selected .gap-slot,
-.multi-part .gap-container:not(.selected):hover .gap-slot  {
-    border: 2px dashed var(--raw-medium) !important;
-}
-
-.taskitem.wrong > .action,
-.package-container, 
-.play-btn, 
-.sm-button, 
-.login-button {
-    border: 2px solid var(--raw-dark) !important;
-}
-
-.revision-tabs {
-    border-bottom: 1px solid var(--raw-dark) !important;
-}
-
-.status-bar-menu-item, 
-.status-bar-menu-header {
-    border: 3px solid var(--text-dark) !important;
-}
-
-.faqs-triangle {
-    border-left: 12px solid var(--raw-light) !important;
-}
-/* END BORDERS */
-
-/* START GRADIENTS */
-.um-login-container {
-    background: linear-gradient(
-        250deg, 
-        var(--raw-medium), 
-        var(--raw-dark)
-    ) !important
-}
-
-.details {
-    background-image: linear-gradient(
-        to right, 
-        var(--raw-light), 0%, 
-        var(--raw-light), 25%, 
-        var(--raw-medium), 25%, 
-        var(--raw-medium), 
-    100%) !important;
-}
-
-#app-container, 
-#footer-cookie-banner
-.waiting-message-screen-background:not(.transparent),
-.um-student {
-    background: linear-gradient(
-        124.88deg,
-        var(--raw-medium), 6.72%,
-        var(--raw-light), 81.9%,
-        var(--raw-light)) !important;
-}
-/* END GRADIENTS */
-
-/* START FILTERS */
-.sparx-logo,
-.package-accordion-icon,
-.alert-dismiss-button,
-.calculator-image, 
-.accordion-element-arrow, 
-.revision-topic-start-button, 
-.svg-inline--fa, 
-.rewards-progress-level-label-arrow,
-.back-button,
-.revision-strand-button,
-.icon-0-2-16 {
+[class*="_PageBackgroundImage_"],
+[class*="_CalculatorIcon_"],
+[alt="Sparx Maths"] {
     filter: var(--tint) !important;
 }
 
-.package-heading {
-    filter: blur(1px)
+[class*="_CircleOuter_"] {
+    filter: var(--tint) brightness(90%) !important;
 }
 
-.package-heading:hover {
-    filter: blur(0px)
+[class*="_Question_"] {
+    --button-colour: var(--raw-medium) !important;
 }
-
-.package-filter.active {
-    filter: brightness(125%) !important;
-}
-
-.status-bar, 
-.package-filter,
-.um-header {
-    filter: brightness(100%) !important;
-}
-
-.status-bar-menu-button {
-    filter: brightness(50%);
-}
-
-.status-bar-menu-button:hover {
-    filter: brightness(75%);
-}
-
-.status-bar-menu-item-img {
-    filter: var(--tint) brightness(75%) !important;
-}
-
-.status-bar-menu-item:hover > .status-bar-menu-item-img {
-    filter: var(--tint) brightness(115%) !important
-}
-
-.package-heading + [aria-expanded="true"] {
-    filter: blur(0px)
-}
-
-.button-0-2-8:hover {
-    filter: brightness(50%);
-}
-/* END FILTERS */
-
-/* START TRANSITIONS */
-.package-heading,
-.package-container, 
-.play-btn, 
-.sm-button, 
-.login-button {
-    transition: all 400ms ease;
-}
-
-.status-bar, 
-.package-filter,
-.um-header,
-.status-bar-menu-button,
-.status-bar-menu-item-img,
-.gap-container {
-    transition: all 100ms ease;
-}
-/* END TRANSITIONS */
-
-/* START MISCELLANEOUS */
-.sparx-logo {
-    scale: 0.6;
-    margin-right: 0 !important; 
-}
-
-.package-heading {
-    transform: scale(1);
-}
-
-.package-heading:hover {
-    transform: scale(1.05);
-    margin-bottom: 20px;
-}
-
-.status-bar, 
-.package-filter,
-.um-header {
-    box-shadow: 0 5px 10px 1px #0000003f;
-}
-
-.cycle-theme-btn {
-    font-size: unset !important;
-    user-select: none !important;
-    margin-left: 0.5em;
-}
-
-.clear-custom-btn,
-.special-btn {
-    font-size: unset !important;
-    user-select: none !important;
-    margin-left: 0 !important;
-}
-
-.theme-select {
-    margin-right: 0.5em !important;
-}
-
-.cycle-theme-btn:focus, 
-.clear-custom-btn:focus,
-.special-btn:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.clear-custom-btn {
-    transform: scale(0.75);
-}
-
-.clear-custom-btn:active {
-    transform: translateY(2px) scale(0.75) !important;
-}
-
-.alert-box-content {
-    overflow-y: unset !important;
-}
-
-*::-webkit-scrollbar {
-    display: none;
-}
-
-.revision-search {
-    width: fit-content !important;
-    height: fit-content;
-    max-height: 2rem;
-    font-size: 1.5rem;
-    margin-right: 1rem
-}
-
-.btn-secondary {
-    padding: 8px !important;
-}
-/* END MISCELLANEOUS */

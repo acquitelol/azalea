@@ -7,17 +7,14 @@ export const spec = {
         "darkest",
         "dark",
         "medium",
-        "light"
+        "light",
+        "lightest",
+        "shine"
     ],
 
     tint: [
         "hue",
         "intensity"
-    ],
-
-    text: [
-        "light",
-        "dark"
     ]
 };
 
@@ -31,16 +28,13 @@ class Theming {
                     dark: "#9c7280",
                     medium: "#d1869f",
                     light: "#deafc2",
+                    lightest: "#ffe8f1",
+                    shine: "#fff0f6"
                 },
 
                 tint: {
                     hue: "280deg",
                     intensity: 0.8
-                },
-
-                text: {
-                    light: "#ffedf2",
-                    dark: "#362e30"
                 }
             }
         },
@@ -52,16 +46,13 @@ class Theming {
                     dark: "#87729d",
                     medium: "#ab85d1",
                     light: "#c4afde",
+                    lightest: "#ead9ff",
+                    shine: "#f5edff"
                 },
 
                 tint: {
                     hue: "210deg",
                     intensity: 0.8
-                },
-
-                text: {
-                    light: "#f6ebff",
-                    dark: "#332f37"
                 }
             }
         },
@@ -73,16 +64,13 @@ class Theming {
                     dark: "#72809d",
                     medium: "#859ed1",
                     light: "#afc2de",
+                    lightest: "#dbeaff",
+                    shine: "#ebf3ff"
                 },
 
                 tint: {
                     hue: "150deg",
                     intensity: 0.8
-                },
-
-                text: {
-                    light: "#ebf0ff",
-                    dark: "#2f3137"
                 }
             }
         },
@@ -94,16 +82,13 @@ class Theming {
                     dark: "#729d96",
                     medium: "#85d1c4",
                     light: "#afded3",
+                    lightest: "#d9fff6",
+                    shine: "#edfffb"
                 },
 
                 tint: {
                     hue: "125deg",
                     intensity: 0.8
-                },
-
-                text: {
-                    light: "#ebfffd",
-                    dark: "#2f3736"
                 }
             }
         },
@@ -115,16 +100,13 @@ class Theming {
                     dark: "#729d72",
                     medium: "#85d185",
                     light: "#b2deaf",
+                    lightest: "#d9ffd6",
+                    shine: "#ecffeb"
                 },
 
                 tint: {
                     hue: "80deg",
                     intensity: 0.8
-                },
-
-                text: {
-                    light: "#ebffec",
-                    dark: "#2f372f"
                 }
             }
         },
@@ -136,37 +118,13 @@ class Theming {
                     dark: "#9d7f72",
                     medium: "#d19e85",
                     light: "#debdaf",
+                    lightest: "#ffe8de",
+                    shine: "#fff3ed"
                 },
 
                 tint: {
                     hue: "330deg",
                     intensity: 0.8
-                },
-
-                text: {
-                    light: "#fff2eb",
-                    dark: "#37322f"
-                }
-            }
-        },
-        {
-            name: "Dusk",
-            colors: {
-                raw: {
-                    darkest: "#030303",
-                    dark: "#3b3b3b",
-                    medium: "#5e5e5e",
-                    light: "#2e2e2e",
-                },
-
-                tint: {
-                    hue: "0deg",
-                    intensity: 0
-                },
-
-                text: {
-                    light: "#f5f5f5",
-                    dark: "#1a1a1a"
                 }
             }
         },
@@ -176,8 +134,8 @@ class Theming {
                 return Object.keys(spec).reduce((acc, key) => ({
                     ...acc,
                     [key]: spec[key].reduce((acc, item) => {
-                        return { 
-                            ...acc, 
+                        return {
+                            ...acc,
                             [item]: colors.get(`${key}-${item}`)
                         }
                     }, {})
@@ -199,7 +157,7 @@ class Theming {
 
         label.textContent = `${label?.textContent?.split("|")[0]} | ${this.theme.name}`
     }
-    
+
     static setTheme() {
         Object.entries(this.theme.colors).forEach(([colorType, colors]) => {
             if (colorType === "tint") {

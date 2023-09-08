@@ -1,10 +1,10 @@
 import modules from "@modules"
 
-const { React, Redux } = modules.common;
+const { React } = modules.common;
 
 export const Button = ({ text, trailing = null, className, onClick, ...props }) => {
     return <div
-        className={`alert-button btn ${className}`}
+        className={className}
         onClick={onClick}
         {...props}
     >

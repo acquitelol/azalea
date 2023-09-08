@@ -7,7 +7,7 @@ import Theming, { spec } from "@handlers/theming";
 
 import { BaseItem } from "@azalea/types";
 
-const { Redux, React, Immutable } = common;
+const { React, Immutable } = common;
 const { colors } = storages;
 const { capitalize } = utilities;
 
@@ -174,12 +174,6 @@ const Themes = ({ label }) => {
 
 export default class Item implements BaseItem {
     text = "Themes";
-
-    img = "menu_theme.png";
-    hoverImg = "menu_theme_hover.png";
-    keyBinding = null;
-
-    action = "onSelectTheme";
     callback() {
         const label = document.querySelector(".status-bar-label-text");
 

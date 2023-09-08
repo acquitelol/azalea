@@ -3,12 +3,6 @@ declare module "@azalea/types" {
 
     export type BaseItem = {
         text: string;
-    
-        img: string;
-        hoverImg: string;
-        keyBinding: string | null;
-    
-        action: string;
         callback(...args: any[]): any | null;
     };
 
@@ -16,7 +10,7 @@ declare module "@azalea/types" {
         prop: string;
         filter: ((r: any) => boolean | void) | null;
     };
-    
+
     export type ModuleRecord = Record<string, Module | string>;
 
     export type CommonModules = Record<
@@ -24,3 +18,6 @@ declare module "@azalea/types" {
         Record<string, any>
     >;
 }
+
+declare type Fn = (...args: any) => any;
+declare type Arguments<T extends Fn> = T extends (...args: infer P) => any ? P : any[];

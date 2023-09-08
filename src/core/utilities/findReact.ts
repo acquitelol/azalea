@@ -9,10 +9,12 @@ const findReact = (element: Element | null, traverseUp = 0) => {
 
     const key = Object.keys(element).find(key => {
         return key.startsWith("__reactFiber$")
-        || key.startsWith("__reactInternalInstance$");
+            || key.startsWith("__reactInternalInstance$")
+            || key.startsWith("__reactContainer$");
     }) ?? "";
 
     const elementFiber = element[key]
+
     if (!elementFiber) return null;
 
     if (elementFiber._currentElement) {
@@ -28,7 +30,7 @@ const findReact = (element: Element | null, traverseUp = 0) => {
     const getComputedFiber = fiber => {
         let parentFiber = fiber.return;
 
-        while (typeof parentFiber.type == "string") {
+        while (parentFiber && typeof parentFiber.type === "string") {
             parentFiber = parentFiber.return;
         }
 
@@ -41,7 +43,7 @@ const findReact = (element: Element | null, traverseUp = 0) => {
         computedFiber = getComputedFiber(computedFiber);
     }
 
-    return computedFiber.stateNode;
+    return computedFiber.stateNode ?? computedFiber;
 };
 
 export default findReact;
