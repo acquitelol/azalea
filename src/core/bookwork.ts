@@ -1,4 +1,4 @@
-import { storages } from "@handlers/state"
+import { storages } from '@handlers/state'
 
 class bookwork {
     static extractAnswers(inputs: NodeListOf<Element>[] = []) {
@@ -8,21 +8,21 @@ class bookwork {
             if (!clone || clone.length === 0) return;
 
             for (let i = 0; i < clone.length; i++) {
-                let text = "";
+                let text = '';
 
-                const spans = clone[i].querySelector("span.text");
+                const spans = clone[i].querySelector('span.text');
 
                 if (spans) {
                     for (let j = 0; j < spans.childNodes.length; j++) {
                         const child = spans.childNodes[j];
 
-                        child.className == "katex"
-                            ? text += child.querySelector("annotation")?.textContent
+                        child.className == 'katex'
+                            ? text += child.querySelector('annotation')?.textContent
                             : text += child.textContent;
                     }
                 }
 
-                const image = clone[i].querySelector("[data-test-target='image-img']");
+                const image = clone[i].querySelector('[data-test-target="image-img"]');
 
                 if (image) {
                     text += image.currentSrc.toString();
@@ -32,7 +32,7 @@ class bookwork {
             }
         }
 
-        const layers = document.querySelectorAll(".number-input");
+        const layers = document.querySelectorAll('.number-input');
 
         if (layers.length > 0) {
             for (let i = 0; i < layers.length; i++) {
@@ -45,13 +45,13 @@ class bookwork {
     };
 
     static storeAnswers() {
-        const bookworkCode = document.querySelector(".bookwork-code")
+        const bookworkCode = document.querySelector('.bookwork-code')
             ?.textContent
-            ?.replace("Bookwork code: ", "");
-            
+            ?.replace('Bookwork code: ', '');
+
         const answers = bookwork.extractAnswers([
-            document.querySelectorAll(".slots .slot"), 
-            document.querySelectorAll(".answer-part .gap-card.selected, .choice.selected")]);
+            document.querySelectorAll('.slots .slot'),
+            document.querySelectorAll('.answer-part .gap-card.selected, .choice.selected')]);
 
         // We can assert that the bookwork code is always available here 
         // because this function should only be called when the user submits a question

@@ -1,2 +1,2 @@
-import * as patcher from "spitroast";
+import * as patcher from 'spitroast';
 export default patcher;

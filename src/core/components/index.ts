@@ -1,8 +1,9 @@
-import { Button, EndAlertButton } from "./buttons";
-import { Arrows } from "./icons";
+import * as Buttons from './buttons';
+import { Arrows } from './icons';
 
-export {
-    Button, 
-    EndAlertButton,
+const components = {
+    ...Buttons,
     Arrows
 };
+
+export default components;

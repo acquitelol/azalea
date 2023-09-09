@@ -1,23 +1,18 @@
-import { ModuleRecord } from "@azalea/types";
+import { ModuleRecord } from '@azalea/types';
 
 const exfiltratedModules = {
-    React: {
-        prop: "useContext",
+    MediaQuery: {
+        prop: 'useMediaQuery',
         filter: () => true
+    },
+    React: {
+        prop: 'useRef',
+        filter: r => 'createElement' in r
     },
     ReactDOM: {
-        prop: "findDOMNode",
-        filter: r => "createPortal" in r
-    },
-    Router: {
-        prop: "Outlet",
-        filter: () => true
+        prop: 'findDOMNode',
+        filter: r => 'createPortal' in r
     }
 } satisfies ModuleRecord;
 
-const globalModules = {
-    Immutable: "$I",
-    // PIXI: "PIXI"
-} satisfies ModuleRecord;
-
-export { exfiltratedModules, globalModules };
+export { exfiltratedModules };

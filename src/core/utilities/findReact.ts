@@ -4,18 +4,19 @@
  * @param {number} traverseUp
  * @returns ReactElement | null
  */
-const findReact = (element: Element | null, traverseUp = 0) => {
+const findReact = <T extends Element>(element: T | null, traverseUp = 0) => {
     if (!element) return null;
 
     const key = Object.keys(element).find(key => {
-        return key.startsWith("__reactFiber$")
-            || key.startsWith("__reactInternalInstance$")
-            || key.startsWith("__reactContainer$");
-    }) ?? "";
+        return key.startsWith('__reactFiber$')
+            || key.startsWith('__reactInternalInstance$')
+            || key.startsWith('__reactContainer$');
+    }) ?? '';
 
     const elementFiber = element[key]
 
     if (!elementFiber) return null;
+    if (key.startsWith('__reactContainer$')) return elementFiber;
 
     if (elementFiber._currentElement) {
         let computedFiber = elementFiber._currentElement._owner;
@@ -30,7 +31,7 @@ const findReact = (element: Element | null, traverseUp = 0) => {
     const getComputedFiber = fiber => {
         let parentFiber = fiber.return;
 
-        while (parentFiber && typeof parentFiber.type === "string") {
+        while (parentFiber && typeof parentFiber.type === 'string') {
             parentFiber = parentFiber.return;
         }
 
@@ -43,7 +44,7 @@ const findReact = (element: Element | null, traverseUp = 0) => {
         computedFiber = getComputedFiber(computedFiber);
     }
 
-    return computedFiber.stateNode ?? computedFiber;
+    return computedFiber;
 };
 
 export default findReact;

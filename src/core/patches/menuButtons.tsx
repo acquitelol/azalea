@@ -1,12 +1,12 @@
-import patcher from "@core/patcher"
-import utilities from "@utilities"
-import handlers from "@handlers"
-import modules from "@modules"
-import items from "@patches/menu"
+import patcher from '@core/patcher'
+import utilities from '@utilities'
+import handlers from '@handlers'
+import modules from '@modules'
+import items from '@patches/menu'
 
-import { BaseItem } from "@azalea/types";
-import findInReactTree from "@core/utilities/findInReactTree"
-import { Button } from "@core/components"
+import { BaseItem } from '@azalea/types';
+import findInReactTree from '@core/utilities/findInReactTree'
+import Components from '@core/components'
 
 const { lazyModule, findReact } = utilities;
 const { Theming } = handlers;
@@ -19,13 +19,13 @@ export default async function () {
 
     const Dropdown = findReact(dropdownNode);
 
-    patcher.before("render", Dropdown.type, (args) => {
+    patcher.before('render', Dropdown.type, (args) => {
         // Apply label again, in-case the XP of the user changes
         Theming.applyLabel(labelNode);
 
         const buttons = findInReactTree(args[0], x => (
             Array.isArray(x.children) 
-            && x.className.includes("_DropdownMenuContent_")
+            && x.className.includes('_DropdownMenuContent_')
         ))
 
         if (!buttons) return;
@@ -38,12 +38,12 @@ export default async function () {
                 if (button?.props?.text === item.text) return
             }
 
-            const index = buttons.children.findIndex(x => x?.props?.children === "Logout");
+            const index = buttons.children.findIndex(x => x?.props?.children === 'Logout');
 
             buttons.children.splice(index === -1 ? 1 : index, 0, (
-                <Button
+                <Components.Button
                     text={item.text}
-                    className={"_DropdownMenuItem_tgmt4_59"}
+                    className={'_DropdownMenuItem_tgmt4_59'}
                     onClick={item.callback}
                 />
             ))

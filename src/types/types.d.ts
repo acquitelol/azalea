@@ -1,5 +1,5 @@
-declare module "@azalea/types" {
-    import { exfiltratedModules, globalModules } from "@modules/data";
+declare module '@azalea/types' {
+    import { exfiltratedModules } from '@modules/data';
 
     export type BaseItem = {
         text: string;
@@ -11,10 +11,10 @@ declare module "@azalea/types" {
         filter: ((r: any) => boolean | void) | null;
     };
 
-    export type ModuleRecord = Record<string, Module | string>;
+    export type ModuleRecord = Record<string, Module>;
 
     export type CommonModules = Record<
-        keyof typeof exfiltratedModules | keyof typeof globalModules,
+        keyof typeof exfiltratedModules,
         Record<string, any>
     >;
 }

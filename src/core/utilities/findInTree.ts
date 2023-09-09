@@ -17,14 +17,14 @@ function findInTree(tree: object | any[] = {}, filter: Function = _ => _, { igno
             return false;
         }
     };
-  
+
     while (stack.length && maxProperties) {
         const node = stack.shift();
         if (wrapFilter(node)) return node;
-    
+
         if (Array.isArray(node)) {
             stack.push(...node);
-        } else if (typeof node === "object" && node !== null) {
+        } else if (typeof node === 'object' && node !== null) {
             if (walkable.length) {
                 for (const key in node) {
                     const value = node[key];

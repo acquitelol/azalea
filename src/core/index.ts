@@ -1,11 +1,11 @@
-import modules from "@modules";
-import * as components from "@components";
-import handlers from "@handlers";
-import utilities from "@utilities";
-import patches from "@patches";
-import patcher from "@core/patcher";
-import bookwork from "@core/bookwork"
-import * as hooks from "@core/hooks";
+import modules from '@modules';
+import * as components from '@components';
+import handlers from '@handlers';
+import utilities from '@utilities';
+import patches from '@patches';
+import patcher from '@core/patcher';
+import bookwork from '@core/bookwork'
+import * as hooks from '@core/hooks';
 
 const azalea = {
     modules,

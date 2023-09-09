@@ -1,5 +1,5 @@
-import modules from "./modules";
-import { storages } from "@handlers/state";
+import modules from './modules';
+import { storages } from '@handlers/state';
 
 const { React } = modules.common;
 

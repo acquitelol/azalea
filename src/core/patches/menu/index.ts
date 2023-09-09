@@ -1,7 +1,7 @@
-import themes from "./themes";
-import settings from "./settings";
+import themes from './themes';
+import settings from './settings';
 
-export default { 
-    settings, 
-    themes, 
+export default {
+    settings,
+    themes,
 }
