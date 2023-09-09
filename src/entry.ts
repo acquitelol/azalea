@@ -2,7 +2,9 @@ import azalea from '@core';
 import utilities from '@utilities'
 import handlers from '@handlers'
 import patcher from '@core/patcher';
-import findReact from '@core/utilities/findReact';
+
+import items from '@patches/menu';
+import { RouteItem } from '@azalea/types';
 
 const { name, lazyModule, getImage } = utilities;
 const { Theming, storages: { preferences } } = handlers;
@@ -14,6 +16,35 @@ if (window.__sparxweb) {
 }
 
 (async function () {
+    const React = await lazyModule(
+        () => azalea.modules.common.React,
+        r => typeof r.useContext === 'function' && typeof r.createElement === 'function'
+    );
+
+    patcher.after('useContext', React, (_, res) => {
+        if (res && res.router && res.navigator) {
+            window.navigation = res;
+
+            const routeItems = Object.values(items)
+                .filter(item => item.Route)
+                .map(item => new item.Route()) satisfies RouteItem[]
+
+            routeItems.forEach(route => {
+                if (!res.router.routes[0].children.find(x => x.path === route.path)) {
+                    res.router.routes[0].children.push({
+                        path: route.path,
+                        element: React.createElement(route.component),
+                        hasErrorBoundary: false,
+                        children: undefined,
+                        id: `0-${res.router.routes[0].children.length}`
+                    })
+                }
+            })
+
+            res.router._internalSetRoutes(res.router.routes);
+        }
+    })
+
     // Initialization by applying preferences
     patcher.after('defineProperty', Object, (_, res: Record<PropertyKey, any>) => {
         if (res.data?.student && ['firstName', 'lastName'].every(k => k in res.data?.student)) {
@@ -21,19 +52,6 @@ if (window.__sparxweb) {
             res.data.student.lastName = name.lastName;
         }
     })
-
-    // Add a way to render custom content
-    const container = await lazyModule(() => document.querySelector('[id="root"]'));
-    const content = await lazyModule(() => container.childNodes[1]);
-    const React = await lazyModule(() => azalea.modules.common.React);
-
-    patcher.after('type', findReact(content as Element), (_, res) => {
-        const [options, setOptions] = React.useState({ enabled: false });
-
-        window.mutatePageOptions = setOptions;
-
-        return options.enabled ? options.content : res;
-    });
 
     const labelNode = await lazyModule(() => document.querySelector('[class*="_XPCount_g7mut_"]'));
     const sparxLogoContainer = await lazyModule(() => document.querySelector('[class*="_SMLogo_g7mut_"]'));

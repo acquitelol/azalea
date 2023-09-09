@@ -4,7 +4,7 @@ import handlers from '@handlers'
 import modules from '@modules'
 import items from '@patches/menu'
 
-import { BaseItem } from '@azalea/types';
+import { MenuItem } from '@azalea/types';
 import findInReactTree from '@core/utilities/findInReactTree'
 import Components from '@core/components'
 
@@ -31,7 +31,9 @@ export default async function () {
         if (!buttons) return;
 
         // Map items and wrap the values in calls to abstract away the actual classes
-        const menuItems = Object.values(items).map(item => new item()) satisfies BaseItem[]
+        const menuItems = Object.values(items)
+            .filter(item => item.Item)
+            .map(item => new item.Item()) satisfies MenuItem[]
 
         menuItems.forEach(item => {
             for (const button of buttons.children) {

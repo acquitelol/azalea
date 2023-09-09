@@ -9,8 +9,8 @@ const { React } = modules.common;
  * @param {storages} store - The store to get the value from with the key provided
  * @return {get, set} - Getting and setting the LocalStorage value statefully.
  */
-export const useStorageValue = <T extends any>(key: string, store: keyof typeof storages) => {
-    const [value, setValue]: [T, (arg: T | ((previous: T) => T)) => void] = React.useState(storages[store].get(key))
+export const useStorageValue = <T = any>(key: string, store: keyof typeof storages) => {
+    const [value, setValue] = React.useState<T>(storages[store].get(key))
 
     React.useLayoutEffect(() => {
         storages[store].set(key, value);
