@@ -9,8 +9,7 @@ function navigate(
     _prefix: Record<string, any> = { enabled: true, prefix: '/student' }
 ) {
     const { enabled, prefix } = _prefix;
-
-    window.navigation.navigator.go(enabled ? `${prefix}${path}` : path);
+    azalea.navigation.navigator.go(enabled ? `${prefix}${path}` : path);
 }
 
 export default navigate;

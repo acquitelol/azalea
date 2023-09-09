@@ -7,7 +7,7 @@ import { MenuItem, RouteItem } from '@azalea/types';
 const { React } = common;
 const { navigate } = utilities;
 
-export const path = '/azalea/themes'
+export const path = '/azalea/themes';
 
 class Item implements MenuItem {
     text = 'Themes';

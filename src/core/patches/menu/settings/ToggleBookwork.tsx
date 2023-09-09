@@ -1,6 +1,6 @@
-import Components from '@core/components'
-import { useStorageValue } from '@core/hooks'
-import { common } from '@core/modules'
+import components from '@core/components';
+import { useStorageValue } from '@core/hooks';
+import { common } from '@core/modules';
 
 const { React } = common;
 
@@ -17,9 +17,8 @@ export default () => {
         <h3 style={{ marginRight: '0.5em' }}>
             Autobookwork
         </h3>
-        <Components.Button 
+        <components.SolidButton 
             text={enabled ? 'Disable' : 'Enable'}
-            className={'special-btn'}
             onClick={() => setEnabled(previous => !previous)}
         />
     </div>

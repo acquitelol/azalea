@@ -1,7 +1,7 @@
-import Components from '@core/components'
-import utilities from '@core/utilities'
-import { common } from '@core/modules'
-import { storages } from '@core/handlers/state'
+import components from '@core/components';
+import utilities from '@core/utilities';
+import { common } from '@core/modules';
+import { storages } from '@core/handlers/state';
 
 const { React } = common;
 const { preferences } = storages;
@@ -25,9 +25,9 @@ export default () => {
             </p>
         </p>
 
-        <Components.Button 
-            text='Back'
-            className=''
+        <components.SolidButton 
+            text={'Back'}
+            style={{ marginTop: 20 }}
             onClick={() => navigate(-1, { enabled: false })}
         />
     </>

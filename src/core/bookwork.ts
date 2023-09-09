@@ -1,4 +1,4 @@
-import { storages } from '@handlers/state'
+import { storages } from '@handlers/state';
 
 class bookwork {
     static extractAnswers(inputs: NodeListOf<Element>[] = []) {

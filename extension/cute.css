@@ -9,6 +9,14 @@
 
     --tint: sepia(1) hue-rotate(280deg) saturate(0.8);
 
+    --shadow-small: #f8d2e780;
+    --shadow-medium: #f8d2e799;
+    --shadow-large: #f8d2e7cc;
+
+    --spx-shadow-sm: 0px 2px 2px var(--shadow-small) !important;
+    --spx-shadow-md: 0px 3px 5px var(--shadow-medium) !important;
+    --spx-shadow-lg: 0px 4px 11px -1px var(--shadow-large) !important;
+
     --palette-dark-blue: var(--raw-darkest) !important;
     --palette-dark-blue-90: var(--raw-dark) !important;
     --palette-light-blue: var(--raw-medium) !important;

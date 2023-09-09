@@ -1,13 +1,13 @@
-import Theming from '@core/handlers/theming'
-import Components from '@core/components'
-import utilities from '@core/utilities'
-import { useStorageValue } from '@core/hooks'
-import { common } from '@core/modules'
+import Theming from '@core/handlers/theming';
+import components from '@core/components';
+import utilities from '@core/utilities';
+import { useStorageValue } from '@core/hooks';
+import { common } from '@core/modules';
 
-import SelectTheme from './SelectTheme'
-import ColorInputs from './ColorInputs'
+import SelectTheme from './SelectTheme';
+import ColorInputs from './ColorInputs';
 
-import { ThemesProps } from '@azalea/themes'
+import { ThemesProps } from '@azalea/themes';
 
 const { React } = common;
 const { navigate } = utilities;
@@ -31,9 +31,8 @@ export default ({ label }: ThemesProps) => {
                 selected={selected} 
                 setSelected={setSelected} 
             />
-            <Components.Button 
+            <components.SolidButton 
                 text={'Cycle Theme'}
-                className={'cycle-theme-btn'}
                 onClick={() => setSelected((previous) => Theming.themes[previous + 1] ? previous + 1 : 0)}
             />
         </div>
@@ -44,9 +43,8 @@ export default ({ label }: ThemesProps) => {
             label={label}
         />
 
-        <Components.Button 
+        <components.SolidButton 
             text={'Done'}
-            className={'_ButtonBase_10evl_1 _FocusTarget_1nxry_1 _ButtonMd_10evl_27 _ButtonBlue_10evl_51 _ButtonContained_10evl_81'}
             onClick={() => navigate(-1, { enabled: false })}
         />
     </div>

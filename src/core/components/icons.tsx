@@ -1,4 +1,4 @@
-import modules from '@modules'
+import modules from '@modules';
 
 const { React } = modules.common;
 

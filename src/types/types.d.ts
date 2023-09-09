@@ -63,5 +63,61 @@ declare module '@azalea/settings' {
     }
 }
 
+declare module '@azalea/buttons' {
+    import { ReactNode } from 'react';
+
+    export type BaseButtonProps = AnyProps<{
+        text: string;
+        trailing?: ReactNode | null;
+        className?: string,
+        onClick: Fn
+    }>
+}
+
+declare module '@azalea/utilities' {
+    export type Path = string | number;
+
+    export type Navigator = {
+        createHref: Fn;
+        encodeLocation: Fn;
+        go(path: Path, arg2?, arg3?): Promise<void>;
+        push(path: Path, arg2?, arg3?): Promise<void>;
+        replace(path: Path, arg2?, arg3?): Promise<void>;
+    }
+
+    export type Route = {
+        path: string;
+        element: any;
+        children?: Route[];
+        id: string;
+        hasErrorBoundary: boolean;
+    }
+
+    export type Navigation = {
+        basename: string;
+        navigator: Navigator;
+        router: Omit<Navigator, 'go' | 'push' | 'replace'> & {
+            basename: string;
+            deleteBlocker: Fn;
+            deleteFetcher: Fn;
+            dispose(): void;
+            enableScrollRestoration: Fn;
+            fetch: Fn;
+            getBlocker: Fn;
+            getFetcher: Fn;
+            initialize(): void;
+            navigate(path: Path, arg2?): Promise<void>;
+            revalidate(): void;
+            routes: Route[],
+            state: Record<string, any>;
+            subscribe: Fn;
+            _internalActiveDeferreds: Map<any, any>;
+            _internalFetchControllers: Map<any, any>;
+            _internalSetRoutes(routes: Route[]): void;
+        }
+    };
+}
+
 declare type Fn = (...args: any) => any;
 declare type Arguments<T extends Fn> = T extends (...args: infer P) => any ? P : any[];
+declare type AnyProps<T extends Record<string, any> = Record<string, any>> = T & Record<PropertyKey, any>;

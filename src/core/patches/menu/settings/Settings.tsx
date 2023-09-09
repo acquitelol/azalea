@@ -1,8 +1,8 @@
-import { common } from '@core/modules'
+import { common } from '@core/modules';
 
-import ToggleBookwork from './ToggleBookwork'
-import NameInputs from './NameInputs'
-import Buttons from './Buttons'
+import ToggleBookwork from './ToggleBookwork';
+import NameInputs from './NameInputs';
+import Buttons from './Buttons';
 
 const { React } = common;
 

@@ -1,5 +1,5 @@
-import patcher from '@core/patcher'
-import utilities from '@utilities'
+import patcher from '@core/patcher';
+import utilities from '@utilities';
 import { storages } from '@handlers/state';
 
 const { findReact, findInReactTree, lazyModule } = utilities;
@@ -27,7 +27,7 @@ export default async function () {
             }
         }
 
-        console.warn('Couldn't submit answer automatically or answer wasn't found!');
+        console.warn('Couldn\'t submit answer automatically or answer wasn\'t found!');
         const container = findInReactTree(res, r => r.props.children[1].props.className?.includes('bookwork-code'));
         if (!container) return;
 

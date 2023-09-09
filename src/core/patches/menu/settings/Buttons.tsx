@@ -1,7 +1,6 @@
-import Components from '@core/components'
-import utilities from '@core/utilities'
-import { useStorageValue } from '@core/hooks'
-import { common } from '@core/modules'
+import components from '@core/components';
+import utilities from '@core/utilities';
+import { common } from '@core/modules';
 
 const { React } = common;
 const { navigate } = utilities;
@@ -30,9 +29,9 @@ const buttons = [
 export default () => {
     return <div>
         {buttons.map(button => {
-            return <Components.Button 
+            return <components.SolidButton 
                 text={button.name}
-                className=''
+                style={{ marginTop: 20 }}
                 onClick={button.callback}
             />
         })}

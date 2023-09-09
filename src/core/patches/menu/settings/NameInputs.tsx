@@ -1,9 +1,9 @@
-import Components from '@core/components'
-import utilities from '@core/utilities'
-import { useStorageValue } from '@core/hooks'
-import { common } from '@core/modules'
+import components from '@core/components';
+import utilities from '@core/utilities';
+import { useStorageValue } from '@core/hooks';
+import { common } from '@core/modules';
 
-import NameInput from './NameInput'
+import NameInput from './NameInput';
 
 const { React } = common;
 const { name } = utilities;
@@ -21,9 +21,8 @@ export default () => {
             }}
         >
             <h2 style={{ textAlign: 'center' }}>Anonymize name</h2>
-            <Components.Button
+            <components.SolidButton
                 text={shouldUseCuteName ? 'Disable' : 'Enable'}
-                className={'clear-custom-btn'}
                 onClick={() => setShouldUseCuteName(previous => !previous)}
             />
         </div>

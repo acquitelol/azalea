@@ -1,7 +1,7 @@
-import Theming from '@core/handlers/theming'
-import { common } from '@core/modules'
+import Theming from '@core/handlers/theming';
+import { common } from '@core/modules';
 
-import { SelectThemeProps } from '@azalea/themes'
+import { SelectThemeProps } from '@azalea/themes';
 
 const { React } = common;
 

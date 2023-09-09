@@ -1,17 +1,17 @@
-import patcher from '@core/patcher'
-import utilities from '@utilities'
-import handlers from '@handlers'
-import modules from '@modules'
-import items from '@patches/menu'
+import patcher from '@core/patcher';
+import utilities from '@utilities';
+import handlers from '@handlers';
+import modules from '@modules';
+import items from '@patches/menu';
 
+import components from '@core/components';
 import { MenuItem } from '@azalea/types';
-import findInReactTree from '@core/utilities/findInReactTree'
-import Components from '@core/components'
 
-const { lazyModule, findReact } = utilities;
+const { lazyModule, findReact, findInReactTree } = utilities;
 const { Theming } = handlers;
-
 const { React } = modules.common;
+
+const patches = [];
 
 export default async function () {
     const labelNode = await lazyModule(() => document.querySelector('[class*="_XPCount_g7mut_"]'));
@@ -19,7 +19,7 @@ export default async function () {
 
     const Dropdown = findReact(dropdownNode);
 
-    patcher.before('render', Dropdown.type, (args) => {
+    patches.push(patcher.before('render', Dropdown.type, (args) => {
         // Apply label again, in-case the XP of the user changes
         Theming.applyLabel(labelNode);
 
@@ -43,12 +43,13 @@ export default async function () {
             const index = buttons.children.findIndex(x => x?.props?.children === 'Logout');
 
             buttons.children.splice(index === -1 ? 1 : index, 0, (
-                <Components.Button
+                <components.DropdownButton
                     text={item.text}
-                    className={'_DropdownMenuItem_tgmt4_59'}
                     onClick={item.callback}
                 />
             ))
         })
-    })
+    }))
+
+    return () => patches.forEach(p => p())
 }

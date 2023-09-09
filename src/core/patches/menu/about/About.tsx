@@ -1,7 +1,7 @@
-import Components from '@core/components'
-import { common } from '@core/modules'
+import components from '@core/components';
+import { common } from '@core/modules';
 
-import utilities from '@core/utilities'
+import utilities from '@core/utilities';
 import manifest from '@extension/manifest.json';
 
 const { React } = common;
@@ -37,9 +37,9 @@ export default () => {
         <h4 style={{ marginBlock: 0 }}>
             Thank you for installing {manifest.name} ♡
         </h4>
-        <Components.Button 
-            text='Back'
-            className=''
+        <components.SolidButton 
+            text={'Back'}
+            style={{ marginTop: 20 }}
             onClick={() => navigate(-1, { enabled: false })}
         />
     </>

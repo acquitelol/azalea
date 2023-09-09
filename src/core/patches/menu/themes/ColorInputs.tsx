@@ -1,12 +1,12 @@
-import Theming, { spec } from '@core/handlers/theming'
-import Components from '@core/components'
-import utilities from '@core/utilities'
-import { common } from '@core/modules'
-import { storages } from '@core/handlers/state'
+import Theming, { spec } from '@core/handlers/theming';
+import components from '@core/components';
+import utilities from '@core/utilities';
+import { common } from '@core/modules';
+import { storages } from '@core/handlers/state';
 
-import ColorInput from './ColorInput'
+import ColorInput from './ColorInput';
 
-import { ColorInputsProps } from '@azalea/themes'
+import { ColorInputsProps } from '@azalea/themes';
 
 const { React } = common;
 const { colors } = storages;
@@ -24,7 +24,7 @@ export default ({ selected, setSelected, label }: ColorInputsProps) => {
             }}
         >
             <h2 style={{ textAlign: 'center', marginBlock: 0 }}>Custom values</h2>
-            {shouldDisplayEditor && <Components.Button
+            {shouldDisplayEditor && <components.SolidButton
                 text={'Clear colors'}
                 className={'clear-custom-btn'}
                 onClick={() => {

@@ -1,7 +1,7 @@
-import { useStorageValue } from '@core/hooks'
-import { common } from '@core/modules'
+import { useStorageValue } from '@core/hooks';
+import { common } from '@core/modules';
 
-import { NameInputProps } from '@azalea/settings'
+import { NameInputProps } from '@azalea/settings';
 
 const { React } = common;
 

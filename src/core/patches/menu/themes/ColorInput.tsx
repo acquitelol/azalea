@@ -1,9 +1,9 @@
-import Theming from '@core/handlers/theming'
-import utilities from '@core/utilities'
-import { useStorageValue } from '@core/hooks'
-import { common } from '@core/modules'
+import Theming from '@core/handlers/theming';
+import utilities from '@core/utilities';
+import { useStorageValue } from '@core/hooks';
+import { common } from '@core/modules';
 
-import { ColorInputProps } from '@azalea/themes'
+import { ColorInputProps } from '@azalea/themes';
 
 const { React } = common;
 const { capitalize } = utilities;
