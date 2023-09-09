@@ -47,7 +47,7 @@ export default ({ label }: ThemesProps) => {
         <Components.Button 
             text={'Done'}
             className={'_ButtonBase_10evl_1 _FocusTarget_1nxry_1 _ButtonMd_10evl_27 _ButtonBlue_10evl_51 _ButtonContained_10evl_81'}
-            onClick={() => navigate('/')}
+            onClick={() => navigate(-1, { enabled: false })}
         />
     </div>
 }

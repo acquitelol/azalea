@@ -22,7 +22,7 @@ const buttons = [
     {
         name: 'Done',
         callback() {
-            navigate('/')
+            navigate(-1, { enabled: false })
         }
     }
 ]

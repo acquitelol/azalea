@@ -16,6 +16,10 @@ if (window.__sparxweb) {
 }
 
 (async function () {
+    if (window.location.href.includes('azalea')) {
+        window.location.href = window.location.href.replace(/azalea\/.*/g, '')
+    }
+
     const React = await lazyModule(
         () => azalea.modules.common.React,
         r => typeof r.useContext === 'function' && typeof r.createElement === 'function'
