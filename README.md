@@ -93,8 +93,11 @@
 
 <img src="extension/assets/divider.png">
 
-<div align="center">
-    ♡ Made by Rosie :3
-    <hr />
-    <a href="#top">⇡ Back to top️!</a>
-</div>
+♡ Made by Rosie :3
+
+Copyright © Rosie ([acquitelol](https://github.com/acquitelol))
+All rights reserved.
+
+<hr />
+
+<a href="#top">⇡ Back to top️!</a>

@@ -20,7 +20,7 @@ export default () => {
                 marginTop: 0
             }}
         >
-            <h2 style={{ textAlign: 'center' }}>Anonymize name</h2>
+            <h2 style={{ textAlign: 'center', marginRight: 10 }}>Anonymize name</h2>
             <components.SolidButton
                 text={shouldUseCuteName ? 'Disable' : 'Enable'}
                 onClick={() => setShouldUseCuteName(previous => !previous)}
