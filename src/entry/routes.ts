@@ -5,10 +5,10 @@ import patcher from '@core/patcher';
 
 import { RouteItem } from '@azalea/types';
 
-const { lazyModule } = utilities;
+const { lazyDefine } = utilities;
 
 async function initializeRoutes() {
-    const React = await lazyModule(
+    const React = await lazyDefine(
         () => modules.common.React,
         r => typeof r.useContext === 'function' && typeof r.createElement === 'function'
     );

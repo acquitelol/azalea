@@ -7,15 +7,15 @@ import items from '@patches/menu';
 import components from '@core/components';
 import { MenuItem } from '@azalea/types';
 
-const { lazyModule, findReact, findInReactTree } = utilities;
+const { lazyDefine, findReact, findInReactTree } = utilities;
 const { Theming } = handlers;
 const { React } = modules.common;
 
 const patches = [];
 
 export default async function () {
-    const labelNode = await lazyModule(() => document.querySelector('[class*="_XPCount_g7mut_"]'));
-    const dropdownNode = await lazyModule(() => document.querySelector('[class*="_DropdownMenuContent_"][role="menu"]'), undefined, Infinity);
+    const labelNode = await lazyDefine(() => document.querySelector('[class*="_XPCount_g7mut_"]'));
+    const dropdownNode = await lazyDefine(() => document.querySelector('[class*="_DropdownMenuContent_"][role="menu"]'), undefined, Infinity);
 
     const Dropdown = findReact(dropdownNode);
 

@@ -32,22 +32,18 @@
     }
     ```
 
-- <img src="extension/assets/menu_theme.png" style="width: 1rem"> Provides access to **Themes** by going into **Menu > Themes** at the top right!
+- Provides access to **Themes** by going into **Menu > Themes** at the top right!
   - Currently the **themes available** include:
-  - Pink (Default ✓), Purple, Blue, Aqua, Green, Creme, Dusk, Custom
+  - Pink (Default ✓), Purple, Blue, Aqua, Green, Creme, Custom
     <hr />
   - *Note:* ***Custom themes allow you to theme every colored variable available in Azalea, ranging from tints to regular colors to text colors. This uses the colors for `Pink` by default because I advocate for pink and believe it is the best color <3.***
   <hr />
 
-- <img src="extension/assets/menu_bookwork.png" style="width: 1rem"> Stores **bookwork checks** and automatically submits them if possible (this is *on* by default, and can be disabled from **Menu > Settings**), otherwise shows you the answer to choose the correct option yourself.
+- Stores **bookwork checks** and automatically submits them if possible (this is *on* by default, and can be disabled from **Menu > Settings**), otherwise shows you the answer to choose the correct option yourself.
 
   <hr />
 
-- <img src="extension/assets/menu_name.png" style="width: 1rem"> Allows you to anonymize your username by setting it to **Rosie :3** by default (editable from **Menu > Settings**, off by default) and anonymizes your ID to `1nitiat3-cut3-m0d3-f0r-5parx-m4ths`. This aims to make Sparx a place where you cannot be doxxed by showing a screenshot asking for help!
-
-  <hr />
-
-- <img src="extension/assets/menu_garden.png" style="width: 1rem"> Adds a button in the **Menu > Settings** allowing you to open garden game. This is meant for if your school disabled times tables minigames and you had progress on Garden Game beforehand, or want to try the game out!
+- Allows you to anonymize your username by setting it to **Rosie :3** by default (editable from **Menu > Settings**, off by default). This aims to make Sparx a place where you cannot be doxxed by showing a screenshot asking for help!
 
 <img src="extension/assets/divider.png">
 

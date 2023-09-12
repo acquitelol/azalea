@@ -6,7 +6,7 @@
  * @param {number?} time - The time to wait before trying to get the module from the callback again. The default is 100ms.
  * @return {Promise<T | null>} - Returns the module if found or null if max attempts were reached. This must be awaited.
  */
-async function lazyModule<T>(callback: () => T, condition?: (result: T | null) => boolean, maxAttempts = 100, time = 100): Promise<T | null> {
+async function lazyDefine<T>(callback: () => T, condition?: (result: T | null) => boolean, maxAttempts = 100, time = 100): Promise<T | null> {
     let attempt = 0;
 
     while (attempt < maxAttempts) {
@@ -21,4 +21,4 @@ async function lazyModule<T>(callback: () => T, condition?: (result: T | null) =
     return null;
 }
 
-export default lazyModule;
+export default lazyDefine;
