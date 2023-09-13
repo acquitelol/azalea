@@ -96,7 +96,7 @@ Copyright © 2023 Rosie ([acquitelol](https://github.com/acquitelol))
 ```
 All rights reserved.
 
-The software provided is not affiliated with Sparx LTD, Sparx Maths, or Sparx Education.
+The software provided is not affiliated with Sparx LTD, Sparx Maths, or Sparx Learning.
 
 All software is provided for educational purposes only, and should not be used for unlawful or unethical modification of the Sparx Maths website.
 ```
