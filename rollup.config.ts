@@ -10,7 +10,7 @@ import commonjs from 'rollup-plugin-commonjs';
 
 // Move everything else related to the extension like manifest, assets, etc
 !existsSync('dist') && mkdirSync('dist');
-execSync('cp -rf extension/* dist/');
+execSync('cp -rf extension/* dist/'); // FOR WINDOWS: copy extension\\* dist\\
 
 export default [
     defineConfig({
