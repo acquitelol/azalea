@@ -90,7 +90,9 @@ function handler() {
                 .replace(/^\$|\$$/g, '');
 
             answers.forEach(store => {
-                if (store.answers.join('').replace(/^\$|\$$/g, '') === wacAnswers) {
+                if (!store.answers) return;
+
+                if (store.answers?.join('').replace(/^\$|\$$/g, '') === wacAnswers) {
                     onSelect();
                 }
             });
