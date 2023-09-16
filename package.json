@@ -4,7 +4,8 @@
     "repository": "https://github.com/acquitelol/azalea.git",
     "author": "Rosie",
     "scripts": {
-        "build": "rollup -c --configPlugin esbuild --no-watch"
+        "build": "rollup -c --configPlugin esbuild",
+        "watch": "pnpm build --watch"
     },
     "license": "MIT",
     "devDependencies": {
@@ -14,7 +15,6 @@
         "@types/react": "^18.2.21",
         "@types/react-dom": "^18.2.7",
         "esbuild": "^0.18.13",
-        "immutable": "^4.3.1",
         "node": "^20.6.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -25,6 +25,7 @@
         "typescript": "^5.1.6"
     },
     "dependencies": {
+        "katex": "^0.16.8",
         "spitroast": "^1.4.3"
     }
 }

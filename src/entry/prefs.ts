@@ -5,13 +5,25 @@ import handlers from '@handlers';
 const { name, lazyDefine } = utilities;
 const { Theming, storages: { preferences } } = handlers;
 
+const defaults = {
+    themeIndex: 0,
+    autoBookwork: true,
+    shouldUseCuteName: false,
+    logger: true
+}
+
 async function initializePrefs() {
+    Object.entries(defaults)
+        .forEach(([key, value]) => {
+            preferences.get(key) ?? preferences.set(key, value)
+        });
+
     patcher.after('defineProperty', Object, (_, res: Record<PropertyKey, any>) => {
         if (res.data?.student && ['firstName', 'lastName'].every(k => k in res.data?.student)) {
             const { student } = res.data;
 
-            preferences.set("firstName", student.firstName);
-            preferences.set("lastName", student.lastName);
+            preferences.set('firstName', student.firstName);
+            preferences.set('lastName', student.lastName);
 
             student.firstName = name.firstName;
             student.lastName = name.lastName;
@@ -19,10 +31,6 @@ async function initializePrefs() {
     })
 
     const labelNode = await lazyDefine(() => document.querySelector('[class*="_XPCount_g7mut_"]'));
-
-    preferences.get('themeIndex') ?? preferences.set('themeIndex', 0);
-    preferences.get('autoBookwork') ?? preferences.set('autoBookwork', true);
-    preferences.get('shouldUseCuteName') ?? preferences.set('shouldUseCuteName', false);
 
     Theming.setTheme();
     Theming.applyLabel(labelNode);

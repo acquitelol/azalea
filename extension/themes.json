@@ -130,5 +130,31 @@
                 "large": "#f8e6d2cc"
             }
         }
+    },
+    {
+        "name": "Dusk",
+        "colors": {
+            "raw": {
+                "darkest": "#030303",
+                "dark": "#3b3b3b",
+                "medium": "#5e5e5e",
+                "light": "#2e2e2e",
+                "lightest": "#bfbfbf",
+                "shine": "#e3e3e3"
+            },
+            "tint": {
+                "hue": "0deg",
+                "intensity": 0
+            },
+            "text": {
+                "light": "#f5f5f5",
+                "dark": "#1a1a1a"
+            },
+            "shadow": {
+                "small": "#00000010",
+                "medium": "#00000029",
+                "large": "#0000005c"
+            }
+        }
     }
 ]
