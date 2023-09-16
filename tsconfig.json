@@ -9,19 +9,48 @@
         "jsx": "react",
         "baseUrl": "src",
         "paths": {
-            "@core": ["core/index.ts"],
-            "@core/*": ["core/*"],
-            "@handlers": ["core/handlers/index.ts"],
-            "@handlers/*": ["core/handlers/*"],
-            "@modules": ["core/modules/index.ts"],
-            "@modules/*": ["core/modules/*"],
-            "@patches": ["core/patches/index.ts"],
-            "@patches/*": ["core/patches/*"],
-            "@utilities": ["core/utilities/index.ts"],
-            "@utilities/*": ["core/utilities/*"],
-            "@extension/*": ["../extension/*"],
-            "@components": ["core/components/index.ts"],
-            "@components/*": ["core/components/*"]
+            "@core": [
+                "core/index.ts"
+            ],
+            "@core/*": [
+                "core/*"
+            ],
+            "@handlers": [
+                "core/handlers/index.ts"
+            ],
+            "@handlers/*": [
+                "core/handlers/*"
+            ],
+            "@modules": [
+                "core/modules/index.ts"
+            ],
+            "@modules/*": [
+                "core/modules/*"
+            ],
+            "@patches": [
+                "core/patches/index.ts"
+            ],
+            "@patches/*": [
+                "core/patches/*"
+            ],
+            "@utilities": [
+                "core/utilities/index.ts"
+            ],
+            "@utilities/*": [
+                "core/utilities/*"
+            ],
+            "@extension/*": [
+                "../extension/*"
+            ],
+            "@components": [
+                "core/components/index.ts"
+            ],
+            "@components/*": [
+                "core/components/*"
+            ],
+            "@logger": [
+                "core/logger"
+            ]
         }
     }
 }

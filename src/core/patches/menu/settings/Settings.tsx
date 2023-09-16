@@ -1,6 +1,7 @@
 import { common } from '@core/modules';
 
-import ToggleBookwork from './ToggleBookwork';
+import Bookwork from './Bookwork';
+import Logger from './Logger';
 import NameInputs from './NameInputs';
 import Buttons from './Buttons';
 
@@ -8,7 +9,8 @@ const { React } = common;
 
 export default () => (
     <>
-        <ToggleBookwork />
+        <Bookwork />
+        <Logger />
         <NameInputs />
         <Buttons />
     </>

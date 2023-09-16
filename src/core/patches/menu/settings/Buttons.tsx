@@ -21,7 +21,7 @@ const buttons = [
     {
         name: 'Done',
         callback() {
-            navigate(-1, { enabled: false })
+            navigate(-1, null)
         }
     }
 ]

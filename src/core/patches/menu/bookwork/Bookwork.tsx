@@ -28,7 +28,7 @@ export default () => {
         <components.SolidButton 
             text={'Back'}
             style={{ marginTop: 20 }}
-            onClick={() => navigate(-1, { enabled: false })}
+            onClick={() => navigate(-1, null)}
         />
     </>
 }
