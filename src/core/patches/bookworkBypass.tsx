@@ -47,7 +47,7 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
                         }}
                         dangerouslySetInnerHTML={{ 
                             __html: katex.renderToString(
-                                store.answers.map(answer => answer.replace(/^\$|\$$/g, '')).join(', '), 
+                                store.answers?.map(answer => answer.replace(/^\$|\$$/g, '')).join(', '), 
                                 false
                             )
                         }}               
@@ -90,7 +90,7 @@ function handler() {
                 .replace(/^\$|\$$/g, '');
 
             answers.forEach(store => {
-                if (!store.answers) return;
+                if (!store.answers || store.answers.length < 1) return;
 
                 if (store.answers?.join('').replace(/^\$|\$$/g, '') === wacAnswers) {
                     onSelect();
