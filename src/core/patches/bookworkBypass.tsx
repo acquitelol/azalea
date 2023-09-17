@@ -75,7 +75,8 @@ function handler() {
         if (!bookworkSection) return;
 
         const code = bookworkSection[1];
-        const answers = bookwork.get(code) ?? [];
+        const baseAnswers = bookwork.get(code) ?? [];
+        const answers = Array.isArray(baseAnswers) ? baseAnswers.filter(x => Array.isArray(x.answers)) : [];
     
         if (!topSection.find(x => x.props.azalea)) {
             topSection.push(<BookworkSection answers={answers} azalea />)
@@ -90,8 +91,6 @@ function handler() {
                 .replace(/^\$|\$$/g, '');
 
             answers.forEach(store => {
-                if (!store.answers || store.answers.length < 1) return;
-
                 if (store.answers?.join('').replace(/^\$|\$$/g, '') === wacAnswers) {
                     onSelect();
                 }
