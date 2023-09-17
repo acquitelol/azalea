@@ -8,7 +8,7 @@ jobs:
     name: Build codebase and release
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Get current unix seconds
         id: unix
@@ -38,10 +38,10 @@ jobs:
           zip -r Azalea.zip Azalea-${{ steps.version.outputs.value }} & wait $!;
 
       - name: Create release
-        uses: marvinpinto/action-automatic-releases@latest
+        uses: softprops/action-gh-release@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: azalea-${{ steps.unix.outputs.value }}
-          title: "Azalea ${{ steps.version.outputs.value }}"
+          tag_name: azalea-${{ steps.unix.outputs.value }}
+          name: "Azalea ${{ steps.version.outputs.value }}"
           files: ./*.zip

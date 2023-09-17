@@ -20,9 +20,9 @@ export const BaseButton = ({ text, trailing = null, className = '', onClick, ...
 export const SolidButton = (props: Arguments<typeof BaseButton>[0]) => {
     return <BaseButton 
         {...props}
-        className={`_ButtonBase_10evl_1 _FocusTarget_1nxry_1 
-        _ButtonMd_10evl_27 _ButtonBlue_10evl_51 
-        _ButtonContained_10evl_81` + ' ' + (props.className ?? '')}
+        className={'_ButtonBase_10evl_1 '  + '_FocusTarget_1nxry_1 '
+        + '_ButtonMd_10evl_27 ' + '_ButtonBlue_10evl_51 '
+        + '_ButtonContained_10evl_81 ' + (props.className ?? '')}
     />
 }
 

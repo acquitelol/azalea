@@ -1,10 +1,10 @@
 class StorageHandler {
     protected name = 'Storage';
-    protected shouldLog = true;
+    protected logging = true;
 
     constructor(name: string, shouldLog: boolean = true) {
         this.name = name;
-        this.shouldLog = shouldLog;
+        this.logging = shouldLog;
 
         this.init();
     }
@@ -15,21 +15,28 @@ class StorageHandler {
     }
 
     protected log(type: string, ...data: any[]) {
-        if (!this.shouldLog) return;
-        console.log(type, ...data);
+        if (!this.logging) return;
+
+        // Use a dynamic import to prevent circular imports
+        import('@logger').then(({ default: logger }) => {
+            logger.info(type, ...data);
+        })
     }
 
     protected error(type: string, ...data: any[]) {
-        console.error(type, ...data);
+        // Use a dynamic import to prevent circular imports
+        import('@logger').then(({ default: logger }) => {
+            logger.error(type, ...data);
+        })
     }
 
     set(key: string, value: any) {
         this.init();
 
         if (typeof key === 'string') {
-            this.log('SET', { key, value })
+            this.log('Setting', { key, value })
         } else {
-            return this.error('SET', { key, value })
+            return this.error('Setting', { key, value })
         }
 
         const items = JSON.parse(localStorage.getItem(this.name) ?? '{}');
@@ -38,7 +45,7 @@ class StorageHandler {
 
     get(key: string) {
         this.init();
-        this.log('GET', { key });
+        this.log('Getting', { key });
 
         const items = JSON.parse(localStorage.getItem(this.name) ?? '{}');
         return items[key] ?? null;
@@ -48,9 +55,9 @@ class StorageHandler {
         this.init();
 
         if (typeof key === 'string') {
-            this.log('DELETE', { key })
+            this.log('Deleting', { key })
         } else {
-            return this.error('DELETE', { key })
+            return this.error('Deleting', { key })
         }
 
         const { [key]: _, ...rest } = JSON.parse(localStorage.getItem(this.name) ?? '{}');
@@ -61,9 +68,9 @@ class StorageHandler {
         this.init();
 
         if (typeof key === 'string') {
-            this.log('TOGGLE', { key })
+            this.log('Toggling', { key })
         } else {
-            return this.error('TOGGLE', { key })
+            return this.error('Toggling', { key })
         }
 
         this.set(key, !this.get(key));
@@ -71,14 +78,14 @@ class StorageHandler {
 
     list() {
         this.init();
-        this.log('LIST', { _: null });
+        this.log('Listing', { _: null });
 
         return JSON.parse(localStorage.getItem(this.name) ?? '{}');
     }
 
     clear() {
         // This doesn't need a this.init() call
-        this.log('CLEAR', { _: null });
+        this.log('Clearing', { _: null });
         localStorage.setItem(this.name, '{}');
     }
 };

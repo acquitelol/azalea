@@ -45,7 +45,7 @@ export default ({ label }: ThemesProps) => {
 
         <components.SolidButton 
             text={'Done'}
-            onClick={() => navigate(-1, { enabled: false })}
+            onClick={() => navigate(-1, null)}
         />
     </div>
 }
