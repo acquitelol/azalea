@@ -1,6 +1,6 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
-import { defineConfig, RollupOptions } from 'rollup';
+import { defineConfig, Plugin, RollupOptions } from 'rollup';
 import { execSync } from 'child_process';
 import { mkdirSync, existsSync } from 'fs';
 
@@ -8,16 +8,20 @@ import json from '@rollup/plugin-json';
 import esbuild from 'rollup-plugin-esbuild';
 import commonjs from 'rollup-plugin-commonjs';
 
-// Move everything else related to the extension like manifest, assets, etc
-!existsSync('dist') && mkdirSync('dist');
+const copyExtension = (): Plugin => ({
+    name: 'copy-extension',
+    generateBundle: () => {
+        !existsSync('dist') && mkdirSync('dist');
 
-switch (process.platform) {
-    case 'win32':
-        execSync('copy extension\\* dist\\');
-        break;
-    default:
-        execSync('cp -rf extension/* dist/');
-}
+        switch (process.platform) {
+            case 'win32':
+                execSync('copy extension\\* dist\\');
+                break;
+            default:
+                execSync('cp -rf extension/* dist/');
+        }
+    }
+})
 
 const defineExtendedConfig = (options: RollupOptions) => defineConfig({
     onwarn(warning, warn) {
@@ -74,7 +78,8 @@ export default [
             nodeResolve(),
             commonjs(),
             json(),
-            esbuild({ minify: true, target: 'ES2020' })
+            esbuild({ minify: true, target: 'ES2020' }),
+            copyExtension()
         ]
     }),
 ]

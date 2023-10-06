@@ -34,7 +34,38 @@ declare module '@azalea/types' {
     >;
 }
 
+declare module '@azalea/components' {
+    import type { PropsWithChildren, ReactElement } from 'react';
+    import { spec } from '@core/handlers/theming';
+
+    export type TextWithMathsProps = {
+        text: string,
+        element?: 'p' | 'h4' | 'h3' | 'h2'
+    } & React.AllHTMLAttributes<HTMLDivElement>;
+
+    export type RowProps = {
+        label: string | ReactElement;
+        sublabel?: string | ReactElement;
+        trailing?: ReactElement;
+        extra?: ReactElement;
+        background?: typeof spec['raw'][number]
+    }
+
+    export type SettingRowProps = Pick<RowProps, 'label' | 'sublabel' | 'extra'> & {
+        option: string
+    }
+
+    export type SectionTitleProps = PropsWithChildren;
+    export type SectionBodyProps = PropsWithChildren<{ style?: React.CSSProperties }>;
+    export type SectionProps = PropsWithChildren<{
+        title?: string,
+        collapsable?: boolean
+    }> & React.AllHTMLAttributes<HTMLDivElement>;
+}
+
 declare module '@azalea/themes' {
+    import { RowProps } from '@azalea/components';
+
     export type ThemesProps = {
         label: Element;
     }
@@ -44,6 +75,7 @@ declare module '@azalea/themes' {
         color: string;
         colorType: string;
         colorKey: string;
+        background: RowProps['background'];
     }
 
     export type ColorInputsProps = {

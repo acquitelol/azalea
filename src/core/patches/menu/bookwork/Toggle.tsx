@@ -1,21 +1,13 @@
 import components from '@core/components';
-import { useStorageValue } from '@core/hooks';
+import { commonStyles } from '@core/stylesheet';
 import { common } from '@core/modules';
 
 const { React } = common;
 
-export default () => {
-    const [enabled, setEnabled] = useStorageValue<boolean>('autoBookwork', 'preferences');
-
-    return <div 
-        style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            marginBottom: '0'
-        }}
-    >
+export default ({ enabled, setEnabled }) => {
+    return <div style={commonStyles.merge(x => [x.flex, x.align, { marginBottom: '0' }])}>
         <h3 style={{ marginRight: '0.5em' }}>
-            Autobookwork
+            Autobookwork (<strong>{enabled ? 'Enabled' : 'Disabled'}</strong>)
         </h3>
         <components.SolidButton 
             text={enabled ? 'Disable' : 'Enable'}

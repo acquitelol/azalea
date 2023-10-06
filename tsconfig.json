@@ -50,6 +50,9 @@
             ],
             "@logger": [
                 "core/logger"
+            ],
+            "@stylesheet": [
+                "core/stylesheet"
             ]
         }
     }

@@ -22,10 +22,15 @@ const name = {
 };
 
 const repository = {
-    plain: 'https://github.com/acquitelol/azalea',
-    raw: 'https://raw.githubusercontent.com/acquitelol/azalea'
+    user: 'https://github.com/acquitelol',
+
+    get plain() {
+        return this.user + '/azalea';
+    },
+
+    raw: 'https://raw.githubusercontent.com/acquitelol/azalea',
 };
-const getImage = (name: string) => `${repository.raw}/main/extension/assets/${name}`;
+const getImage = (name: string) => `${repository.raw}/sparx-v2/extension/assets/${name}`;
 const capitalize = (s: string) => s.trim().replace(/^\w/, m => m.toUpperCase());
 const noop = () => { };
 

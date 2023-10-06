@@ -23,7 +23,16 @@ export const spec = {
         'medium',
         'large'
     ]
-};
+} as const;
+
+type Theme = {
+    name: string;
+    colors: {
+        [K in keyof typeof spec]: {
+            [T in typeof spec[K][number]]: string
+        }
+    };
+}
 
 class Theming {
     static themes = [
@@ -39,10 +48,10 @@ class Theming {
                             [item]: colors.get(`${key}-${item}`)
                         }
                     }, {})
-                }), {})
+                }), {}) as Theme['colors'];
             }
         }
-    ] as const;
+    ] satisfies Theme[];
 
     static get index() {
         return preferences.get('themeIndex') ?? 0
@@ -65,7 +74,7 @@ class Theming {
                 const intensity = colors.intensity !== 0 && !colors.intensity ? '0.8' : colors.intensity;
 
                 const color = `sepia(1) hue-rotate(${hue}) saturate(${intensity})`;
-                return document.documentElement.style.setProperty(`--${colorType}`, color as string);
+                return document.documentElement.style.setProperty(`--${colorType}`, color);
             }
 
             Object.entries(colors).forEach(([key, color]) => {

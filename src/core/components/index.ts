@@ -1,9 +1,15 @@
 import * as Buttons from './buttons';
-import { Arrows } from './icons';
+import * as Katex from './katex';
+import *  as Sections from './section';
+import Row from './row';
+import Dividers from './dividers';
 
-const components = {
+export const components = {
     ...Buttons,
-    Arrows
+    ...Katex,
+    ...Sections,
+    Row,
+    Dividers
 };
 
 export default components;

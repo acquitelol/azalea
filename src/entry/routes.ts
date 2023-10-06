@@ -26,7 +26,16 @@ async function initializeRoutes() {
                 if (!res.router.routes[0].children.find(x => x.path === route.path)) {
                     res.router.routes[0].children.push({
                         path: route.path,
-                        element: React.createElement(route.component),
+                        element: (
+                            React.createElement('div', {
+                                style: {
+                                    background: 'var(--raw-shine)',
+                                    height: '100%',
+                                    overflowY: 'auto'
+                                },
+                                children: React.createElement(route.component)
+                            })
+                        ),
                         hasErrorBoundary: false,
                         children: undefined,
                         id: `0-${res.router.routes[0].children.length}`

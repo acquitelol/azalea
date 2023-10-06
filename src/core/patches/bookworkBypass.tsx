@@ -1,59 +1,48 @@
-import katex from 'katex';
 import patcher from '@core/patcher';
 import logger from '@logger';
 import utilities from '@utilities';
 import { storages } from '@handlers/state';
 import { common } from '@core/modules';
+import { TextWithMaths } from '@core/components/katex';
+import { createStyleSheet, commonStyles } from '@core/stylesheet';
 
 const { findReact, findInReactTree, lazyDefine } = utilities;
 const { bookwork, preferences } = storages;
 const { React } = common;
+const { styles } =createStyleSheet({
+    item: {
+        backgroundColor: 'var(--colours-selected)',
+        color: 'var(--palette-white)',
+        width: 'fit-content',
+        paddingBlock: '0.4em',
+        paddingInline: '0.6em',
+        borderRadius: '4px'
+    }
+})
 
 const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
-    return <div id='azalea-wac-content' style={{ textAlign: 'center', marginInline: '6em' }}>
-        <h3 style={{ 
-            marginInline: '2em'
-        }}>
+    return <div id='azalea-wac-content' style={commonStyles.merge(x => [x.textCenter, { marginInline: '6em' }])}>
+        <h3 style={{ marginInline: '2em' }}>
             The three most recent answers for this code are shown below:
         </h3>
-        <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-        }}>
-            {answers.sort((a, b) => b.date - a.date).slice(0, 3).map(store => <div style={{
-                marginBlock: '2em',
-                marginBottom: '-2em'
-            }}>
-                <div style={{
-                    backgroundColor: 'var(--colours-selected)',
-                    color: 'var(--palette-white)',
-                    width: 'fit-content',
-                    paddingBlock: '0.4em',
-                    paddingInline: '0.6em',
-                    borderRadius: '4px'
-                }}>
-                    <h6 style={{ 
-                        fontWeight: 'bold', 
-                        display: 'flex',
-                        justifyContent: 'center'
-                    }}>
-                        ({new Date(store.date).toLocaleString()})
-                    </h6>
-                    <h3 
-                        style={{
-                            display: 'inline-block',
-                            fontFamily: 'math'
-                        }}
-                        dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                                store.answers?.map(answer => answer.replace(/^\$|\$$/g, '')).join(', '), 
-                                false
-                            )
-                        }}               
-                    />
-                </div>
-            </div>)}
+        <div style={commonStyles.merge(x => [x.flex, x.row, { justifyContent: 'space-around' }])}>
+            {answers
+                .filter(store => store.answers?.length > 0)
+                .sort((a, b) => b.date - a.date)
+                .slice(0, 3)
+                .map(store => (
+                    <div style={{ marginBlock: '2em' }}>
+                        <div style={styles.item}>
+                            <h6 style={commonStyles.merge(x => [x.flex, x.justify, { fontWeight: 'bold' }])}>
+                                ({new Date(store.date).toLocaleString()})
+                            </h6>
+                            <TextWithMaths 
+                                text={store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`).join(', ')}
+                                element={'h4'}
+                            />
+                        </div>
+                    </div>
+                ))}
         </div>
     </div>
 }

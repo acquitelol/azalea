@@ -39,7 +39,7 @@
   - *Note:* ***Custom themes allow you to theme every colored variable available in Azalea, ranging from tints to regular colors to text colors. This uses the colors for `Pink` by default because I advocate for pink and believe it is the best color <3.***
   <hr />
 
-- Stores **bookwork checks** and automatically submits them if possible (this is *on* by default, and can be disabled from **Menu > Settings**), otherwise shows you the answer to choose the correct option yourself.
+- Stores **bookwork checks** and automatically selects them if possible (this is *on* by default, and can be disabled from **Menu > Bookwork**), otherwise shows you the most recent answers to choose the correct option yourself.
 
   <hr />
 

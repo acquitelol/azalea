@@ -47,11 +47,7 @@ function handler() {
     const endpoint = findInReactTree(QuestionWrapper.memoizedProps.children, x => x.layout && x.input);
     const questionText = findInTree(endpoint.layout, x => x.type.includes('question-text'), { walkable: ['content'] });
 
-    // Remove all question-dependent Latex formatting and remove consecutive spaces
-    const id = findInTree(questionText, x => x.element === 'text', { walkable: ['content'] })?.text
-        .replace(/\$.*?\$/g, '')
-        .replace(/ +/g, " ");
-
+    const id = findInTree(questionText, x => x.element === 'text', { walkable: ['content'] })?.text;
     const code = QuestionInfo.memoizedProps.bookworkCode;
     const answers = processAnswers(endpoint.input);
 
@@ -60,8 +56,12 @@ function handler() {
         return;
     }
 
+    // Remove all question-dependent latex formatting and remove consecutive spaces
+    const sanitise = (id: string) => id.replace(/\$.*?\$/g, '').replace(/ +/g, " ");
+    const sanitisedId = sanitise(id);
+
     bookwork.set(code, [
-        ...bookwork.get(code)?.filter(x => x.id !== id) ?? [],
+        ...bookwork.get(code)?.filter(x => sanitise(x.id) !== sanitisedId) ?? [],
         { id, answers, date: Date.now() }
     ]);
 }

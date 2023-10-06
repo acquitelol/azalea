@@ -1,11 +1,21 @@
 import Bookwork from './Bookwork';
+import utilities from '@core/utilities';
 import { common } from '@modules';
 
-import { RouteItem } from '@azalea/types';
+import { MenuItem, RouteItem } from '@azalea/types';
 
 const { React } = common;
+const { navigate } = utilities;
 
 export const path = '/azalea/bookwork';
+
+class Item implements MenuItem {
+    text = 'Bookwork';
+
+    callback() {
+        navigate(path)
+    }
+}
 
 class Route implements RouteItem {
     path = path
@@ -15,4 +25,4 @@ class Route implements RouteItem {
     }
 }
 
-export default { Item: null, Route };
+export default { Item, Route };

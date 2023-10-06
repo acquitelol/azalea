@@ -1,17 +1,34 @@
 import { common } from '@core/modules';
 
-import Bookwork from './Bookwork';
-import Logger from './Logger';
-import NameInputs from './NameInputs';
-import Buttons from './Buttons';
+import { Section } from '@core/components/section';
+import Dividers from '@core/components/dividers';
+
+import About from './About';
+import Toggles from './Toggles';
+import Title from './Title';
+import Themes from './themes';
 
 const { React } = common;
 
 export default () => (
     <>
-        <Bookwork />
-        <Logger />
-        <NameInputs />
-        <Buttons />
+        <Title />
+
+        <Dividers.Large />
+
+        <Section 
+            title="Preferences"
+            style={{ marginTop: '1em' }}
+        >
+            <Toggles />
+        </Section>
+
+        <Section title="Themes">
+            <Themes />
+        </Section>
+
+        <Section title="About">
+            <About />
+        </Section>
     </>
 );

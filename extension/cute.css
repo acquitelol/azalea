@@ -1,10 +1,10 @@
 :root {
     --user-select-accessibility-setting: default !important;
-    --raw-darkest: #613248;
+    --raw-darkest: #5e404b;
     --raw-dark: #9c7280;
     --raw-medium: #d1869f;
     --raw-light: #deafc2;
-    --raw-lightest: #fddae8;
+    --raw-lightest: #ffe8f1;
     --raw-shine: #fff0f6;
 
     --tint: sepia(1) hue-rotate(280deg) saturate(0.8);
@@ -56,4 +56,12 @@
 
 [class*="_Question_"] {
     --button-colour: var(--raw-medium) !important;
+}
+
+html {
+    overflow: hidden !important;
+}
+
+[class*="_WACContent_"] {
+    justify-content: space-evenly !important;
 }
