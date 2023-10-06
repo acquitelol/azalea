@@ -13,9 +13,9 @@ const options = [
         option: 'logger'
     },
     {
-        label: "Anonymize Name",
+        label: 'Anonymize Name',
         sublabel: 'Allows you to set your own custom first and last name.',
-        option: "shouldUseCuteName",
+        option: 'shouldUseCuteName',
         extra() {
             return <NameInputs />
         }
