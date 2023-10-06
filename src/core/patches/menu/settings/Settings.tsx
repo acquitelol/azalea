@@ -17,17 +17,17 @@ export default () => (
         <Dividers.Large />
 
         <Section 
-            title="Preferences"
+            title='Preferences'
             style={{ marginTop: '1em' }}
         >
             <Toggles />
         </Section>
 
-        <Section title="Themes">
+        <Section title='Themes'>
             <Themes />
         </Section>
 
-        <Section title="About">
+        <Section title='About'>
             <About />
         </Section>
     </>

@@ -22,7 +22,7 @@ const { merge, styles } = createStyleSheet({
     },
 
     message: {
-        marginInline: '1em',
+        marginInline: '2em',
         background: 'var(--raw-lightest)'
     },
 
