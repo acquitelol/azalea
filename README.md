@@ -32,14 +32,16 @@
     }
     ```
 
-- Provides access to **Themes** by going into **Menu > Themes** at the top right!
+- Provides access to **Themes** by going into **Menu > Settings** at the top right!
   - Currently the **themes available** include:
-  - Pink (Default ✓), Purple, Blue, Aqua, Green, Creme, Custom
+  - Pink (Default ✓), Purple, Blue, Aqua, Green, Creme, Dusk, Custom
     <hr />
   - *Note:* ***Custom themes allow you to theme every colored variable available in Azalea, ranging from tints to regular colors to text colors. This uses the colors for `Pink` by default because I advocate for pink and believe it is the best color <3.***
   <hr />
 
 - Stores **bookwork checks** and automatically selects them if possible (this is *on* by default, and can be disabled from **Menu > Bookwork**), otherwise shows you the most recent answers to choose the correct option yourself.
+
+- *Note:* **You can manage your stored bookwork checks by going into ***Menu > Bookwork*** at the top right**
 
   <hr />
 
@@ -74,14 +76,14 @@
 - Open up the repository, and checkout a new branch:
 
     ```sh
-    git checkout -b feature/cuter
+    git checkout -b feature/meow
     ```
 
 - Add your amazing feature(s) and **commit & push to the branch**:
 
     ```sh
-    git commit -m 'Added cutest new feature! :3'
-    git push origin feature/cuter
+    git commit -m 'Added cutest new feature! ;3'
+    git push origin feature/meow
     ```
 
 - Create a **[pull request](https://github.com/acquitelol/azalea/pulls)** and wait for it to be reviewed

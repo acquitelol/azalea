@@ -8,7 +8,7 @@ function navigate(
     path: string | number,
     prefix = '/student'
 ) {
-    azalea.navigation.navigator.go(prefix ? `${prefix}${path}` : path);
+    azalea.navigation.navigator.replace(prefix ? `${prefix}${path}` : path);
 }
 
 export default navigate;

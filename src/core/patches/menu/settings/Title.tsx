@@ -33,7 +33,7 @@ export default () => {
             trailing={<img 
                 src={getImage('logo.png')} 
                 style={{ width: '4em' }}
-                alt="Sparx Maths"
+                alt='Sparx Maths'
             />}
         />
     </Section>

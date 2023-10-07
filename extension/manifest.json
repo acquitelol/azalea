@@ -1,7 +1,7 @@
 {
     "name": "Azalea",
-    "version": "3.4.0",
-    "description": "The cutest SparxMaths bookwork-bypass extension for Chromium ~!",
+    "version": "3.4.1",
+    "description": "The cutest SparxMaths extension for Chromium ~!",
     "manifest_version": 3,
     "author": "Rosie",
     "host_permissions": [

@@ -12,7 +12,7 @@ export default () => {
         label={<>
             <h4>
                 Written by{' '}
-                <a href={repository.user} target="blank">
+                <a href={repository.user} target='blank'>
                     {manifest.author}
                 </a>. 
                 Version {manifest.version}

@@ -9,7 +9,7 @@ import { createStyleSheet, commonStyles } from '@core/stylesheet';
 const { findReact, findInReactTree, lazyDefine } = utilities;
 const { bookwork, preferences } = storages;
 const { React } = common;
-const { styles } =createStyleSheet({
+const { styles } = createStyleSheet({
     item: {
         backgroundColor: 'var(--colours-selected)',
         color: 'var(--palette-white)',
