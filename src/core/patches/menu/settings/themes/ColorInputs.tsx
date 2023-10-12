@@ -58,7 +58,7 @@ export default ({ selected, setSelected, label }: ColorInputsProps) => {
                                     color={`${key}-${color}`}
                                     colorType={key}
                                     colorKey={color}
-                                    background={i % 2 === 0 ? 'shine' : 'lightest'}
+                                    backgroundColor={i % 2 === 0 ? 'shine' : 'lightest'}
                                 />
                                 {i !== array.length - 1 && <Dividers.Small />}
                             </>

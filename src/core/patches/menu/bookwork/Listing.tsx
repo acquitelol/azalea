@@ -15,43 +15,64 @@ const { styles } = createStyleSheet({
 })
 
 function sortCodes([a]: [string, any[]], [b]: [string, any[]]) {
-    const prefixA = Number(a.slice(0, -1));
-    const prefixB = Number(b.slice(0, -1));
+    const numberA = Number(a.slice(0, -1));
+    const numberB = Number(b.slice(0, -1));
     const letterA = a.slice(-1);
     const letterB = b.slice(-1);
 
-    if (prefixA !== prefixB) {
-        return prefixA - prefixB;
-    } else {
-        return letterA.localeCompare(letterB);
+    if (numberA !== numberB) {
+        return numberA - numberB;
     }
+    
+    return letterA.localeCompare(letterB);
 }
 
 export default ({ query, force }: { query: string, force: any }) => {
     const entries = React.useMemo(
-        () => Object.entries(bookwork.list()).filter(([k]: [string, any[]]) => k.toLowerCase().includes(query.toLowerCase())), 
+        () => Object.entries(bookwork.list()).filter(([k]) => k.toLowerCase().includes(query.toLowerCase())), 
         [query, force]
     )
 
     return entries.length > 0 ? entries.sort(sortCodes).map(([key, value]: [string, any[]]) => {
-        return <Section title={key}>
-            {value.filter(store => store.answers.length > 0).map((store, i, array) => {
-                const plural = store.answers.length > 1 ? 's' : '';
-                const answers = store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`).join(', ');
+        return value.length > 0 && <Section title={key}>
+            {value
+                .filter(store => store.answers.length > 0)
+                .sort((a, b) => b.date - a.date)
+                .map((store, i, array) => {
+                    // Add 's' to the word 'Answer' if the amount of answers is more than 1
+                    // You will never have 0 or -1 answers due to the filter above
+                    // Therefore 'len > 1' is valid for this use case
+                    const plural = store.answers.length > 1 ? 's' : '';
 
-                return <>
-                    <Row 
-                        label={'Question:'}
-                        sublabel={store.id}
-                    />
-                    <Dividers.Small />
-                    <Row 
-                        label={`Answer${plural}:`}
-                        sublabel={answers}
-                    />
-                    {i !== array.length - 1 && <Dividers.Large />}
-                </>
-            })}
+                    // Convert plain numbers to latex formatting and add spacing between answers with the join seperator
+                    const answers = store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`).join('$,\\;\\;$');
+
+                    return <>
+                        <Row 
+                            label={'Question:'}
+                            sublabel={store.id}
+                            trailing={<div 
+                                style={{ 
+                                    marginTop: '0.5em', 
+                                    marginRight: '0.5em',
+                                    marginLeft: '1em'
+                                }}
+                            >
+                                <h6 style={{ color: 'var(--raw-dark)'}}>Date stored:</h6>
+                                <h4 style={{ fontWeight: 'normal' }}>
+                                    {new Date(store.date).toLocaleString()}
+                                </h4>
+                            </div>}
+                            centerTrailing={false}
+                        />
+                        <Dividers.Small />
+                        <Row 
+                            label={`Answer${plural}:`}
+                            sublabel={answers}
+                        />
+                        {i !== array.length - 1 && <Dividers.Large />}
+                    </>
+                })}
         </Section>
     }) : <SectionBody style={styles.fallback}>
         <h2 style={commonStyles.merge(x => [x.flex, x.justify, x.align, x.textCenter])}>

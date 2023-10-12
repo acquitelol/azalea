@@ -33,12 +33,19 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
                 .map(store => (
                     <div style={{ marginBlock: '2em' }}>
                         <div style={styles.item}>
-                            <h6 style={commonStyles.merge(x => [x.flex, x.justify, { fontWeight: 'bold' }])}>
+                            <h6 style={commonStyles.merge(x => [
+                                x.flex, x.justify, 
+                                { 
+                                    fontWeight: 'bold', 
+                                    color: 'var(--palette-white)' 
+                                }
+                            ])}>
                                 ({new Date(store.date).toLocaleString()})
                             </h6>
                             <TextWithMaths 
                                 text={store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`).join(', ')}
                                 element={'h4'}
+                                style={{ color: 'var(--palette-white)' }}
                             />
                         </div>
                     </div>
@@ -54,13 +61,17 @@ function handler() {
 
     const WAC = findReact(wacContainer);
 
-    if (!WAC) return logger.warn('Failed to find React Fiber of WAC:', WAC);
+    if (!WAC) return logger.debug('Failed to find React Fiber of WAC:', WAC);
 
-    patcher.after('render', WAC.type, (_, { props: { children }}) => {
+    const Button = findInReactTree(WAC.memoizedProps, x => x.children === 'Submit' && x.onClick);
+
+    patcher.after('render', WAC.type, (_, { props: { children } }) => {
+        !Button.isDisabled && Button.onClick();
+
         const topSection: any[] = findInReactTree(children, x => x?.find(y => y.props.className.includes('Bookwork')));
         const bookworkSection = topSection?.find(x => x.props?.className?.includes('Bookwork'))?.props?.children;
         const firstOption = findInReactTree(children, x => x.props.choices && x.props.option);
-        
+
         if (!bookworkSection) return;
 
         const code = bookworkSection[1];
@@ -74,7 +85,7 @@ function handler() {
         if (!preferences.get('autoBookwork')) return logger.info('Autobookwork is disabled.');
 
         firstOption?.props?.choices.forEach(({ element: { props }, onSelect }) => {
-            // Get rid of <step></step> markup and $5$ katex formatting
+            // Get rid of <step></step> markup and '$' operator
             const wacAnswers = props.markup
                 .replace(/<[^>]+>/g, '')
                 .replace(/^\$|\$$/g, '');

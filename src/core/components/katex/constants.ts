@@ -8,13 +8,16 @@ export const patterns = {
     pound: /\\pound/g,
     euro: /\\euro/g,
     gap: /\\gap/g,
-    backslash: /\\n(?![a-zA-Z])/g,
+    newLine: /\\n(?![a-zA-Z])/g,
     nonBreakingSpace: /~/g,
     ampersand: /&/g,
     leftAngledBracket: /</g,
     apostrophe: /'/g,
     quotation: /"/g,
-    hazardousCharacters: /[&<>"']/
+    hazardousComma: /(?<!\s)\\,/g,
+    hazardousCharacters: /[&<>"']/,
+    maths: /\$|(?:\\.|[^$])+/g,
+    bold: /\*\*(.*)\*\*/g
 }
 
 export const brackets = {

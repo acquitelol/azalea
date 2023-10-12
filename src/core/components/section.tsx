@@ -21,7 +21,6 @@ const { merge } = createStyleSheet({
     arrow: {
         scale: '50%',
         marginRight: '0.25em',
-        cursor: 'pointer',
         userSelect: 'none',
         transition: 'all 300ms ease'
     }
@@ -40,7 +39,17 @@ export const SectionBody = ({ children, style }: SectionBodyProps) => {
 export const Section = ({ title, children, collapsable = true, style }: SectionProps) => {
     const [hidden, setHidden] = React.useState(false);
     return <div style={mergeStyles({ marginInline: '2em' }, style)}>
-        <div style={commonStyles.merge(x => [x.flex, x.row])}>
+        <div 
+            style={commonStyles.merge(x => [
+                x.flex, x.row,
+                { 
+                    cursor: collapsable ? 'pointer' : 'auto',
+                    userSelect: collapsable ? 'none' : 'auto',
+                    width: 'fit-content'
+                },
+            ])}
+            {...collapsable ? { onClick: () => setHidden(prev => !prev) } : {}}
+        >
             {collapsable && <div 
                 style={merge(x => [
                     x.arrow, 
@@ -48,7 +57,6 @@ export const Section = ({ title, children, collapsable = true, style }: SectionP
                         rotate: hidden ? '0deg' : '90deg',
                     }
                 ])}
-                onClick={() => setHidden(prev => !prev)}
             >
                 <h2>{'▶'}</h2>
             </div>}

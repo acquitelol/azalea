@@ -16,18 +16,18 @@ const { merge, styles } = createStyleSheet({
     }
 });
 
-export const Row = ({ label, sublabel, trailing, extra, background = 'lightest' }: RowProps) => {
+export const Row = ({ label, sublabel, trailing, extra, centerTrailing = true, backgroundColor = 'lightest' }: RowProps) => {
     return <>
         <div 
             style={commonStyles.merge(x => [
                 x.flex, x.row, styles.common,
                 {
                     justifyContent: 'space-between',
-                    background: `var(--raw-${background})`
+                    background: `var(--raw-${backgroundColor})`
                 }
             ])}
         >
-            <div style={{ marginBlock: '0.5em' }}>
+            <div style={{ marginBlock: '0.5em', flexGrow: 1, flexBasis: 0 }}>
                 {typeof label === 'string' ? <TextWithMaths 
                     text={label}
                     element='h4'
@@ -37,14 +37,14 @@ export const Row = ({ label, sublabel, trailing, extra, background = 'lightest' 
                     style={{ margin: 0, padding: 0 }}
                 /> : sublabel}
             </div>
-            <div style={commonStyles.merge(x => [x.flex, x.column, x.justify])}>
+            <div style={centerTrailing ? commonStyles.merge(x => [x.flex, x.column, x.justify]) : {}}>
                 {trailing}
             </div>
         </div>
         {extra && (<>
             <Dividers.Small />
             
-            <div style={merge(x => [x.common, { background: `var(--raw-${background})` }])}>
+            <div style={merge(x => [x.common, { background: `var(--raw-${backgroundColor})` }])}>
                 {extra}
             </div>
         </>)}

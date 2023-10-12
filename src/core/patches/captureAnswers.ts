@@ -31,7 +31,7 @@ function handler() {
     const possibleQuestionInfo = document.querySelector('[class*="_QuestionInfo_"]');
 
     if (!possibleQuestionWrapper || !possibleQuestionInfo) {
-        logger.warn(
+        logger.debug(
             'Wrappers failed to query! You\'re likely not in a question.',
             {
                 question: possibleQuestionWrapper,
@@ -52,16 +52,15 @@ function handler() {
     const answers = processAnswers(endpoint.input);
 
     if (!id || !code || !answers) {
-        logger.warn('Answers failed to parse:', { id, code, answers });
+        logger.debug('Answers failed to parse:', { id, code, answers });
         return;
     }
 
     // Remove all question-dependent latex formatting and remove consecutive spaces
     const sanitise = (id: string) => id.replace(/\$.*?\$/g, '').replace(/ +/g, " ");
-    const sanitisedId = sanitise(id);
 
     bookwork.set(code, [
-        ...bookwork.get(code)?.filter(x => sanitise(x.id) !== sanitisedId) ?? [],
+        ...bookwork.get(code)?.filter(x => sanitise(x.id) !== sanitise(id)) ?? [],
         { id, answers, date: Date.now() }
     ]);
 }

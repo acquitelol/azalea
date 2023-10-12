@@ -3,7 +3,8 @@ import { patterns } from './constants';
 const replacers = {
     text: new Map([
         [patterns.nonBreakingSpace, '\xa0'],
-        [patterns.backslash, '<br/>']
+        [patterns.newLine, '<br/>'],
+        [patterns.bold, '<strong>$1</strong>']
     ]),
 
     maths: new Map([
@@ -15,7 +16,8 @@ const replacers = {
         [patterns.uscore, '\\rule{$1em}{0.03em}'],
         [patterns.pound, '\\pounds'],
         [patterns.euro, '€'],
-        [patterns.gap, '\\text{\\textunderscore}']
+        [patterns.gap, '\\text{\\textunderscore}'],
+        [patterns.hazardousComma, '']
     ])
 } satisfies Record<string, Map<RegExp, string>>
 

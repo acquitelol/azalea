@@ -25,7 +25,7 @@ const { merge, styles } = createStyleSheet({
     }
 })
 
-export default ({ label, color, colorKey, colorType, background }: ColorInputProps) => {
+export default ({ label, color, colorKey, colorType, backgroundColor }: ColorInputProps) => {
     const isKeyTint = React.useMemo(() => color.toLowerCase().includes('tint'), []);
     const defaultTheme = React.useMemo(() => Theming.themes[0].colors, []);
 
@@ -38,7 +38,7 @@ export default ({ label, color, colorKey, colorType, background }: ColorInputPro
 
     return <Row
         label={capitalize(colorKey)}
-        background={background}
+        backgroundColor={backgroundColor}
         trailing={<div style={commonStyles.merge(x => [x.flex, x.align])}>
             <input 
                 className={'_Search_juc87_90'}
