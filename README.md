@@ -12,13 +12,13 @@
     <hr />
 - Extract the ZIP to a folder onto your local file system.
 - Open the **Manage Extensions** tab in your Chromium-based browser
-  - (This can be any browser ranging from `Chrome` to `Edge` to `Opera` to `Arc`).
+  - (This can be any browser ranging from `Chrome` to `Edge` to `Opera` to `Arc` to `Orion`).
   <hr />
 - *(Enable* ***Developer Mode*** *if not enabled already.)*
 - Click on **Load Unpacked**.
 - Select the **Azalea-(version)** directory.
   <hr />
-- **You're done!** Open/Refresh `Sparx` the extension should be installed! :D
+- **You're done!** Open/Refresh `Sparx` and the extension should be installed! :D
 
 <img src="extension/assets/divider.png">
 
@@ -49,7 +49,7 @@
 
   <hr />
 
-- Allows you to change the icon usd in Sparx by providing an image URL! (editable from **Menu > Settings**, off by default).
+- Allows you to change the icon used in Sparx by providing an image URL! (editable from **Menu > Settings**, off by default).
 
 <img src="extension/assets/divider.png">
 

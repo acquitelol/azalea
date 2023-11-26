@@ -61,39 +61,40 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
         if (typeof message !== 'object') return;
         const { type, update, reset, local } = message;
 
-        if (type === 'inject-azalea') {
-            if (local) {
-                console.info('Loading bundle from local sources...');
+        if (type !== 'inject-azalea') return;
 
-                const res = await fetch(chrome.runtime.getURL('bundle.js'))
-                    .then(r => r.text())
-                    .catch(() => {
-                        console.info('Bundle doesn\'t exist! Assuming enabling local mode was a mistake...')
-                    })
+        if (local) {
+            console.info('Loading bundle from local sources...');
 
-                res && inject(sender.tab.id, res);
-            } else {
-                if (reset) {
-                    console.info('Clearing bundle and hash! Please wait...');
-                    await chrome.storage.local.set({ azaleaHash: null, azalea: null })
-                }
+            const res = await fetch(chrome.runtime.getURL('bundle.js'))
+                .then(r => r.text())
+                .catch(() => {
+                    console.info('Bundle doesn\'t exist! Assuming enabling local mode was a mistake...')
+                })
 
-                const loader = await fetch(chrome.runtime.getURL('loader.js')).then(r => r.text());
-                const { azalea } = await promisifiedGet('azalea');
+            res && inject(sender.tab.id, res);
+            return;
+        }
 
-                if (azalea) {
-                    inject(
-                        sender.tab.id,
-                        loader.replace('INJECT_AZALEA_SOURCE', azalea),
-                    );
-                }
+        if (reset) {
+            console.info('Clearing bundle and hash! Please wait...');
+            await chrome.storage.local.set({ azaleaHash: null, azalea: null })
+        }
 
-                if (update) {
-                    console.info('Updates are disabled.')
-                } else {
-                    await updateAzalea(sender.tab.id);
-                }
-            }
+        const loader = await fetch(chrome.runtime.getURL('loader.js')).then(r => r.text());
+        const { azalea } = await promisifiedGet('azalea');
+
+        if (azalea) {
+            inject(
+                sender.tab.id,
+                loader.replace('INJECT_AZALEA_SOURCE', azalea),
+            );
+        }
+
+        if (update) {
+            console.info('Updates are disabled.')
+        } else {
+            await updateAzalea(sender.tab.id);
         }
     } catch (e) {
         throw new Error('Failed to load Azalea: ' + e);
