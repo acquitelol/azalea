@@ -26,12 +26,21 @@ jobs:
         id: build
         run: pnpm build
 
-      - name: Compress `dist` directory
-        id: compress
+      - name: Prepare for release
+        id: prepare
         run: |
-          mv dist/bundle.js .
+          rm $GITHUB_WORKSPACE/builds/* || true
+          mkdir builds || true
+          mv dist/bundle.js ./builds
+
           mv dist Azalea-${{ steps.version.outputs.value }}
           zip -r Azalea.zip Azalea-${{ steps.version.outputs.value }} & wait $!;
+
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add builds
+          git commit -m "Build $GITHUB_SHA" || exit 0
+          git push
 
       - name: Create release
         uses: softprops/action-gh-release@v1
@@ -42,4 +51,3 @@ jobs:
           name: "Azalea ${{ steps.version.outputs.value }}"
           files: |
             ./*.zip
-            bundle.js

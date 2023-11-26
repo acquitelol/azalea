@@ -1,7 +1,7 @@
 // Thank you to Shelter, this code is essentially taken directly from them <3
 // https://github.com/uwu/shelter/blob/main/injectors/mv3/worker.js
 const hashUrl = 'https://api.github.com/repos/acquitelol/azalea/git/refs/heads/sparx-v2';
-const bundleUrl = 'https://github.com/acquitelol/azalea/releases/latest/download/bundle.js';
+const bundleUrl = 'https://raw.githubusercontent.com/acquitelol/azalea/sparx-v2/builds/bundle.js';
 
 function promisifiedGet<T extends string[]>(...args: T): Promise<{ [K in T[number]]: any }> {
     return new Promise((res) => chrome.storage.local.get(...args, res))
