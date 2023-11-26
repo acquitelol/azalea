@@ -25,11 +25,11 @@ export default () => {
     return <>
         <div style={merge(x => [x.container, { background: 'var(--palette-light-blue-20)' }])}>
             <components.SectionBody style={commonStyles.merge(x => [x.textCenter, styles.message])}>
-                <h2>
+                <h2 style={{ marginBlock: '0.25em' }}>
                     Disclaimer
                 </h2>
                 <components.Dividers.Small />
-                <p style={{ marginInline: '1em' }}>
+                <p style={{ marginInline: '1em', marginBlock: '0.5em' }}>
                     Do not mess with these options unless <strong>you know what you're doing.</strong> Changing these at random could <strong>break your Azalea installation.</strong> If you need help fixing it, <a href={repository.plain + '/issues/new'}>raise an issue</a>.
                 </p>
             </components.SectionBody>

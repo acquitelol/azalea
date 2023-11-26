@@ -7,14 +7,10 @@ function promisifiedGet<T extends string[]>(...args: T): Promise<{ [K in T[numbe
     return new Promise((res) => chrome.storage.local.get(...args, res))
 };
 
-function getProxiedPath(url: string) {
-    return `https://corsproxy.io/?${encodeURIComponent(url)}`
-}
-
 async function fetchAzalea() {
     console.info('Fetching Azalea\'s bundle...');
 
-    return await fetch(getProxiedPath(bundleUrl))
+    return await fetch(bundleUrl)
         .then(r => r.text())
         .catch((error) => {
             console.error(error);
@@ -25,7 +21,7 @@ async function fetchAzalea() {
 async function updateAzalea(tabId) {
     console.info('Checking for updates...');
 
-    const ref = await fetch(getProxiedPath(hashUrl)).then(r => r.json());
+    const ref = await fetch(hashUrl).then(r => r.json());
 
     if (ref.object.sha !== (await promisifiedGet('azaleaHash')).azaleaHash) {
         console.info('Update found! Attempting to override bundle...');
