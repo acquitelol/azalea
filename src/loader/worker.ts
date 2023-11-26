@@ -10,7 +10,7 @@ function promisifiedGet<T extends string[]>(...args: T): Promise<{ [K in T[numbe
 async function fetchAzalea() {
     console.info('Fetching Azalea\'s bundle...');
 
-    return await fetch(bundleUrl)
+    return await fetch(bundleUrl, { cache: 'no-cache' })
         .then(r => r.text())
         .catch((error) => {
             console.error(error);
@@ -21,7 +21,7 @@ async function fetchAzalea() {
 async function updateAzalea(tabId) {
     console.info('Checking for updates...');
 
-    const ref = await fetch(hashUrl).then(r => r.json());
+    const ref = await fetch(hashUrl, { cache: 'no-cache' }).then(r => r.json());
 
     if (ref.object.sha !== (await promisifiedGet('azaleaHash')).azaleaHash) {
         console.info('Update found! Attempting to override bundle...');
@@ -59,11 +59,18 @@ function inject(tabId, code, detachOnFinish = true) {
     });
 }
 
-chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     try {
         sendResponse();
+        if (typeof message !== 'object') return;
+        const { type, update, reset } = message;
 
-        if (msg.includes('inject-azalea')) {
+        if (type === 'inject-azalea') {
+            if (reset) {
+                console.info('Clearing bundle and hash! Please wait...');
+                await chrome.storage.local.set({ azaleaHash: null, azalea: null })
+            }
+
             const loader = await fetch(chrome.runtime.getURL('loader.js')).then(r => r.text());
             const { azalea } = await promisifiedGet('azalea');
 
@@ -74,7 +81,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
                 );
             }
 
-            if (msg.includes('no-update')) {
+            if (update) {
                 console.info('Updates are disabled.')
             } else {
                 await updateAzalea(sender.tab.id);

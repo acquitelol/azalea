@@ -41,5 +41,12 @@ if (updater.get('localFetch')) {
     });
 } else {
     logger.info('Loading Azalea...');
-    chrome.runtime.sendMessage(`inject-azalea${updater.get('updaterDisabled') ? '-no-update' : ''}`);
+
+    chrome.runtime.sendMessage({
+        type: 'inject-azalea',
+
+        // Force update if the user chose to reset updates
+        update: updater.get('resetUpdates') ? true : updater.get('updaterDisabled'),
+        reset: updater.get('resetUpdates')
+    });
 }

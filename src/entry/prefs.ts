@@ -3,7 +3,7 @@ import utilities from '@core/utilities';
 import handlers from '@handlers';
 
 const { name, lazyDefine } = utilities;
-const { Theming, storages: { preferences } } = handlers;
+const { Theming, storages: { preferences, updater } } = handlers;
 
 const defaults = {
     themeIndex: 0,
@@ -18,6 +18,10 @@ async function initializePrefs() {
         .forEach(([key, value]) => {
             preferences.get(key) ?? preferences.set(key, value)
         });
+
+    if (updater.get('resetUpdates')) {
+        updater.set('resetUpdates', false);
+    }
 
     patcher.after('defineProperty', Object, (_, res: Record<PropertyKey, any>) => {
         if (res.data?.student && ['firstName', 'lastName'].every(k => k in res.data?.student)) {

@@ -1,10 +1,11 @@
-import { SettingRow } from '@core/components/row';
+import Row, { SettingRow } from '@core/components/row';
 import { common } from '@core/modules';
 import Dividers from '@core/components/dividers';
 import { useStorageValue } from '@core/hooks';
 import { commonStyles, createStyleSheet } from '@core/stylesheet';
 import components from '@core/components';
 import { repository } from '@core/utilities/common';
+import { SolidButton } from '@core/components/buttons';
 
 const { React } = common;
 const { merge, styles } = createStyleSheet({
@@ -21,6 +22,7 @@ const { merge, styles } = createStyleSheet({
 
 export default () => {
     const [localFetch, setLocalFetch] = useStorageValue<boolean>('localFetch', 'updater');
+    const [, setResetUpdates] = useStorageValue<boolean>('resetUpdates', 'updater');
 
     return <>
         <div style={merge(x => [x.container, { background: 'var(--palette-light-blue-20)' }])}>
@@ -46,6 +48,19 @@ export default () => {
             sublabel={'Completely disables updates. This means that if something breaks and you would like to re-enable them, the updates will have to be enabled manually through the console.'}
             option={'updaterDisabled'} 
             store={'updater'} 
+        />
+        <Dividers.Small />
+        <Row 
+            label={'Reset Stores'}
+            sublabel={'Resets the updater hash and bundle. Upon refresh, a completely new bundle and hash will be forcefully fetched and loaded, negating the currently installed ones.'}
+            trailing={<SolidButton
+                text={'Reset'}
+                style={{ marginLeft: '0.5em' }}
+                onClick={() => {
+                    setResetUpdates(true);
+                    window.location.reload();
+                }}
+            />}
         />
     </>
 }
