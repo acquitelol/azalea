@@ -65,7 +65,7 @@
 
 - Due to the limited nature of Manifest V3 Chrome Extensions, having an updater without being on the Chrome Web Store is already *very* difficult and convoluted. As such, there is no way to manually check for updates, only to disable them and fetch from local sources.
 
-> **I see a 'Azalea started debugging this browser' message! What is this? Stop hacking me!**
+- **I see a 'Azalea started debugging this browser' message! What is this? Stop hacking me!** <br />
 This is only used as a way to execute Azalea's bundle dynamically, as there are many systems put in place by Chrome to prevent running code. If you would like to be extra sure, the only place in the entire codebase where the debugger is used is [here](https://github.com/acquitelol/azalea/blob/sparx-v2/src/loader/worker.ts), for updating and running the bundle.
 
 > If you have any questions, please [raise an issue](https://github.com/acquitelol/azalea/issues/new) :3
