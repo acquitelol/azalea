@@ -1,6 +1,6 @@
 {
     "name": "Azalea",
-    "version": "3.5.0",
+    "version": "3.5.1",
     "description": "The cutest SparxMaths extension for Chromium ~!",
     "manifest_version": 3,
     "author": "Rosie",
@@ -17,6 +17,8 @@
     },
 
     "permissions": [
+        "declarativeNetRequestWithHostAccess",
+        "debugger",
         "activeTab",
         "storage"
     ],
@@ -29,28 +31,41 @@
 
     "content_scripts": [
         {
-            "js": [
-                "index.js"
-            ],
-            "matches": [
-                "https://*.sparxmaths.uk/*"
-            ],
-            "run_at": "document_start",
-            "all_frames": true
+            "js": [ "index.js" ],
+            "matches": [ "https://*.sparxmaths.uk/*", "https://sparxmaths.uk/*" ],
+            "run_at": "document_start"
         }
     ],
+
+    "background": {
+        "service_worker": "worker.js"
+    },
+
+    "externally_connectable": {
+        "matches": [ "https://*.sparxmaths.uk/*", "https://sparxmaths.uk/*" ]
+    },
 
     "web_accessible_resources": [
         {
             "resources": [
                 "bundle.js",
-                "intermediate.js",
+                "loader.js",
                 "cute.css",
                 "core.css"
             ],
             "matches": [
-                "<all_urls>"
+                "https://*.sparxmaths.uk/*"
             ]
         }
-    ]
+    ],
+
+    "declarative_net_request": {
+        "rule_resources": [
+            {
+                "id": "azalea-remove-csp",
+                "enabled": true,
+                "path": "headers.json"
+            }
+        ]
+    }
 }

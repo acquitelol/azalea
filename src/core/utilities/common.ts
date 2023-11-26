@@ -29,7 +29,8 @@ const repository = {
     },
 
     hash: 'https://api.github.com/repos/acquitelol/azalea/git/refs/heads/sparx-v2',
-    download: 'https://github.com/acquitelol/azalea/releases/latest/download',
+    // download: 'https://github.com/acquitelol/azalea/releases/latest/download',
+    download: 'https://gist.githubusercontent.com/acquitelol/be2bfd2c9e31923d9f2453b2d142faf0/raw/8a7bdf40b4c3af88c1415e6f00f347120a7d3f53',
     raw: 'https://raw.githubusercontent.com/acquitelol/azalea',
 };
 
@@ -39,6 +40,15 @@ const capitalize = (s: string) => s.trim().replace(/^\w/, m => m.toUpperCase());
 const noop = () => { };
 
 export default {
+    name,
+    repository,
+    getImage,
+    getFile,
+    capitalize,
+    noop
+};
+
+export {
     name,
     repository,
     getImage,

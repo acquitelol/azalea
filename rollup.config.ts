@@ -35,7 +35,7 @@ const copyExtension = (): Plugin => ({
     }
 })
 
-const defineExtendedConfig = (options: RollupOptions) => defineConfig({
+const defineExtendedConfig = ({ plugins, ...options }: RollupOptions) => defineConfig({
     onwarn(warning, warn) {
         if (['MISSING_NAME_OPTION_FOR_IIFE_EXPORT', 'EVAL'].includes(warning.code)) return;
         warn(warning);
@@ -50,12 +50,21 @@ const defineExtendedConfig = (options: RollupOptions) => defineConfig({
         ]
     },
 
+    plugins: plugins ?? [
+        typescriptPaths({
+            preserveExtensions: true,
+            nonRelative: process.platform === 'darwin' ? false : true
+        }),
+        esbuild({ minify: true, target: 'ES2020' }),
+        obfuscateCode()
+    ],
+
     ...options
 })
 
 export default [
     defineExtendedConfig({
-        input: 'src/index.ts',
+        input: 'src/loader/index.ts',
 
         output: [
             {
@@ -65,36 +74,30 @@ export default [
                 strict: false,
             }
         ],
-
-        plugins: [
-            typescriptPaths({
-                preserveExtensions: true,
-                nonRelative: process.platform === 'darwin' ? false : true
-            }),
-            esbuild({ minify: true, target: 'ES2020' }),
-            obfuscateCode()
-        ]
     }),
     defineExtendedConfig({
-        input: 'src/intermediate.ts',
+        input: 'src/loader/loader.ts',
 
         output: [
             {
-                file: 'dist/intermediate.js',
+                file: 'dist/loader.js',
                 format: 'iife',
                 inlineDynamicImports: true,
                 strict: false,
             }
         ],
+    }),
+    defineExtendedConfig({
+        input: 'src/loader/worker.ts',
 
-        plugins: [
-            typescriptPaths({
-                preserveExtensions: true,
-                nonRelative: process.platform === 'darwin' ? false : true
-            }),
-            esbuild({ minify: true, target: 'ES2020' }),
-            obfuscateCode()
-        ]
+        output: [
+            {
+                file: 'dist/worker.js',
+                format: 'iife',
+                inlineDynamicImports: true,
+                strict: false,
+            }
+        ],
     }),
     defineExtendedConfig({
         input: 'src/entry/index.ts',

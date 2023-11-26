@@ -1,20 +1,39 @@
-import Row, { SettingRow } from '@core/components/row';
+import { SettingRow } from '@core/components/row';
 import { common } from '@core/modules';
-import utilities from '@core/utilities';
 import Dividers from '@core/components/dividers';
-import components from '@core/components';
 import { useStorageValue } from '@core/hooks';
+import { commonStyles, createStyleSheet } from '@core/stylesheet';
+import components from '@core/components';
+import { repository } from '@core/utilities/common';
 
 const { React } = common;
-const { repository, getFile } = utilities;
+const { merge, styles } = createStyleSheet({
+    container: {
+        paddingTop: '1em',
+        overflow: 'hidden'
+    },
+
+    message: {
+        marginInline: '1em',
+        background: 'var(--palette-light-blue-20)'
+    },
+});
 
 export default () => {
-    const [status, setStatus] = React.useState(null);
-    const [updateHash, setUpdateHash] = useStorageValue<string>('updateHash', 'updater');
     const [localFetch, setLocalFetch] = useStorageValue<boolean>('localFetch', 'updater');
-    const [, setBundleCache] = useStorageValue<string>('bundleCache', 'updater');
 
     return <>
+        <div style={merge(x => [x.container, { background: 'var(--palette-light-blue-20)' }])}>
+            <components.SectionBody style={commonStyles.merge(x => [x.textCenter, styles.message])}>
+                <h2>
+                    Disclaimer
+                </h2>
+                <components.Dividers.Small />
+                <p style={{ marginInline: '1em' }}>
+                    Do not mess with these options unless <strong>you know what you're doing.</strong> Changing these at random could <strong>break your Azalea installation.</strong> If you need help fixing it, <a href={repository.plain + '/issues/new'}>raise an issue</a>.
+                </p>
+            </components.SectionBody>
+        </div>
         <SettingRow 
             label={'Local fetch'}
             sublabel={'Attempts to fetch the bundle from the Chrome runtime. Only works if the extension is loaded in development mode, and a bundle is found locally to run.'}
@@ -22,46 +41,11 @@ export default () => {
             setter={setLocalFetch}
         />
         <Dividers.Small />
-        <div style={{ pointerEvents: localFetch ? 'none' : 'auto', opacity: localFetch ? 0.5 : 1 }}> 
-            <SettingRow 
-                label={'Disable updates'} 
-                sublabel={'Completely disables updates. This takes precendence over all other options.'}
-                option={'updaterDisabled'} 
-                store={'updater'} 
-            />
-            <Dividers.Small />
-            <Row 
-                label='Manage updates' 
-                sublabel='Allows you to check for updates and override the old bundle with the new one.'
-                trailing={<components.SolidButton 
-                    text='Search'
-                    onClick={async () => {
-                        const res = await fetch(repository.hash, { cache: 'no-cache' }).then(res => res.json());
-
-                        if (res.object?.sha !== updateHash) {
-                            const bundleCache = await fetch(getFile('bundle.js'), { cache: 'no-cache', mode: 'no-cors' }).then(res => res.text())
-
-                            setUpdateHash(res.object.sha);
-                            setBundleCache(bundleCache);
-
-                            setStatus(true)
-                        } else {
-                            setStatus(false)
-                        }
-                    }}
-                />}
-            />
-            {status !== null && <>
-                <Dividers.Small />
-                <Row 
-                    label={status ? 'Update found!' : 'No updates found.'}
-                    sublabel={status ? 'Please refresh the page for any changes to take effect.' : 'Azalea has had no updates since the last version you installed.'}
-                    trailing={<components.SolidButton 
-                        text={status ? 'Refresh' : 'Close'}
-                        onClick={() => status ? window.location.href = window.location.href.replace(/azalea\/.*/g, '') : setStatus(null)}
-                    />}
-                />
-            </>}
-        </div>
+        <SettingRow 
+            label={'Disable updates'} 
+            sublabel={'Completely disables updates. This means that if something breaks and you would like to re-enable them, the updates will have to be enabled manually through the console.'}
+            option={'updaterDisabled'} 
+            store={'updater'} 
+        />
     </>
 }

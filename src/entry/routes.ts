@@ -14,7 +14,7 @@ async function initializeRoutes() {
         r => typeof r.useContext === 'function' && typeof r.createElement === 'function'
     );
 
-    patcher.after('useContext', React, (_, res: typeof azalea.navigation) => {
+    const unpatch = patcher.after('useContext', React, (_, res: typeof azalea.navigation) => {
         if (res && res.router && res.navigator) {
             logger.info('Assigning azalea.navigation...');
             azalea.navigation = res;
@@ -47,6 +47,7 @@ async function initializeRoutes() {
 
             res.router._internalSetRoutes(res.router.routes);
             logger.info('Successfully configured Azalea\'s Routes!');
+            unpatch();
         }
     })
 }

@@ -53,7 +53,7 @@
 
 <img src="extension/assets/divider.png">
 
-### ♡ **Notes on bundling:**
+### ♡ **Notes on bundling and updating:**
 
 - The codebase **is minified and obfuscated into a bundle**, but this is simply done to reduce file size when installing. This means that **all of the source code is public** and the codebase is transformed into a bundle using GitHub Actions, available to view [here](https://github.com/acquitelol/azalea/actions).
 
@@ -63,7 +63,10 @@
 
     <hr />
 
-- At the moment, there is a system in place to **prevent Azalea being rebranded and claimed to be written by someone else**. This is due to a few people who repeatedly steal my code and claim they wrote it, replacing any mention of my name with theirs and providing no attribution to Azalea, even though they were warned and are aware they cannot use the code due to the nature of their usage. **This system will remain in place until this issue is resolved.** This does not affect any usage of the extension as-is, and it will only affect people attempting to change the extension's name and author.
+- Due to the limited nature of Manifest V3 Chrome Extensions, having an updater without being on the Chrome Web Store is already *very* difficult and convoluted. As such, there is no way to manually check for updates, only to disable them and fetch from local sources.
+
+> **I see a 'Azalea started debugging this browser' message! What is this? Stop hacking me!**
+This is only used as a way to execute Azalea's bundle dynamically, as there are many systems put in place by Chrome to prevent running code. If you would like to be extra sure, the only place in the entire codebase where the debugger is used is [here](https://github.com/acquitelol/azalea/blob/sparx-v2/src/loader/worker.ts), for updating and running the bundle.
 
 > If you have any questions, please [raise an issue](https://github.com/acquitelol/azalea/issues/new) :3
 

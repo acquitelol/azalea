@@ -1,4 +1,5 @@
 import { storages } from "@core/handlers/state";
+import logger from "@core/logger";
 
 const { updater } = storages;
 
@@ -30,9 +31,15 @@ function loadStylesheetFromURL(src: string, id = 'stylesheet') {
 loadStylesheetFromURL(chrome.runtime.getURL('core.css'), 'azalea-core-styles');
 loadStylesheetFromURL(chrome.runtime.getURL('cute.css'), 'azalea-theme-styles');
 
-// Load from local environment if possible
 if (updater.get('localFetch')) {
     loadScriptFromURL(chrome.runtime.getURL('bundle.js'));
+
+    // Fail safe in case someone who can't read decides to turn on localFetch in the production environment
+    fetch(chrome.runtime.getURL('bundle.js')).catch(() => {
+        updater.set('localFetch', false);
+        location.reload()
+    });
 } else {
-    loadScriptFromURL(chrome.runtime.getURL('intermediate.js'));
+    logger.info('Loading Azalea...');
+    chrome.runtime.sendMessage(`inject-azalea${updater.get('updaterDisabled') ? '-no-update' : ''}`);
 }
