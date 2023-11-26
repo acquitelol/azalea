@@ -39,7 +39,7 @@ export default () => {
                         const res = await fetch(repository.hash, { cache: 'no-cache' }).then(res => res.json());
 
                         if (res.object?.sha !== updateHash) {
-                            const bundleCache = await fetch(getFile('bundle.js'), { cache: 'no-cache' }).then(res => res.text())
+                            const bundleCache = await fetch(getFile('bundle.js'), { cache: 'no-cache', mode: 'no-cors' }).then(res => res.text())
 
                             setUpdateHash(res.object.sha);
                             setBundleCache(bundleCache);

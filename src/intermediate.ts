@@ -16,7 +16,7 @@ async function loadBundle(src: string, type: 'url' | 'raw' = 'url') {
 async function ensureCache(force = false, hash?: string) {
     if ((typeof updater.get('bundleCache') !== 'string') || force) {
         try {
-            const bundleCache = await fetch(common.getFile('bundle.js'), { cache: 'no-cache' }).then(res => res.text())
+            const bundleCache = await fetch(common.getFile('bundle.js'), { cache: 'no-cache', mode: 'no-cors' }).then(res => res.text())
 
             updater.set('bundleCache', bundleCache);
 
