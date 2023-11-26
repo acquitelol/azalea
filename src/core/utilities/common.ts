@@ -28,9 +28,13 @@ const repository = {
         return this.user + '/azalea';
     },
 
+    hash: 'https://api.github.com/repos/acquitelol/azalea/git/refs/heads/sparx-v2',
+    download: 'https://github.com/acquitelol/azalea/releases/latest/download',
     raw: 'https://raw.githubusercontent.com/acquitelol/azalea',
 };
+
 const getImage = (name: string) => `${repository.raw}/sparx-v2/extension/assets/${name}`;
+const getFile = (name: string) => `${repository.download}/${name}`;
 const capitalize = (s: string) => s.trim().replace(/^\w/, m => m.toUpperCase());
 const noop = () => { };
 
@@ -38,6 +42,7 @@ export default {
     name,
     repository,
     getImage,
+    getFile,
     capitalize,
     noop
 }

@@ -14,15 +14,15 @@ export const colors = {
     debug: '#e2c2ff'
 }
 
-export const title = ({ background, bold }: { background?: string, bold?: boolean } = {}) => {
+export const title = ({ background = colors.log, bold = true }: { background?: string, bold?: boolean } = {}) => {
     const styles = [
         'border-radius: 5px',
         'text-shadow: 3px 2px 8px #0000004d',
         'color: black'
     ];
 
-    (bold ?? true) && styles.push('font-weight: bold');
-    styles.push(`background: ${background ?? colors.log}`);
+    bold && styles.push('font-weight: bold');
+    styles.push(`background: ${background}`);
 
     return styles.join('; ');
 }

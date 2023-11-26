@@ -12,12 +12,15 @@ const { Theming } = handlers;
 const { React } = modules.common;
 
 export default async function () {
-    const labelNode = await lazyDefine(() => document.querySelector('[class*="_XPCount_g7mut_"]'));
+    const labelNode = await lazyDefine(() => document.querySelector('[class*="_XPCount_"]'));
     const dropdownNode = await lazyDefine(() => document.querySelector('[class*="_DropdownMenuContent_"][role="menu"]'), undefined, Infinity);
 
     const Dropdown = findReact(dropdownNode);
 
     const unpatch = patcher.before('render', Dropdown.type, (args) => {
+        // Refresh the page if navigation patch failed
+        if (!azalea.navigation) window.location.href = window.location.href.replace(/azalea\/.*/g, '')
+
         // Apply label again, in-case the XP of the user changes
         Theming.applyLabel(labelNode);
 

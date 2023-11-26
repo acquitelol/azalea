@@ -7,10 +7,22 @@ import { mkdirSync, existsSync } from 'fs';
 import json from '@rollup/plugin-json';
 import esbuild from 'rollup-plugin-esbuild';
 import commonjs from 'rollup-plugin-commonjs';
+import obfuscator, { ObfuscatorOptions } from 'javascript-obfuscator';
+
+const obfuscateCode = (options?: ObfuscatorOptions): Plugin => ({
+    name: 'javascript-obfuscator',
+    transform(code) {
+        const obfuscationResult = obfuscator.obfuscate(code, options);
+
+        return {
+            code: obfuscationResult.getObfuscatedCode()
+        };
+    }
+});
 
 const copyExtension = (): Plugin => ({
     name: 'copy-extension',
-    generateBundle: () => {
+    generateBundle() {
         !existsSync('dist') && mkdirSync('dist');
 
         switch (process.platform) {
@@ -25,7 +37,7 @@ const copyExtension = (): Plugin => ({
 
 const defineExtendedConfig = (options: RollupOptions) => defineConfig({
     onwarn(warning, warn) {
-        if (warning.code === 'MISSING_NAME_OPTION_FOR_IIFE_EXPORT') return;
+        if (['MISSING_NAME_OPTION_FOR_IIFE_EXPORT', 'EVAL'].includes(warning.code)) return;
         warn(warning);
     },
 
@@ -55,7 +67,33 @@ export default [
         ],
 
         plugins: [
-            esbuild({ minify: true, target: 'ES2020' })
+            typescriptPaths({
+                preserveExtensions: true,
+                nonRelative: process.platform === 'darwin' ? false : true
+            }),
+            esbuild({ /* minify: true, */ target: 'ES2020' }),
+            // obfuscateCode()
+        ]
+    }),
+    defineExtendedConfig({
+        input: 'src/intermediate.ts',
+
+        output: [
+            {
+                file: 'dist/intermediate.js',
+                format: 'iife',
+                inlineDynamicImports: true,
+                strict: false,
+            }
+        ],
+
+        plugins: [
+            typescriptPaths({
+                preserveExtensions: true,
+                nonRelative: process.platform === 'darwin' ? false : true
+            }),
+            esbuild({ /* minify: true, */ target: 'ES2020' }),
+            // obfuscateCode()
         ]
     }),
     defineExtendedConfig({
@@ -78,7 +116,8 @@ export default [
             nodeResolve(),
             commonjs(),
             json(),
-            esbuild({ minify: true, target: 'ES2020' }),
+            esbuild({ /* minify: true, */ target: 'ES2020' }),
+            // obfuscateCode(),
             copyExtension()
         ]
     }),

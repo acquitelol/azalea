@@ -10,11 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get current unix seconds
-        id: unix
-        run: |
-          echo "value=$(date +'%s')" >> $GITHUB_OUTPUT
-
       - name: Get version
         id: version
         run: |
@@ -34,6 +29,7 @@ jobs:
       - name: Compress `dist` directory
         id: compress
         run: |
+          mv dist/bundle.js .
           mv dist Azalea-${{ steps.version.outputs.value }}
           zip -r Azalea.zip Azalea-${{ steps.version.outputs.value }} & wait $!;
 
@@ -42,6 +38,8 @@ jobs:
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          tag_name: azalea-${{ steps.unix.outputs.value }}
+          tag_name: "${{ steps.version.outputs.value }}"
           name: "Azalea ${{ steps.version.outputs.value }}"
-          files: ./*.zip
+          files: |
+            ./*.zip
+            bundle.js

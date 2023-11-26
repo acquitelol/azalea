@@ -9,6 +9,12 @@
         "jsx": "react",
         "baseUrl": "src",
         "paths": {
+            "@entry": [
+                "entry/index.ts"
+            ],
+            "@entry/*": [
+                "entry/*"
+            ],
             "@core": [
                 "core/index.ts"
             ],

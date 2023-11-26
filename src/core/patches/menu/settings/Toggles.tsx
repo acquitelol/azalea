@@ -3,6 +3,7 @@ import { common } from '@core/modules';
 import components from '@core/components';
 import { SettingRow } from '@core/components/row';
 import NameInputs from './name';
+import LogoInput from './logo';
 
 const { React } = common;
 
@@ -18,6 +19,14 @@ const options = [
         option: 'shouldUseCuteName',
         extra() {
             return <NameInputs />
+        }
+    },
+    {
+        label: 'Sparx Logo',
+        sublabel: 'Allows you to set your own custom image URL for the Sparx Logo..',
+        option: 'shouldUseCustomLogo',
+        extra() {
+            return <LogoInput />
         }
     }
 ]

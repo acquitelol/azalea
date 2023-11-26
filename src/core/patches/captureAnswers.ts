@@ -19,8 +19,14 @@ function processAnswers(input: Record<string, Record<string, any>>) {
     }
 
     if (!isEmpty(input.choices)) {
-        Object.values(input.choices).forEach(choice =>
-            choice.selected && answers.push(choice.content[0].text))
+        Object.values(input.choices).forEach(choice => {
+            if (!choice.selected) return;
+
+            if (choice.content[0].element === 'image')
+                return answers.push(`${window.__sparxweb.urls.contentAssets}/${choice.content[0].src}`);
+
+            return answers.push(choice.content[0].text);
+        })
     }
 
     return answers;
@@ -51,8 +57,8 @@ function handler() {
     const code = QuestionInfo.memoizedProps.bookworkCode;
     const answers = processAnswers(endpoint.input);
 
-    if (!id || !code || !answers) {
-        logger.debug('Answers failed to parse:', { id, code, answers });
+    if (!id || !code || !answers || answers.length < 1) {
+        logger.debug('Answers failed to parse or no answers selected:', { id, code, answers });
         return;
     }
 

@@ -27,7 +27,7 @@ const { merge, styles } = createStyleSheet({
 
 export default ({ label, color, colorKey, colorType, backgroundColor }: ColorInputProps) => {
     const isKeyTint = React.useMemo(() => color.toLowerCase().includes('tint'), []);
-    const defaultTheme = React.useMemo(() => Theming.themes[0].colors, []);
+    const defaultTheme = React.useMemo(() => Theming.themes.find(x => x.name === 'Pink').colors, []);
 
     const [value, setValue] = useStorageValue(color, 'colors');
 

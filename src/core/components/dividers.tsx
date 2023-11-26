@@ -5,7 +5,7 @@ const { React } = common;
 const { merge } = createStyleSheet({
     common: {
         margin: 0,
-        color: 'var(--raw-light)'
+        color: 'var(--palette-blue-gradient-start)'
     }
 })
 

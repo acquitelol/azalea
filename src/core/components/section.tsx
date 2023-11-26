@@ -7,7 +7,7 @@ const { React } = modules.common;
 const { merge } = createStyleSheet({
     body: {
         marginBottom: '1em',
-        border: '2px solid var(--raw-light)',
+        border: '2px solid var(--palette-blue-gradient-start)',
         boxShadow: 'var(--spx-shadow-md)',
         borderRadius: 20,
         overflow: 'hidden'

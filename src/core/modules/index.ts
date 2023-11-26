@@ -19,7 +19,6 @@ Object.entries(exfiltratedModules).forEach(([name, mdl]) => {
         .then(res => Object.assign(common, { [name]: res }));
 })
 
-
 // Use common[mdl] on its own only if you are *100%* sure that the module exists when you `get` any properties.
 // If you are loading early, use await lazyDefine(() => common[mdl]) to wait for the module to be found.
 export default { exfiltrate, common };

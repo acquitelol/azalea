@@ -1,7 +1,7 @@
-import azalea from '@core';
+import generateAzalea from '@core';
 
-function initializeWindow() {
-    window.azalea = azalea;
+async function initializeWindow() {
+    window.azalea = generateAzalea();
 
     // Disable sentry
     if (window.__sparxweb) {

@@ -11,22 +11,25 @@
     "devDependencies": {
         "@rollup/plugin-json": "^6.0.0",
         "@rollup/plugin-node-resolve": "^15.1.0",
+        "@types/chrome": "^0.0.253",
         "@types/katex": "^0.16.3",
         "@types/node": "^20.6.0",
         "@types/react": "^18.2.21",
         "@types/react-dom": "^18.2.7",
         "esbuild": "^0.18.13",
+        "javascript-obfuscator": "^4.1.0",
         "node": "^20.6.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "rollup": "^3.26.2",
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-esbuild": "^5.0.0",
+        "rollup-plugin-javascript-obfuscator": "^1.0.4",
         "rollup-plugin-typescript-paths": "^1.4.0",
+        "spitroast": "^1.4.3",
         "typescript": "^5.1.6"
     },
     "dependencies": {
-        "katex": "^0.16.8",
-        "spitroast": "^1.4.3"
+        "katex": "^0.16.8"
     }
 }

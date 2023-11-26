@@ -17,21 +17,35 @@ const { styles } = createStyleSheet({
         paddingBlock: '0.4em',
         paddingInline: '0.6em',
         borderRadius: '4px'
+    },
+
+    imageContainer: {
+        maxWidth: '8%', 
+        aspectRatio: 1, 
+        display: 'flex', 
+        flexDirection: 'row', 
+        gap: '1em', 
+        marginBlock: '0.5em'
     }
 })
 
 const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
     return <div id='azalea-wac-content' style={commonStyles.merge(x => [x.textCenter, { marginInline: '6em' }])}>
         <h3 style={{ marginInline: '2em' }}>
-            The three most recent answers for this code are shown below:
+            The most recent stored answers for this code are shown below:
         </h3>
         <div style={commonStyles.merge(x => [x.flex, x.row, { justifyContent: 'space-around' }])}>
             {answers
-                .filter(store => store.answers?.length > 0)
+                .filter(store => Array.isArray(store.answers) && store.answers.length > 0)
                 .sort((a, b) => b.date - a.date)
                 .slice(0, 3)
-                .map(store => (
-                    <div style={{ marginBlock: '2em' }}>
+                .map(store => {
+                    // Convert plain numbers to latex formatting and add spacing between answers with the join seperator
+                    const answers = store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`);
+                    const imageAnswers = answers.filter(answer => answer.includes('assets.sparxhomework.uk'));
+                    const textAnswers = answers.filter(answer => !answer.includes('assets.sparxhomework.uk'));
+
+                    return <div style={{ marginBlock: '2em' }}>
                         <div style={styles.item}>
                             <h6 style={commonStyles.merge(x => [
                                 x.flex, x.justify, 
@@ -42,14 +56,20 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
                             ])}>
                                 ({new Date(store.date).toLocaleString()})
                             </h6>
-                            <TextWithMaths 
-                                text={store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`).join(', ')}
-                                element={'h4'}
-                                style={{ color: 'var(--palette-white)' }}
-                            />
+                            <div>
+                                {imageAnswers.length > 0 && <div style={styles.imageContainer}>
+                                    {imageAnswers.map(answer => (
+                                        <img src={answer} />
+                                    ))}
+                                </div>}
+                                {textAnswers.length > 0 && <TextWithMaths 
+                                    text={textAnswers.join('$,\\;\\;$')}
+                                    style={{ margin: 0, padding: 0 }}
+                                />}
+                            </div>
                         </div>
                     </div>
-                ))}
+                })}
         </div>
     </div>
 }
@@ -63,11 +83,7 @@ function handler() {
 
     if (!WAC) return logger.debug('Failed to find React Fiber of WAC:', WAC);
 
-    const Button = findInReactTree(WAC.memoizedProps, x => x.children === 'Submit' && x.onClick);
-
     patcher.after('render', WAC.type, (_, { props: { children } }) => {
-        !Button.isDisabled && Button.onClick();
-
         const topSection: any[] = findInReactTree(children, x => x?.find(y => y.props.className.includes('Bookwork')));
         const bookworkSection = topSection?.find(x => x.props?.className?.includes('Bookwork'))?.props?.children;
         const firstOption = findInReactTree(children, x => x.props.choices && x.props.option);

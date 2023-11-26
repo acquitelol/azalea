@@ -16,14 +16,14 @@ const { merge, styles } = createStyleSheet({
     }
 });
 
-export const Row = ({ label, sublabel, trailing, extra, centerTrailing = true, backgroundColor = 'lightest' }: RowProps) => {
+export const Row = ({ label, sublabel, trailing, extra, centerTrailing = true, backgroundColor = '--palette-light-blue-20' }: RowProps) => {
     return <>
         <div 
             style={commonStyles.merge(x => [
                 x.flex, x.row, styles.common,
                 {
                     justifyContent: 'space-between',
-                    background: `var(--raw-${backgroundColor})`
+                    background: `var(${backgroundColor})`
                 }
             ])}
         >
@@ -44,19 +44,32 @@ export const Row = ({ label, sublabel, trailing, extra, centerTrailing = true, b
         {extra && (<>
             <Dividers.Small />
             
-            <div style={merge(x => [x.common, { background: `var(--raw-${backgroundColor})` }])}>
+            <div style={merge(x => [x.common, { background: `var(${backgroundColor})` }])}>
                 {extra}
             </div>
         </>)}
     </>
 }
 
-export const SettingRow = ({ option, extra, ...props }: SettingRowProps) => {
-    const [query, setQuery] = useStorageValue<boolean>(option, 'preferences');
+export const SettingRow = ({ option, store = 'preferences', extra, getter, setter, ...props }: SettingRowProps) => {
+    if (!option && getter !== undefined && getter !== null && setter) {
+        return <Row 
+            trailing={<SolidButton
+                text={getter ? 'Disable' : 'Enable'}
+                style={{ marginLeft: '0.5em' }}
+                onClick={() => setter(previous => !previous)}
+            />}
+            extra={getter && extra}
+            {...props}
+        />
+    }
+
+    const [query, setQuery] = useStorageValue<boolean>(option, store);
 
     return <Row 
         trailing={<SolidButton
             text={query ? 'Disable' : 'Enable'}
+            style={{ marginLeft: '0.5em' }}
             onClick={() => setQuery(previous => !previous)}
         />}
         extra={query && extra}

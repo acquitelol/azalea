@@ -12,7 +12,7 @@ const { styles } = createStyleSheet({
         width: 'auto',
         paddingRight: '2em',
         marginLeft: '0.5em',
-        color: 'var(--raw-darkest)'
+        color: 'var(--palette-dark-blue)'
     }
 })
 

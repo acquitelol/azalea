@@ -11,7 +11,7 @@ import ColorInputs from './ColorInputs';
 const { React } = common;
 
 export default () => {
-    const [label] = React.useState(document.querySelector('[class*="_XPCount_g7mut_"]'));
+    const [label] = React.useState(document.querySelector('[class*="_XPCount_"]'));
     const [selected, setSelected] = useStorageValue<number>('themeIndex', 'preferences');
 
     return <Row 

@@ -42,7 +42,7 @@ export default ({ selected, setSelected, label }: ColorInputsProps) => {
                     
                     // Force rerender the inputs by setting away from Custom theme and back
                     // The timeout has no delay specified hence it just gets added to the event queue
-                    setSelected(0);
+                    setSelected(Theming.themes.findIndex(x => x.name === 'Pink'));
                     setTimeout(() => setSelected(Theming.themes.findIndex(x => x.name === 'Custom')));
                 }}
             />}
@@ -58,7 +58,7 @@ export default ({ selected, setSelected, label }: ColorInputsProps) => {
                                     color={`${key}-${color}`}
                                     colorType={key}
                                     colorKey={color}
-                                    backgroundColor={i % 2 === 0 ? 'shine' : 'lightest'}
+                                    backgroundColor={i % 2 === 0 ? '--palette-light-grey' : '--palette-light-blue-20'}
                                 />
                                 {i !== array.length - 1 && <Dividers.Small />}
                             </>

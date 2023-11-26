@@ -35,20 +35,30 @@ type Theme = {
 }
 
 class Theming {
+    static generateTheme(callback: ({ key, item }: { key: string, item: string }) => string) {
+        return Object.keys(spec).reduce((acc, key) => ({
+            ...acc,
+            [key]: spec[key].reduce((acc, item) => {
+                return {
+                    ...acc,
+                    [item]: callback({ key, item })
+                }
+            }, {})
+        }), {}) as Theme['colors'];
+    }
+
     static themes = [
+        {
+            name: 'None',
+            get colors() {
+                return Theming.generateTheme(() => null);
+            }
+        },
         ...themes,
         {
             name: 'Custom',
             get colors() {
-                return Object.keys(spec).reduce((acc, key) => ({
-                    ...acc,
-                    [key]: spec[key].reduce((acc, item) => {
-                        return {
-                            ...acc,
-                            [item]: colors.get(`${key}-${item}`)
-                        }
-                    }, {})
-                }), {}) as Theme['colors'];
+                return Theming.generateTheme(({ key, item }) => colors.get(`${key}-${item}`))
             }
         }
     ] satisfies Theme[];
@@ -68,6 +78,25 @@ class Theming {
     }
 
     static setTheme() {
+        const stylesheet = document.querySelector('#azalea-theme-styles');
+
+        if (this.theme.name === 'None') {
+            // Disable the stylesheet and remove css variables from the documentElement
+            stylesheet.setAttribute('media', "max-width: 1px");
+
+            Object.entries(this.theme.colors).forEach(([colorType, colors]: [string, any]) => {
+                Object.entries(colors).forEach(([key]) => {
+                    document.documentElement.style.removeProperty(`--${colorType}-${key}`);
+                })
+            })
+
+            return;
+        }
+
+        if (stylesheet.hasAttribute('media')) stylesheet.removeAttribute('media')
+
+        if (!this.theme.colors) return;
+
         Object.entries(this.theme.colors).forEach(([colorType, colors]: [string, any]) => {
             if (colorType === 'tint') {
                 const hue = colors.hue || '280deg';

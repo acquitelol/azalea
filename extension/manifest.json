@@ -1,45 +1,52 @@
 {
     "name": "Azalea",
-    "version": "3.4.2",
+    "version": "3.5.0",
     "description": "The cutest SparxMaths extension for Chromium ~!",
     "manifest_version": 3,
     "author": "Rosie",
-    "host_permissions": [
-        "*://www.sparxmaths.uk/*",
-        "https://auth.sparxmaths.uk/*"
-    ],
+
     "icons": {
         "128": "assets/logo.png"
     },
+
     "action": {
         "default_icon": {
             "128": "assets/logo.png"
         },
         "default_title": "Azalea"
     },
+
     "permissions": [
         "activeTab",
-        "storage",
-        "downloads"
+        "storage"
     ],
+
+    "host_permissions": [
+        "*://*.sparxmaths.uk/*",
+        "https://www.sparxmaths.uk/*",
+        "*://auth.sparxmaths.uk/*"
+    ],
+
     "content_scripts": [
         {
             "js": [
                 "index.js"
             ],
-            "css": [
-                "cute.css"
-            ],
             "matches": [
                 "https://*.sparxmaths.uk/*"
             ],
-            "run_at": "document_start"
+            "run_at": "document_start",
+            "all_frames": true
         }
     ],
+
     "web_accessible_resources": [
         {
             "resources": [
-                "bundle.js"
+                "bundle.js",
+                "intermediate.js",
+                "cute.css",
+                "core.css"
             ],
             "matches": [
                 "<all_urls>"

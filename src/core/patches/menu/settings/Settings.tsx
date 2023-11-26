@@ -7,6 +7,7 @@ import About from './About';
 import Toggles from './Toggles';
 import Title from './Title';
 import Themes from './themes';
+import Updater from './Updater';
 
 const { React } = common;
 
@@ -25,6 +26,10 @@ export default () => (
 
         <Section title='Themes'>
             <Themes />
+        </Section>
+
+        <Section title='Updater'>
+            <Updater />
         </Section>
 
         <Section title='About'>

@@ -146,10 +146,6 @@
                 "hue": "0deg",
                 "intensity": "0"
             },
-            "text": {
-                "light": "#f5f5f5",
-                "dark": "#1a1a1a"
-            },
             "shadow": {
                 "small": "#00000010",
                 "medium": "#00000029",

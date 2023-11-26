@@ -4,6 +4,7 @@ import items from '@patches/menu';
 import patcher from '@core/patcher';
 
 import { RouteItem } from '@azalea/types';
+import logger from '@core/logger';
 
 const { lazyDefine } = utilities;
 
@@ -15,6 +16,7 @@ async function initializeRoutes() {
 
     patcher.after('useContext', React, (_, res: typeof azalea.navigation) => {
         if (res && res.router && res.navigator) {
+            logger.info('Assigning azalea.navigation...');
             azalea.navigation = res;
 
             const routeItems = Object.values(items)
@@ -22,14 +24,14 @@ async function initializeRoutes() {
                 .map(item => new item.Route()) satisfies RouteItem[]
 
             // Add each route to the routes if it hasn't been added already
-            routeItems.forEach(route => {
+            for (const route of routeItems) {
                 if (!res.router.routes[0].children.find(x => x.path === route.path)) {
                     res.router.routes[0].children.push({
                         path: route.path,
                         element: (
                             React.createElement('div', {
                                 style: {
-                                    background: 'var(--raw-shine)',
+                                    background: 'var(--palette-light-grey)',
                                     height: '100%',
                                     overflowY: 'auto'
                                 },
@@ -41,9 +43,10 @@ async function initializeRoutes() {
                         id: `0-${res.router.routes[0].children.length}`
                     })
                 }
-            })
+            }
 
             res.router._internalSetRoutes(res.router.routes);
+            logger.info('Successfully configured Azalea\'s Routes!');
         }
     })
 }

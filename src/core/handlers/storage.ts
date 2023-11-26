@@ -17,18 +17,14 @@ class StorageHandler {
     protected log(type: string, ...data: any[]) {
         if (!this.logging) return;
 
-        // Use a dynamic import to prevent circular imports
-        import('@logger').then(({ default: logger }) => {
-            logger.info(type, ...data);
-        })
+        console.info(type, ...data);
     }
 
     protected error(type: string, ...data: any[]) {
-        // Use a dynamic import to prevent circular imports
-        import('@logger').then(({ default: logger }) => {
-            logger.error(type, ...data);
-        })
+        console.error(type, ...data);
     }
+
+
 
     set(key: string, value: any) {
         this.init();
@@ -80,7 +76,7 @@ class StorageHandler {
         this.init();
         this.log('Listing', { _: null });
 
-        return JSON.parse(localStorage.getItem(this.name) ?? '{}');
+        return JSON.parse(localStorage.getItem(this.name) ?? '{}') as AnyProps;
     }
 
     clear() {

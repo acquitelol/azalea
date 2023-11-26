@@ -34,7 +34,7 @@
 
 - Provides access to **Themes** by going into **Menu > Settings** at the top right!
   - Currently the **themes available** include:
-  - Pink (Default ✓), Purple, Blue, Aqua, Green, Creme, Dusk, Custom
+  - None (Default ✓), Pink, Purple, Blue, Aqua, Green, Creme, Dusk, Custom
     <hr />
   - *Note:* ***Custom themes allow you to theme every colored variable available in Azalea, ranging from tints to regular colors to text colors. This uses the colors for `Pink` by default because I advocate for pink and believe it is the best color <3.***
   <hr />
@@ -47,11 +47,15 @@
 
 - Allows you to anonymize your username by setting it to **Rosie :3** by default (editable from **Menu > Settings**, off by default). This aims to make Sparx a place where you cannot be doxxed by showing a screenshot asking for help!
 
+  <hr />
+
+- Allows you to change the icon usd in Sparx by providing an image URL! (editable from **Menu > Settings**, off by default).
+
 <img src="extension/assets/divider.png">
 
 ### ♡ **Notes on bundling:**
 
-- The codebase **is minified into a bundle**, but this is simply done to reduce file size when installing. This means that **all of the source code is public** and the codebase is transformed into a bundle using GitHub Actions, available to view [here](https://github.com/acquitelol/azalea/actions).
+- The codebase **is minified and obfuscated into a bundle**, but this is simply done to reduce file size when installing. This means that **all of the source code is public** and the codebase is transformed into a bundle using GitHub Actions, available to view [here](https://github.com/acquitelol/azalea/actions).
 
     <hr />
 
@@ -59,7 +63,9 @@
 
     <hr />
 
-- At the moment, **there is no updater implementation in the extension**, so you will need to reinstall the extension manually from here when updates arrive. When this does eventually release, it will be **opt-in only**, which means it will be **disabled by default**, to ensure safety.
+- At the moment, there is a system in place to **prevent Azalea being rebranded and claimed to be written by someone else**. This is due to a few people who repeatedly steal my code and claim they wrote it, replacing any mention of my name with theirs and providing no attribution to Azalea, even though they were warned and are aware they cannot use the code due to the nature of their usage. **This system will remain in place until this issue is resolved.** This does not affect any usage of the extension as-is, and it will only affect people attempting to change the extension's name and author.
+
+> If you have any questions, please [raise an issue](https://github.com/acquitelol/azalea/issues/new) :3
 
 <img src="extension/assets/divider.png">
 

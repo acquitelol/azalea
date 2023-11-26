@@ -1,14 +1,28 @@
 import utilities from '@core/utilities';
+import { storages } from '@core/handlers/state';
 
 const { lazyDefine, getImage } = utilities;
+const { preferences } = storages;
 
 async function initializeLogo() {
-    const sparxLogoContainer = await lazyDefine(() => document.querySelector('[class*="_SMLogo_g7mut_"]'));
-    const sparxLogo = (sparxLogoContainer.childNodes[0] as HTMLImageElement);
+    const sparxLogoContainer = await lazyDefine(() => document.querySelector('[class*="_SMLogo_"]'));
+    const sparxLogo = sparxLogoContainer.childNodes[0] as HTMLImageElement;
 
-    // Apply cuter logo
-    sparxLogo.src = getImage('logo.png');
-    sparxLogo.style.width = '50px';
+    preferences.set('originalLogoUrl', sparxLogo.src);
+
+    applyLogo(sparxLogo);
+}
+
+export function applyLogo(logo: HTMLImageElement, { url, size }: { url?: string, size?: string } = { url: preferences.get('customLogoUrl'), size: preferences.get('customLogoSize') }) {
+    if (!logo) logo = document.querySelector('[class*="_SMLogo_"]').childNodes[0] as HTMLImageElement
+
+    if (preferences.get('shouldUseCustomLogo')) {
+        logo.src = url || getImage('logo.png');
+        logo.style.width = size || '50px';
+    } else {
+        logo.src = preferences.get('originalLogoUrl');
+        logo.style.width = '150px';
+    }
 }
 
 export default initializeLogo;

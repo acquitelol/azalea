@@ -9,6 +9,7 @@ const defaults = {
     themeIndex: 0,
     autoBookwork: true,
     shouldUseCuteName: false,
+    shouldUseCustomLogo: false,
     logger: true
 }
 
@@ -30,7 +31,7 @@ async function initializePrefs() {
         }
     })
 
-    const labelNode = await lazyDefine(() => document.querySelector('[class*="_XPCount_g7mut_"]'));
+    const labelNode = await lazyDefine(() => document.querySelector('[class*="_XPCount_"]'));
 
     Theming.setTheme();
     Theming.applyLabel(labelNode);

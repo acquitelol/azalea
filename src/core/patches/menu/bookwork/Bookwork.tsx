@@ -23,7 +23,7 @@ const { merge, styles } = createStyleSheet({
 
     message: {
         marginInline: '2em',
-        background: 'var(--raw-lightest)'
+        background: 'var(--palette-light-blue-20)'
     },
 
     navigation: {
@@ -33,6 +33,17 @@ const { merge, styles } = createStyleSheet({
     collapsable: {
         overflow: 'hidden',
         transition: 'max-height 300ms ease, opacity 300ms ease'
+    },
+
+    answers: {
+        fontSize: '1.25rem', 
+        justifyContent: 'end',
+        marginRight: '2em'
+    },
+
+    paragraph: {
+        marginBlock: 0, 
+        marginRight: '0.25em'
     }
 });
 
@@ -40,6 +51,7 @@ export default () => {
     const [enabled, setEnabled] = useStorageValue<boolean>('autoBookwork', 'preferences');
     const [query, setQuery] = React.useState<string>('');
     const [force, forceRender] = React.useState({});
+    const listing = React.useMemo(() => bookwork.list(), [query, force]);
 
     return <>
         <div style={commonStyles.merge(x => [x.flex, x.justify, x.row, styles.navigation])}>
@@ -79,6 +91,17 @@ export default () => {
             </div>
         </div>
 
+        <components.Dividers.Small />
+
+        <div style={commonStyles.merge(x => [x.flex, x.row, styles.navigation, styles.answers])}>
+            <p style={styles.paragraph}>Total questions stored:</p>
+            <strong>
+                {Object.values(listing)
+                    .reduce((pre: any[], cur: any[]) => [...pre, ...cur], [])
+                    .filter(item => item.answers.length > 0).length}
+            </strong>
+        </div>
+
         <div 
             style={merge(x => [
                 x.collapsable, 
@@ -99,6 +122,6 @@ export default () => {
             </components.SectionBody>
         </div>
 
-        <Listing query={query} force={force} />
+        <Listing query={query} force={force} listing={listing} />
     </>
 }

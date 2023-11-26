@@ -1,5 +1,6 @@
 declare module '@azalea/types' {
     import { exfiltratedModules } from '@modules/data';
+    import { Navigation } from '@azalea/utilities';
 
     export type MenuItem = {
         text: string;
@@ -36,7 +37,7 @@ declare module '@azalea/types' {
 
 declare module '@azalea/components' {
     import type { PropsWithChildren, ReactElement } from 'react';
-    import { spec } from '@core/handlers/theming';
+    import { storages } from '@core/handlers/state';
 
     export type TextWithMathsProps = {
         text: string,
@@ -49,12 +50,15 @@ declare module '@azalea/components' {
         trailing?: ReactElement;
         extra?: ReactElement;
         centerTrailing?: boolean;
-        backgroundColor?: typeof spec['raw'][number];
+        backgroundColor?: `--${string}`
     }
 
-    export type SettingRowProps = Pick<RowProps, 'label' | 'sublabel' | 'extra'> & {
-        option: string
-    }
+    export type SettingRowProps<T extends unknown = any> = Exclude<RowProps, 'trailing'> & ({
+        option?: string;
+        store?: keyof typeof storages
+        getter?: T;
+        setter?: React.Dispatch<React.SetStateAction<T>>
+    })
 
     export type SectionTitleProps = PropsWithChildren;
     export type SectionBodyProps = PropsWithChildren<{ style?: React.CSSProperties }>;
@@ -93,6 +97,10 @@ declare module '@azalea/settings' {
         type: string;
         label: string;
         placeholder: string;
+    }
+
+    export type LogoInputProps = NameInputProps & {
+        callback: Fn;
     }
 }
 

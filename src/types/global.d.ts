@@ -1,6 +1,6 @@
 declare global {
     var nativeLoggingHook: (message: string, level: number) => void;
-    var azalea: typeof import('../core').default;
+    var azalea: ReturnType<typeof import('../core').default>;
     var __sparxweb: {
         GAProperty: string;
         csrfCookieName: string;
