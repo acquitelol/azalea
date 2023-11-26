@@ -92,9 +92,9 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
         }
 
         if (update) {
-            console.info('Updates are disabled.')
-        } else {
             await updateAzalea(sender.tab.id);
+        } else {
+            console.info('Updates are disabled.')
         }
     } catch (e) {
         throw new Error('Failed to load Azalea: ' + e);

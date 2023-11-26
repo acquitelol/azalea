@@ -37,10 +37,14 @@ chrome.runtime.sendMessage({
     type: 'inject-azalea',
 
     // Force update if the user chose to reset updates
-    update: updater.get('resetUpdates') ? true : updater.get('updaterDisabled'),
+    update: updater.get('resetUpdates') || !updater.get('updaterDisabled'),
     reset: updater.get('resetUpdates'),
     local: updater.get('localFetch')
 });
+
+if (updater.get('resetUpdates')) {
+    updater.set('resetUpdates', false);
+}
 
 if (updater.get('localFetch')) {
     fetch(chrome.runtime.getURL('bundle.js')).catch(() => {
