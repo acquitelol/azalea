@@ -21,22 +21,19 @@ async function fetchAzalea() {
 async function updateAzalea(tabId) {
     console.info('Checking for updates...');
 
-    const ref = await fetch(hashUrl, { cache: 'no-cache' }).then(r => r.json());
+    const ref = await fetch(hashUrl).then(r => r.json());
 
     if (ref.object.sha !== (await promisifiedGet('azaleaHash')).azaleaHash) {
         console.info('Update found! Attempting to override bundle...');
-
         await chrome.storage.local.set({ azaleaHash: ref.object.sha });
-        const [{ azalea }, newAzalea] = await Promise.all([promisifiedGet('azalea'), fetchAzalea()]);
 
+        const [{ azalea }, newAzalea] = await Promise.all([promisifiedGet('azalea'), fetchAzalea()]);
         if (azalea === newAzalea) return console.info('Bundles are identical, will not override...');
 
         console.info('Overriding Azalea\'s bundle...');
-
         await chrome.storage.local.set({ azalea: newAzalea });
 
         console.info('Successfully updated! Refreshing...');
-
         return inject(tabId, `location.reload()`);
     }
 
@@ -59,32 +56,43 @@ function inject(tabId, code, detachOnFinish = true) {
     });
 }
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (message, sender) => {
     try {
-        sendResponse();
         if (typeof message !== 'object') return;
-        const { type, update, reset } = message;
+        const { type, update, reset, local } = message;
 
         if (type === 'inject-azalea') {
-            if (reset) {
-                console.info('Clearing bundle and hash! Please wait...');
-                await chrome.storage.local.set({ azaleaHash: null, azalea: null })
-            }
+            if (local) {
+                console.info('Loading bundle from local sources...');
 
-            const loader = await fetch(chrome.runtime.getURL('loader.js')).then(r => r.text());
-            const { azalea } = await promisifiedGet('azalea');
+                const res = await fetch(chrome.runtime.getURL('bundle.js'))
+                    .then(r => r.text())
+                    .catch(() => {
+                        console.info('Bundle doesn\'t exist! Assuming enabling local mode was a mistake...')
+                    })
 
-            if (azalea) {
-                inject(
-                    sender.tab.id,
-                    loader.replace('/extid/', chrome.runtime.id).replace('INJECT_AZALEA_SOURCE', azalea),
-                );
-            }
-
-            if (update) {
-                console.info('Updates are disabled.')
+                res && inject(sender.tab.id, res);
             } else {
-                await updateAzalea(sender.tab.id);
+                if (reset) {
+                    console.info('Clearing bundle and hash! Please wait...');
+                    await chrome.storage.local.set({ azaleaHash: null, azalea: null })
+                }
+
+                const loader = await fetch(chrome.runtime.getURL('loader.js')).then(r => r.text());
+                const { azalea } = await promisifiedGet('azalea');
+
+                if (azalea) {
+                    inject(
+                        sender.tab.id,
+                        loader.replace('INJECT_AZALEA_SOURCE', azalea),
+                    );
+                }
+
+                if (update) {
+                    console.info('Updates are disabled.')
+                } else {
+                    await updateAzalea(sender.tab.id);
+                }
             }
         }
     } catch (e) {

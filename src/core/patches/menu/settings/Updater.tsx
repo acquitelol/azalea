@@ -52,7 +52,7 @@ export default () => {
         <Dividers.Small />
         <Row 
             label={'Reset Stores'}
-            sublabel={'Resets the updater hash and bundle. Upon refresh, a completely new bundle and hash will be forcefully fetched and loaded, negating the currently installed ones.'}
+            sublabel={'Resets the hash and bundle. Upon refresh, a completely new bundle and hash will be forcefully fetched and loaded, negating the currently installed ones.'}
             trailing={<SolidButton
                 text={'Reset'}
                 style={{ marginLeft: '0.5em' }}

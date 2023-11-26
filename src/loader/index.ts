@@ -31,22 +31,20 @@ function loadStylesheetFromURL(src: string, id = 'stylesheet') {
 loadStylesheetFromURL(chrome.runtime.getURL('core.css'), 'azalea-core-styles');
 loadStylesheetFromURL(chrome.runtime.getURL('cute.css'), 'azalea-theme-styles');
 
-if (updater.get('localFetch')) {
-    loadScriptFromURL(chrome.runtime.getURL('bundle.js'));
+logger.info('Loading Azalea...');
 
-    // Fail safe in case someone who can't read decides to turn on localFetch in the production environment
+chrome.runtime.sendMessage({
+    type: 'inject-azalea',
+
+    // Force update if the user chose to reset updates
+    update: updater.get('resetUpdates') ? true : updater.get('updaterDisabled'),
+    reset: updater.get('resetUpdates'),
+    local: updater.get('localFetch')
+});
+
+if (updater.get('localFetch')) {
     fetch(chrome.runtime.getURL('bundle.js')).catch(() => {
         updater.set('localFetch', false);
-        location.reload()
-    });
-} else {
-    logger.info('Loading Azalea...');
-
-    chrome.runtime.sendMessage({
-        type: 'inject-azalea',
-
-        // Force update if the user chose to reset updates
-        update: updater.get('resetUpdates') ? true : updater.get('updaterDisabled'),
-        reset: updater.get('resetUpdates')
+        location.reload();
     });
 }
