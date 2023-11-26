@@ -71,8 +71,8 @@ export default [
                 preserveExtensions: true,
                 nonRelative: process.platform === 'darwin' ? false : true
             }),
-            esbuild({ /* minify: true, */ target: 'ES2020' }),
-            // obfuscateCode()
+            esbuild({ minify: true, target: 'ES2020' }),
+            obfuscateCode()
         ]
     }),
     defineExtendedConfig({
@@ -92,8 +92,8 @@ export default [
                 preserveExtensions: true,
                 nonRelative: process.platform === 'darwin' ? false : true
             }),
-            esbuild({ /* minify: true, */ target: 'ES2020' }),
-            // obfuscateCode()
+            esbuild({ minify: true, target: 'ES2020' }),
+            obfuscateCode()
         ]
     }),
     defineExtendedConfig({
@@ -116,8 +116,8 @@ export default [
             nodeResolve(),
             commonjs(),
             json(),
-            esbuild({ /* minify: true, */ target: 'ES2020' }),
-            // obfuscateCode(),
+            esbuild({ minify: true, target: 'ES2020' }),
+            obfuscateCode(),
             copyExtension()
         ]
     }),
