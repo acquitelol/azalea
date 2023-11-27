@@ -16,7 +16,7 @@ const { merge, styles } = createStyleSheet({
     }
 });
 
-export const Row = ({ label, sublabel, trailing, extra, centerTrailing = true, backgroundColor = '--palette-light-blue-20' }: RowProps) => {
+export function Row({ label, sublabel, trailing, extra, centerTrailing = true, backgroundColor = '--palette-light-blue-20' }: RowProps) {
     return <>
         <div 
             style={commonStyles.merge(x => [
@@ -48,10 +48,10 @@ export const Row = ({ label, sublabel, trailing, extra, centerTrailing = true, b
                 {extra}
             </div>
         </>)}
-    </>
+    </>;
 }
 
-export const SettingRow = ({ option, store = 'preferences', extra, getter, setter, ...props }: SettingRowProps) => {
+export function SettingRow({ option, store = 'preferences', extra, getter, setter, ...props }: SettingRowProps) {
     if (!option && getter !== undefined && getter !== null && setter) {
         return <Row 
             trailing={<SolidButton
@@ -61,7 +61,7 @@ export const SettingRow = ({ option, store = 'preferences', extra, getter, sette
             />}
             extra={getter && extra}
             {...props}
-        />
+        />;
     }
 
     const [query, setQuery] = useStorageValue<boolean>(option, store);
@@ -74,7 +74,7 @@ export const SettingRow = ({ option, store = 'preferences', extra, getter, sette
         />}
         extra={query && extra}
         {...props}
-    />
+    />;
 }
 
 export default Row;

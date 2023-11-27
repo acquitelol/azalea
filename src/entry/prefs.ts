@@ -3,7 +3,7 @@ import utilities from '@core/utilities';
 import handlers from '@handlers';
 
 const { name, lazyDefine } = utilities;
-const { Theming, storages: { preferences, updater } } = handlers;
+const { Theming, storages: { preferences } } = handlers;
 
 const defaults = {
     themeIndex: 0,

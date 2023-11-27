@@ -18,7 +18,7 @@ const options = [
         sublabel: 'Allows you to set your own custom first and last name.',
         option: 'shouldUseCuteName',
         extra() {
-            return <NameInputs />
+            return <NameInputs />;
         }
     },
     {
@@ -26,12 +26,12 @@ const options = [
         sublabel: 'Allows you to set your own custom image URL for the Sparx Logo..',
         option: 'shouldUseCustomLogo',
         extra() {
-            return <LogoInput />
+            return <LogoInput />;
         }
     }
-]
+];
 
-const Toggles = () => {
+function Toggles() {
     return options.map(({ extra: Extra, ...props }, i, array) => (
         <>
             <SettingRow 
@@ -40,7 +40,7 @@ const Toggles = () => {
             />
             {i !== array.length - 1 && <components.Dividers.Large />}
         </>
-    ))
+    ));
 }
 
-export default Toggles
+export default Toggles;

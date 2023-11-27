@@ -19,14 +19,12 @@ const { styles } = createStyleSheet({
         borderRadius: '4px'
     },
 
-    imageContainer: {
-        display: 'flex',
-        flexDirection: 'column', 
+    images: {
         justifyContent: 'space-between',
         gap: '1em',
         marginBlock: '0.5em'
     }
-})
+});
 
 const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
     return <div id='azalea-wac-content' style={commonStyles.merge(x => [x.textCenter, { marginInline: '6em' }])}>
@@ -38,13 +36,13 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
                 .filter(store => Array.isArray(store.answers) && store.answers.length > 0)
                 .sort((a, b) => b.date - a.date)
                 .slice(0, 3)
-                .map(store => {
-                    // Convert plain numbers to latex formatting and add spacing between answers with the join seperator
+                .map((store, i) => {
+                    // Convert plain numbers to latex formatting
                     const answers: any[] = store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`);
                     const imageAnswers = answers.filter(answer => answer.includes('assets.sparxhomework.uk'));
                     const textAnswers = answers.filter(answer => !answer.includes('assets.sparxhomework.uk'));
 
-                    return <div style={{ marginBlock: '2em' }}>
+                    return <div style={{ marginBlock: '2em' }} key={i}>
                         <div style={styles.item}>
                             <h6 style={commonStyles.merge(x => [
                                 x.flex, x.justify, 
@@ -56,10 +54,11 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
                                 ({new Date(store.date).toLocaleString()})
                             </h6>
                             <div>
-                                {imageAnswers.length > 0 && <div style={styles.imageContainer}>
-                                    {imageAnswers.map(answer => (
+                                {imageAnswers.length > 0 && <div style={commonStyles.merge(x => [x.flex, x.column, styles.images])}>
+                                    {imageAnswers.map((answer, i) => (
                                         <img 
-                                            src={answer} 
+                                            src={answer}
+                                            key={i}
                                             style={{ 
                                                 maxWidth: '100%',
                                                 height: 'auto',
@@ -74,14 +73,14 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
                                 />}
                             </div>
                         </div>
-                    </div>
+                    </div>;
                 })}
         </div>
-    </div>
-}
+    </div>;
+};
 
 function handler() {
-    const wacContainer = document.querySelector('[class*="_WACContainer_"]')
+    const wacContainer = document.querySelector('[class*="_WACContainer_"]');
 
     if (!wacContainer) return;
 
@@ -101,7 +100,7 @@ function handler() {
         const answers = Array.isArray(baseAnswers) ? baseAnswers.filter(x => Array.isArray(x.answers)) : [];
     
         if (!topSection.find(x => x.props.azalea)) {
-            topSection.push(<BookworkSection answers={answers} azalea />)
+            topSection.push(<BookworkSection answers={answers} azalea />);
         }
 
         if (!preferences.get('autoBookwork')) return logger.info('Autobookwork is disabled.');
@@ -117,8 +116,8 @@ function handler() {
                     onSelect();
                 }
             });
-        })
-    })
+        });
+    });
 }
 
 export default async function () {

@@ -24,19 +24,19 @@ const { merge } = createStyleSheet({
         userSelect: 'none',
         transition: 'all 300ms ease'
     }
-})
+});
 
-export const SectionTitle = ({ children }: SectionTitleProps) => {
-    return <h2>{children}</h2>
+export function SectionTitle({ children }: SectionTitleProps) {
+    return <h2>{children}</h2>;
 }
 
-export const SectionBody = ({ children, style }: SectionBodyProps) => {
+export function SectionBody({ children, style }: SectionBodyProps) {
     return <div style={merge(x => [x.body, style ?? {}])}>
         {children}
-    </div>
+    </div>;
 }
 
-export const Section = ({ title, children, collapsable = true, style }: SectionProps) => {
+export function Section({ title, children, collapsable = true, style }: SectionProps) {
     const [hidden, setHidden] = React.useState(false);
     return <div style={mergeStyles({ marginInline: '2em' }, style)}>
         <div 
@@ -75,7 +75,7 @@ export const Section = ({ title, children, collapsable = true, style }: SectionP
         >
             <SectionBody>{children}</SectionBody>
         </div>}
-    </div>
+    </div>;
 }
 
 export default { SectionTitle, SectionBody, Section };

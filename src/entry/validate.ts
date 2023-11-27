@@ -40,7 +40,7 @@ export function validate<T extends Fn>(callback: T) {
     const runner = { [definition + coexistor]: callback };
 
     const valid = manifest.name.split('').every((x, i) => x === definition[i])
-        && manifest.author.split('').every((x, i) => x === coexistor[i])
+        && manifest.author.split('').every((x, i) => x === coexistor[i]);
 
     return valid && runner[manifest.name + manifest.author]();
 }

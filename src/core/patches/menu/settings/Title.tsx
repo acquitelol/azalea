@@ -14,9 +14,9 @@ const { styles } = createStyleSheet({
         marginTop: '1.5em', 
         marginBottom: '0.5em' 
     }
-})
+});
 
-export default () => {
+function Title() {
     return <Section collapsable={false} style={styles.section}>
         <Row 
             label={<div 
@@ -36,5 +36,7 @@ export default () => {
                 alt='Sparx Maths'
             />}
         />
-    </Section>
+    </Section>;
 }
+
+export default Title;

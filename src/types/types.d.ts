@@ -104,6 +104,21 @@ declare module '@azalea/settings' {
     }
 }
 
+declare module '@azalea/bookwork' {
+    import { storages } from '@core/handlers/state';
+
+    export type ToggleProps = {
+        enabled: boolean;
+        setEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+    }
+
+    export type ListingProps = {
+        query: string,
+        readonly force: Record<string, any>,
+        listing: ReturnType<typeof storages['bookwork']['list']>
+    }
+}
+
 declare module '@azalea/buttons' {
     import { ReactNode } from 'react';
 

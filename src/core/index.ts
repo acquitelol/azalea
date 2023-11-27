@@ -19,6 +19,6 @@ const generateAzalea = () => validate(() => ({
     patcher,
     hooks,
     navigation: null as Navigation
-}))
+}));
 
 export default generateAzalea;

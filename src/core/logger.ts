@@ -12,7 +12,7 @@ export const colors = {
     warn: '#fff1a8',
     error: '#ffbdbf',
     debug: '#e2c2ff'
-}
+};
 
 export const title = ({ background = colors.log, bold = true }: { background?: string, bold?: boolean } = {}) => {
     const styles = [
@@ -25,7 +25,7 @@ export const title = ({ background = colors.log, bold = true }: { background?: s
     styles.push(`background: ${background}`);
 
     return styles.join('; ');
-}
+};
 
 const logger = new Proxy(console, {
     get(target, prop) {
@@ -44,8 +44,8 @@ const logger = new Proxy(console, {
                 }),
                 ...args
             );
-        }
+        };
     }
-}) as Pick<typeof console, 'log' | 'info' | 'warn' | 'error' | 'debug'>
+}) as Pick<typeof console, 'log' | 'info' | 'warn' | 'error' | 'debug'>;
 
 export default logger;

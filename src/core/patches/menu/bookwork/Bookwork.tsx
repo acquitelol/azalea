@@ -47,7 +47,7 @@ const { merge, styles } = createStyleSheet({
     }
 });
 
-export default () => {
+function Bookwork() {
     const [enabled, setEnabled] = useStorageValue<boolean>('autoBookwork', 'preferences');
     const [query, setQuery] = React.useState<string>('');
     const [force, forceRender] = React.useState({});
@@ -123,5 +123,7 @@ export default () => {
         </div>
 
         <Listing query={query} force={force} listing={listing} />
-    </>
+    </>;
 }
+
+export default Bookwork;

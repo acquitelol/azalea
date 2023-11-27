@@ -16,9 +16,9 @@ const { merge, styles } = createStyleSheet({
     bottom: {
         marginBottom: '0.5em'
     }
-})
+});
 
-export default () => {
+function About() {
     return <Row
         label={<>
             <div style={styles.bottom}>
@@ -105,5 +105,7 @@ export default () => {
                 Thank you for installing my extension ♡
             </h4>
         </div>}
-    />
+    />;
 }
+
+export default About;

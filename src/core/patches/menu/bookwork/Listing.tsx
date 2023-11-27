@@ -1,8 +1,8 @@
-import handlers from '@handlers';
 import components from '@core/components';
 import { common } from '@core/modules';
 import { createStyleSheet, commonStyles } from '@core/stylesheet';
 import { TextWithMaths } from '@core/components/katex';
+import { ListingProps } from '@azalea/bookwork';
 
 const { React } = common;
 const { Section, SectionBody, Row, Dividers } = components;
@@ -13,15 +13,13 @@ const { styles } = createStyleSheet({
         background: 'var(--palette-light-blue-20)',
     },
 
-    imageContainer: {
+    images: {
         maxWidth: '10%', 
         aspectRatio: 1, 
-        display: 'flex', 
-        flexDirection: 'row', 
         gap: '1em', 
         marginBlock: '0.5em'
     }
-})
+});
 
 function sortCodes([a]: [string, any[]], [b]: [string, any[]]) {
     const numberA = Number(a.slice(0, -1));
@@ -36,11 +34,11 @@ function sortCodes([a]: [string, any[]], [b]: [string, any[]]) {
     return letterA.localeCompare(letterB);
 }
 
-export default ({ query, listing }: { query: string, force: any, listing: any }) => {
+function Listing({ query, listing }: ListingProps) {
     const entries = React.useMemo(
         () => Object.entries(listing).filter(([k]) => k.toLowerCase().includes(query.toLowerCase())), 
         [listing]
-    )
+    );
 
     return entries.length > 0 ? entries.sort(sortCodes).map(([key, value]: [string, any[]]) => {
         return value.length > 0 && <Section title={key}>
@@ -53,7 +51,7 @@ export default ({ query, listing }: { query: string, force: any, listing: any })
                     // Therefore 'len > 1' is valid for this use case
                     const plural = store.answers.length > 1 ? 's' : '';
 
-                    // Convert plain numbers to latex formatting and add spacing between answers with the join seperator
+                    // Convert plain numbers to latex formatting
                     const answers = store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`);
                     const imageAnswers = answers.filter(answer => answer.includes('assets.sparxhomework.uk'));
                     const textAnswers = answers.filter(answer => !answer.includes('assets.sparxhomework.uk'));
@@ -80,9 +78,9 @@ export default ({ query, listing }: { query: string, force: any, listing: any })
                         <Row 
                             label={`Answer${plural}:`}
                             sublabel={<div>
-                                {imageAnswers.length > 0 && <div style={styles.imageContainer}>
-                                    {imageAnswers.map(answer => (
-                                        <img src={answer} />
+                                {imageAnswers.length > 0 && <div style={commonStyles.merge(x => [x.flex, x.row, styles.images])}>
+                                    {imageAnswers.map((answer, i) => (
+                                        <img src={answer} key={i} />
                                     ))}
                                 </div>}
                                 {textAnswers.length > 0 && <TextWithMaths 
@@ -92,12 +90,14 @@ export default ({ query, listing }: { query: string, force: any, listing: any })
                             </div>}
                         />
                         {i !== array.length - 1 && <Dividers.Large />}
-                    </>
+                    </>;
                 })}
-        </Section>
+        </Section>;
     }) : <SectionBody style={styles.fallback}>
         <h2 style={commonStyles.merge(x => [x.flex, x.justify, x.align, x.textCenter])}>
             No bookwork codes found :(
         </h2>
-    </SectionBody>
+    </SectionBody>;
 }
+
+export default Listing;

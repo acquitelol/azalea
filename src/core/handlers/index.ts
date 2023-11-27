@@ -6,6 +6,6 @@ const handlers = {
     Theming,
     StorageHandler,
     storages
-}
+};
 
 export default handlers;

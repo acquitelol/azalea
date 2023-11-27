@@ -14,6 +14,6 @@ const utilities = {
     lazyDefine,
     navigate,
     isEmpty
-}
+};
 
 export default utilities;

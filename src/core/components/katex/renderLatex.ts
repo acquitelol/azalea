@@ -6,11 +6,11 @@ import { preprocessMaths, preprocessText } from './preprocess';
 import { replaceLatexTagsWithHtmlTags } from './replaceLatex';
 import { patterns } from './constants';
 
-const renderMathsToString = (maths: string, options?: KatexOptions) => {
+function renderMathsToString(maths: string, options?: KatexOptions) {
     return katex.renderToString(preprocessMaths(maths), options);
 };
 
-export const renderMixedTextToString = (text: string, suppressWarnings?: boolean) => {
+export function renderMixedTextToString(text: string, suppressWarnings?: boolean) {
     const tagStack: string[] = [];
     const parts = text.match(patterns.maths);
 

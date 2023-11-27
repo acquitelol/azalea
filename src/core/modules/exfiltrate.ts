@@ -1,4 +1,4 @@
-// Thank you to uwu/shelter for this exfiltrating method
+// Thank you to uwu/shelter for this exfiltrating method :3
 // https://github.com/uwu/shelter/blob/main/packages/shelter/src/exfiltrate.ts
 function exfiltrate(prop: string, filter?: ((self: any) => boolean) | null) {
     const protoKey = Symbol(prop);

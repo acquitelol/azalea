@@ -10,7 +10,7 @@ import ColorInputs from './ColorInputs';
 
 const { React } = common;
 
-export default () => {
+function Themes() {
     const [label] = React.useState(document.querySelector('[class*="_XPCount_"]'));
     const [selected, setSelected] = useStorageValue<number>('themeIndex', 'preferences');
 
@@ -32,5 +32,7 @@ export default () => {
             setSelected={setSelected}
             label={label}
         />}
-    />
+    />;
 }
+
+export default Themes;

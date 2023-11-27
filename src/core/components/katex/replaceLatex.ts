@@ -1,6 +1,6 @@
 import { latexTags, brackets } from './constants';
 
-export const replaceLatexTagsWithHtmlTags = (bit: string, tagStack: string[]) => {
+export function replaceLatexTagsWithHtmlTags(bit: string, tagStack: string[]) {
     const res = [];
     let input = bit;
 

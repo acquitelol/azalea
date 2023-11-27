@@ -37,6 +37,6 @@ export const commonStyles = createStyleSheet({
     textCenter: {
         textAlign: 'center'
     }
-})
+});
 
 export default { mergeStyles, createStyleSheet, commonStyles };

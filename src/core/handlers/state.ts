@@ -5,4 +5,4 @@ export const storages = {
     preferences: new StorageHandler('AzaleaPreferences', false),
     bookwork: new StorageHandler('AzaleaBookwork'),
     updater: new StorageHandler('AzaleaUpdater')
-}
+};

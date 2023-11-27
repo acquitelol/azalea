@@ -10,7 +10,7 @@ async function initializeWindow() {
 
     // Workaround for routes not being defined early enough
     if (window.location.href.includes('azalea')) {
-        window.location.href = window.location.href.replace(/azalea\/.*/g, '')
+        window.location.href = window.location.href.replace(/azalea\/.*/g, '');
     }
 }
 

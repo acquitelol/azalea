@@ -11,29 +11,33 @@ import Updater from './Updater';
 
 const { React } = common;
 
-export default () => (
-    <>
-        <Title />
+function Settings() {
+    return (
+        <>
+            <Title />
+    
+            <Dividers.Large />
+    
+            <Section 
+                title='Preferences'
+                style={{ marginTop: '1em' }}
+            >
+                <Toggles />
+            </Section>
+    
+            <Section title='Themes'>
+                <Themes />
+            </Section>
+    
+            <Section title='Updater'>
+                <Updater />
+            </Section>
+    
+            <Section title='About'>
+                <About />
+            </Section>
+        </>
+    );
+}
 
-        <Dividers.Large />
-
-        <Section 
-            title='Preferences'
-            style={{ marginTop: '1em' }}
-        >
-            <Toggles />
-        </Section>
-
-        <Section title='Themes'>
-            <Themes />
-        </Section>
-
-        <Section title='Updater'>
-            <Updater />
-        </Section>
-
-        <Section title='About'>
-            <About />
-        </Section>
-    </>
-);
+export default Settings;

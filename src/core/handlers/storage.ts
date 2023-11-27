@@ -24,15 +24,13 @@ class StorageHandler {
         console.error(type, ...data);
     }
 
-
-
     set(key: string, value: any) {
         this.init();
 
         if (typeof key === 'string') {
-            this.log('Setting', { key, value })
+            this.log('Setting', { key, value });
         } else {
-            return this.error('Setting', { key, value })
+            return this.error('Setting', { key, value });
         }
 
         const items = JSON.parse(localStorage.getItem(this.name) ?? '{}');
@@ -51,9 +49,9 @@ class StorageHandler {
         this.init();
 
         if (typeof key === 'string') {
-            this.log('Deleting', { key })
+            this.log('Deleting', { key });
         } else {
-            return this.error('Deleting', { key })
+            return this.error('Deleting', { key });
         }
 
         const { [key]: _, ...rest } = JSON.parse(localStorage.getItem(this.name) ?? '{}');
@@ -64,9 +62,9 @@ class StorageHandler {
         this.init();
 
         if (typeof key === 'string') {
-            this.log('Toggling', { key })
+            this.log('Toggling', { key });
         } else {
-            return this.error('Toggling', { key })
+            return this.error('Toggling', { key });
         }
 
         this.set(key, !this.get(key));

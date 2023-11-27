@@ -4,4 +4,4 @@ import bookwork from './bookwork';
 export default {
     settings,
     bookwork
-}
+};

@@ -9,7 +9,7 @@ export const common = new Proxy({}, {
             get(_, moduleProp) {
                 return target[prop]?.[moduleProp];
             }
-        })
+        });
     }
 }) as CommonModules;
 
@@ -17,7 +17,7 @@ export const common = new Proxy({}, {
 Object.entries(exfiltratedModules).forEach(([name, mdl]) => {
     exfiltrate(mdl.prop, mdl.filter)
         .then(res => Object.assign(common, { [name]: res }));
-})
+});
 
 // Use common[mdl] on its own only if you are *100%* sure that the module exists when you `get` any properties.
 // If you are loading early, use await lazyDefine(() => common[mdl]) to wait for the module to be found.

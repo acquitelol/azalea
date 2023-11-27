@@ -13,7 +13,7 @@ const findReact = <T extends Element>(element: T | null, traverseUp = 0) => {
             || key.startsWith('__reactContainer$');
     }) ?? '';
 
-    const elementFiber = element[key]
+    const elementFiber = element[key];
 
     if (!elementFiber) return null;
     if (key.startsWith('__reactContainer$')) return elementFiber;

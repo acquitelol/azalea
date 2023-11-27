@@ -23,9 +23,9 @@ const { merge, styles } = createStyleSheet({
         borderRadius: '0.5rem',
         border: '1px solid #00000020',
     }
-})
+});
 
-export default ({ label, color, colorKey, colorType, backgroundColor }: ColorInputProps) => {
+function ColorInput({ label, color, colorKey, colorType, backgroundColor }: ColorInputProps) {
     const isKeyTint = React.useMemo(() => color.toLowerCase().includes('tint'), []);
     const defaultTheme = React.useMemo(() => Theming.themes.find(x => x.name === 'Pink').colors, []);
 
@@ -60,5 +60,7 @@ export default ({ label, color, colorKey, colorType, backgroundColor }: ColorInp
                 />
             </div>
         </div>}
-    />
+    />;
 }
+
+export default ColorInput;

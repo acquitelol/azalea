@@ -7,9 +7,9 @@ const { merge } = createStyleSheet({
         margin: 0,
         color: 'var(--palette-blue-gradient-start)'
     }
-})
+});
 
-export const Small = () => {
+export function Small() {
     return <hr
         style={merge(x => [
             x.common, 
@@ -17,10 +17,10 @@ export const Small = () => {
                 borderStyle: 'dashed' 
             }
         ])}
-    />
+    />;
 }
 
-export const Large = () => {
+export function Large() {
     return <hr
         style={merge(x => [
             x.common,
@@ -29,7 +29,7 @@ export const Large = () => {
                 borderWidth: 3
             }
         ])}
-    />
+    />;
 }
 
 export default { Small, Large };

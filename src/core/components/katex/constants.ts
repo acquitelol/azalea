@@ -18,7 +18,7 @@ export const patterns = {
     hazardousCharacters: /[&<>"']/,
     maths: /\$|(?:\\.|[^$])+/g,
     bold: /\*\*(.*)\*\*/g
-}
+};
 
 export const brackets = {
     openingAngledLeft: '<',
@@ -26,7 +26,7 @@ export const brackets = {
     closingAngledRight: '>',
     openingCurly: '{',
     closingCurly: '}'
-}
+};
 
 export const latexTags = {
     '\\textbf{': 'b',

@@ -17,7 +17,7 @@ declare global {
             interactionGateway: string;
             staticAssets: string;
         }
-    }
+    };
 }
 
 export { };

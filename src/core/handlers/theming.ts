@@ -42,7 +42,7 @@ class Theming {
                 return {
                     ...acc,
                     [item]: callback({ key, item })
-                }
+                };
             }, {})
         }), {}) as Theme['colors'];
     }
@@ -58,13 +58,13 @@ class Theming {
         {
             name: 'Custom',
             get colors() {
-                return Theming.generateTheme(({ key, item }) => colors.get(`${key}-${item}`))
+                return Theming.generateTheme(({ key, item }) => colors.get(`${key}-${item}`));
             }
         }
     ] satisfies Theme[];
 
     static get index() {
-        return preferences.get('themeIndex') ?? 0
+        return preferences.get('themeIndex') ?? 0;
     };
 
     static get theme() {
@@ -74,7 +74,7 @@ class Theming {
     static applyLabel(label: Element | null) {
         if (!label) return;
 
-        label.textContent = `${label?.textContent?.split('|')[0]} | ${this.theme.name}`
+        label.textContent = `${label?.textContent?.split('|')[0]} | ${this.theme.name}`;
     }
 
     static setTheme() {
@@ -82,19 +82,18 @@ class Theming {
 
         if (this.theme.name === 'None') {
             // Disable the stylesheet and remove css variables from the documentElement
-            stylesheet.setAttribute('media', "max-width: 1px");
+            stylesheet.setAttribute('media', 'max-width: 1px');
 
             Object.entries(this.theme.colors).forEach(([colorType, colors]: [string, any]) => {
                 Object.entries(colors).forEach(([key]) => {
                     document.documentElement.style.removeProperty(`--${colorType}-${key}`);
-                })
-            })
+                });
+            });
 
             return;
         }
 
-        if (stylesheet.hasAttribute('media')) stylesheet.removeAttribute('media')
-
+        if (stylesheet.hasAttribute('media')) stylesheet.removeAttribute('media');
         if (!this.theme.colors) return;
 
         Object.entries(this.theme.colors).forEach(([colorType, colors]: [string, any]) => {
@@ -108,8 +107,8 @@ class Theming {
 
             Object.entries(colors).forEach(([key, color]) => {
                 document.documentElement.style.setProperty(`--${colorType}-${key}`, color as string);
-            })
-        })
+            });
+        });
     }
 };
 

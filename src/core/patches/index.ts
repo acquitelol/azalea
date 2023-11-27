@@ -6,6 +6,6 @@ const patches = () => Promise.allSettled([
     menuButtons(),
     captureAnswers(),
     bookworkBypass()
-])
+]);
 
 export default patches;

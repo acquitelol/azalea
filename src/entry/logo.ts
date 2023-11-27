@@ -14,7 +14,7 @@ async function initializeLogo() {
 }
 
 export function applyLogo(logo: HTMLImageElement, { url = preferences.get('customLogoUrl'), size = preferences.get('customLogoSize') }) {
-    if (!logo) logo = document.querySelector('[class*="_SMLogo_"]').childNodes[0] as HTMLImageElement
+    if (!logo) logo = document.querySelector('[class*="_SMLogo_"]').childNodes[0] as HTMLImageElement;
 
     if (preferences.get('shouldUseCustomLogo')) {
         logo.src = url || getImage('logo.png');

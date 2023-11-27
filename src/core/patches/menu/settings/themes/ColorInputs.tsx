@@ -26,10 +26,10 @@ const { styles } = createStyleSheet({
     fallback: {
         maxWidth: '75%'
     }
-})
+});
 
-export default ({ selected, setSelected, label }: ColorInputsProps) => {
-    const shouldDisplayEditor = React.useMemo(() => Theming.themes[selected].name === 'Custom', [selected])
+function ColorInputs({ selected, setSelected, label }: ColorInputsProps) {
+    const shouldDisplayEditor = React.useMemo(() => Theming.themes[selected].name === 'Custom', [selected]);
 
     return <>
         <div style={commonStyles.merge(x => [x.flex, x.justify, x.align, { marginTop: '0.5em' }])}>
@@ -49,10 +49,10 @@ export default ({ selected, setSelected, label }: ColorInputsProps) => {
         </div>
         <div style={shouldDisplayEditor ? {} : commonStyles.merge(x => [x.flex, x.justify])}>
             {shouldDisplayEditor
-                ? Object.keys(spec).map(key => {
-                    return <Section title={capitalize(key)}>
-                        {spec[key].map((color, i, array) => {
-                            return <>
+                ? Object.keys(spec).map((key, i) => {
+                    return <Section title={capitalize(key)} key={i}>
+                        {spec[key].map((color, i, array) => (
+                            <React.Fragment key={i}>
                                 <ColorInput 
                                     label={label}
                                     color={`${key}-${color}`}
@@ -61,13 +61,15 @@ export default ({ selected, setSelected, label }: ColorInputsProps) => {
                                     backgroundColor={i % 2 === 0 ? '--palette-light-grey' : '--palette-light-blue-20'}
                                 />
                                 {i !== array.length - 1 && <Dividers.Small />}
-                            </>
-                        })}
-                    </Section>
+                            </React.Fragment>
+                        ))}
+                    </Section>;
                 }) 
                 : <p style={commonStyles.merge(x => [x.textCenter, styles.fallback])}>
                     Select the <strong>Custom</strong> theme from the dropdown above for these colors to be editable!
                 </p>}
         </div>
-    </>
+    </>;
 }
+
+export default ColorInputs;

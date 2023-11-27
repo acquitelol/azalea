@@ -21,7 +21,7 @@ async function initializeRoutes() {
 
             const routeItems = Object.values(items)
                 .filter(item => item.Route)
-                .map(item => new item.Route()) satisfies RouteItem[]
+                .map(item => new item.Route()) satisfies RouteItem[];
 
             // Add each route to the routes if it hasn't been added already
             for (const route of routeItems) {
@@ -29,6 +29,7 @@ async function initializeRoutes() {
                     res.router.routes[0].children.push({
                         path: route.path,
                         element: (
+                            // eslint-disable-next-line react/no-children-prop
                             React.createElement('div', {
                                 style: {
                                     background: 'var(--palette-light-grey)',
@@ -41,7 +42,7 @@ async function initializeRoutes() {
                         hasErrorBoundary: false,
                         children: undefined,
                         id: `0-${res.router.routes[0].children.length}`
-                    })
+                    });
                 }
             }
 
@@ -49,7 +50,7 @@ async function initializeRoutes() {
             logger.info('Successfully configured Azalea\'s Routes!');
             unpatch();
         }
-    })
+    });
 }
 
 export default initializeRoutes;

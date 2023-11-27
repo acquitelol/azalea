@@ -19,9 +19,9 @@ const replacers = {
         [patterns.gap, '\\text{\\textunderscore}'],
         [patterns.hazardousComma, '']
     ])
-} satisfies Record<string, Map<RegExp, string>>
+} satisfies Record<string, Map<RegExp, string>>;
 
-export const preprocessText = (text: string) => {
+export function preprocessText(text: string) {
     if (!text) {
         return '';
     }
@@ -31,9 +31,9 @@ export const preprocessText = (text: string) => {
     }
 
     return text;
-};
+}
 
-export const preprocessMaths = (maths: string) => {
+export function preprocessMaths(maths: string) {
     if (!maths) {
         return '';
     }
@@ -43,4 +43,4 @@ export const preprocessMaths = (maths: string) => {
     }
 
     return `{${maths}}`;
-};
+}

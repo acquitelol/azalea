@@ -8,12 +8,12 @@ import LogoInput from './LogoInput';
 const { React } = common;
 const { getImage } = utilities;
 
-export default () => {
+function Logo() {
     React.useEffect(() => {
         applyLogo(null, {});
 
         return () => applyLogo(null, {});
-    }, [])
+    }, []);
     
     return <div style={commonStyles.merge(x => [x.flex, x.justify, x.wrap])}>
         <LogoInput 
@@ -28,5 +28,7 @@ export default () => {
             placeholder={'50px'}
             callback={(value) => applyLogo(null, { size: value })}
         />
-    </div>
+    </div>;
 }
+
+export default Logo;

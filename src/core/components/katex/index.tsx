@@ -5,9 +5,11 @@ import { renderMixedTextToString } from './renderLatex';
 
 const { React } = modules.common;
 
-export const TextWithMaths = ({ text, element = 'p', ...props }: TextWithMathsProps) => (
-    React.createElement(element, {
-        dangerouslySetInnerHTML: { __html: renderMixedTextToString(text, false) },
-        ...props
-    })
-);
+export function TextWithMaths({ text, element = 'p', ...props }: TextWithMathsProps) {
+    return (
+        React.createElement(element, {
+            dangerouslySetInnerHTML: { __html: renderMixedTextToString(text, false) },
+            ...props
+        })
+    );
+}

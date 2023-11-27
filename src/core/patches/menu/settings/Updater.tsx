@@ -20,7 +20,7 @@ const { merge, styles } = createStyleSheet({
     },
 });
 
-export default () => {
+function Updater() {
     const [localFetch, setLocalFetch] = useStorageValue<boolean>('localFetch', 'updater');
     const [, setResetUpdates] = useStorageValue<boolean>('resetUpdates', 'updater');
 
@@ -32,7 +32,7 @@ export default () => {
                 </h2>
                 <components.Dividers.Small />
                 <p style={{ marginInline: '1em', marginBlock: '0.5em' }}>
-                    Do not mess with these options unless <strong>you know what you're doing.</strong> Changing these at random could <strong>break your Azalea installation.</strong> If you need help fixing it, <a href={repository.plain + '/issues/new'} target={'blank'}>raise an issue</a>.
+                    Do not mess with these options unless <strong>you know what you&apos;re doing.</strong> Changing these at random could <strong>break your Azalea installation.</strong> If you need help fixing it, <a href={repository.plain + '/issues/new'} target={'blank'}>raise an issue</a>.
                 </p>
             </components.SectionBody>
         </div>
@@ -58,9 +58,11 @@ export default () => {
                 style={{ marginLeft: '0.5em' }}
                 onClick={() => {
                     setResetUpdates(true);
-                    window.location.href = window.location.href.replace(/azalea\/.*/g, '')
+                    window.location.href = window.location.href.replace(/azalea\/.*/g, '');
                 }}
             />}
         />
-    </>
+    </>;
 }
+
+export default Updater;

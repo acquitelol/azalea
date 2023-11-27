@@ -1,6 +1,6 @@
 import { patterns } from './constants';
 
-export const htmlEscape = (input: any) => {
+export function htmlEscape(input: any) {
     if (!input) {
         return '';
     }
@@ -16,4 +16,4 @@ export const htmlEscape = (input: any) => {
     } else {
         return input;
     }
-}
+};

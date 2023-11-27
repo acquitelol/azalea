@@ -13,12 +13,12 @@ class Item implements MenuItem {
     text = 'Bookwork';
 
     callback() {
-        navigate(path)
+        navigate(path);
     }
 }
 
 class Route implements RouteItem {
-    path = path
+    path = path;
 
     component() {
         return <Bookwork />;

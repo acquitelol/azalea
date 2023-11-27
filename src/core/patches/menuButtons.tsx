@@ -19,7 +19,7 @@ export default async function () {
 
     const unpatch = patcher.before('render', Dropdown.type, (args) => {
         // Refresh the page if navigation patch failed
-        if (!azalea.navigation) window.location.href = window.location.href.replace(/azalea\/.*/g, '')
+        if (!azalea.navigation) window.location.href = window.location.href.replace(/azalea\/.*/g, '');
 
         // Apply label again, in-case the XP of the user changes
         Theming.applyLabel(labelNode);
@@ -27,18 +27,18 @@ export default async function () {
         const buttons = findInReactTree(args[0], x => (
             Array.isArray(x.children) 
             && x.className.includes('_DropdownMenuContent_')
-        ))
+        ));
 
         if (!buttons) return;
 
         // Map items and wrap the values in calls to abstract away the actual classes
         const menuItems = Object.values(items)
             .filter(item => item.Item)
-            .map(item => new item.Item()) satisfies MenuItem[]
+            .map(item => new item.Item()) satisfies MenuItem[];
 
         menuItems.forEach(item => {
             for (const button of buttons.children) {
-                if (button?.props?.text === item.text) return
+                if (button?.props?.text === item.text) return;
             }
 
             const index = buttons.children.findIndex(x => x?.props?.children === 'Logout');
@@ -48,9 +48,9 @@ export default async function () {
                     text={item.text}
                     onClick={item.callback}
                 />
-            ))
-        })
-    })
+            ));
+        });
+    });
 
     return unpatch;
 }

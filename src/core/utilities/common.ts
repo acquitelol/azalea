@@ -11,13 +11,13 @@ const name = {
     get firstName() {
         return preferences.get('shouldUseCuteName')
             ? preferences.get('cuterFirstName') || this.defaults.firstName
-            : preferences.get('firstName')
+            : preferences.get('firstName');
     },
 
     get lastName() {
         return preferences.get('shouldUseCuteName')
             ? preferences.get('cuterLastName') || this.defaults.lastName
-            : preferences.get('lastName')
+            : preferences.get('lastName');
     }
 };
 
@@ -49,4 +49,4 @@ export {
     getImage,
     capitalize,
     noop
-}
+};

@@ -15,7 +15,7 @@ function processAnswers(input: Record<string, Record<string, any>>) {
 
     if (!isEmpty(input.cards)) {
         Object.values(input.cards).forEach(card =>
-            card.slot_ref && answers.push(card.content[0].text))
+            card.slot_ref && answers.push(card.content[0].text));
     }
 
     if (!isEmpty(input.choices)) {
@@ -26,7 +26,7 @@ function processAnswers(input: Record<string, Record<string, any>>) {
                 return answers.push(`${window.__sparxweb.urls.contentAssets}/${choice.content[0].src}`);
 
             return answers.push(choice.content[0].text);
-        })
+        });
     }
 
     return answers;
@@ -63,7 +63,7 @@ function handler() {
     }
 
     // Remove all question-dependent latex formatting and remove consecutive spaces
-    const sanitise = (id: string) => id.replace(/\$.*?\$/g, '').replace(/ +/g, " ");
+    const sanitise = (id: string) => id.replace(/\$.*?\$/g, '').replace(/ +/g, ' ');
 
     bookwork.set(code, [
         ...bookwork.get(code)?.filter(x => sanitise(x.id) !== sanitise(id)) ?? [],
@@ -78,5 +78,5 @@ export default async function () {
     return () => {
         document.removeEventListener('pointerdown', handler, { capture: true });
         document.removeEventListener('keydown', handler, { capture: true });
-    }
+    };
 }

@@ -22,9 +22,9 @@ const { styles } = createStyleSheet({
         borderRadius: '100em',
         height: 'var(--spx-unit-10)',
     }
-})
+});
 
-export default ({ type, label, placeholder }: NameInputProps) => {
+function NameInput({ type, label, placeholder }: NameInputProps) {
     const [value, setValue] = useStorageValue(type, 'preferences');
     
     return <div style={commonStyles.merge(x => [x.flex, x.justify, x.align, styles.container])}>
@@ -39,5 +39,7 @@ export default ({ type, label, placeholder }: NameInputProps) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
         />
-    </div>
+    </div>;
 }
+
+export default NameInput;

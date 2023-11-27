@@ -4,7 +4,7 @@ const hashUrl = 'https://api.github.com/repos/acquitelol/azalea/git/refs/heads/s
 const bundleUrl = 'https://raw.githubusercontent.com/acquitelol/azalea/sparx-v2/builds/bundle.js';
 
 function promisifiedGet<T extends string[]>(...args: T): Promise<{ [K in T[number]]: any }> {
-    return new Promise((res) => chrome.storage.local.get(...args, res))
+    return new Promise((res) => chrome.storage.local.get(...args, res));
 };
 
 async function fetchAzalea() {
@@ -34,7 +34,7 @@ async function updateAzalea(tabId) {
         await chrome.storage.local.set({ azalea: newAzalea });
 
         console.info('Successfully updated! Refreshing...');
-        return inject(tabId, `location.reload()`);
+        return inject(tabId, 'location.reload()');
     }
 
     console.info('No updates found.');
@@ -69,8 +69,8 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
             const res = await fetch(chrome.runtime.getURL('bundle.js'))
                 .then(r => r.text())
                 .catch(() => {
-                    console.info('Bundle doesn\'t exist! Assuming enabling local mode was a mistake...')
-                })
+                    console.info('Bundle doesn\'t exist! Assuming enabling local mode was a mistake...');
+                });
 
             res && inject(sender.tab.id, res);
             return;
@@ -78,7 +78,7 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 
         if (reset) {
             console.info('Clearing bundle and hash! Please wait...');
-            await chrome.storage.local.set({ azaleaHash: null, azalea: null })
+            await chrome.storage.local.set({ azaleaHash: null, azalea: null });
         }
 
         const loader = await fetch(chrome.runtime.getURL('loader.js')).then(r => r.text());
@@ -94,7 +94,7 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
         if (update) {
             await updateAzalea(sender.tab.id);
         } else {
-            console.info('Updates are disabled.')
+            console.info('Updates are disabled.');
         }
     } catch (e) {
         throw new Error('Failed to load Azalea: ' + e);

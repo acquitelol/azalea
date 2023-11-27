@@ -7,7 +7,7 @@ import NameInput from './NameInput';
 const { React } = common;
 const { name } = utilities;
 
-export default () => {
+function Name() {
     return <div style={commonStyles.merge(x => [x.flex, x.justify, x.wrap])}>
         <NameInput 
             type={'cuterFirstName'} 
@@ -19,5 +19,7 @@ export default () => {
             label={'Last'}
             placeholder={name.defaults.lastName}
         />
-    </div>
+    </div>;
 }
+
+export default Name;

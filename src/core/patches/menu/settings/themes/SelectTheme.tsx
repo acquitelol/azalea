@@ -14,9 +14,9 @@ const { styles } = createStyleSheet({
         marginLeft: '0.5em',
         color: 'var(--palette-dark-blue)'
     }
-})
+});
 
-export default ({ label, selected, setSelected }: SelectThemeProps) => {
+function SelectTheme({ label, selected, setSelected }: SelectThemeProps) {
     React.useEffect(() => {
         Theming.setTheme();
         Theming.applyLabel(label);
@@ -32,9 +32,11 @@ export default ({ label, selected, setSelected }: SelectThemeProps) => {
         }}
     >
         {Theming.themes.map((theme, i) => (
-            <option value={i}>
+            <option value={i} key={i}>
                 {theme.name}
             </option>
         ))}
-    </select>
+    </select>;
 }
+
+export default SelectTheme;

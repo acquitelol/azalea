@@ -13,16 +13,16 @@ class Item implements MenuItem {
     text = 'Settings';
 
     callback() {
-        navigate(path)
+        navigate(path);
     }
 }
 
 class Route implements RouteItem {
-    path = path
+    path = path;
 
     component() {
-        return <Settings />
+        return <Settings />;
     }
 }
 
-export default { Item, Route }
+export default { Item, Route };

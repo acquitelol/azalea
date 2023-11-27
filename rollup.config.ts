@@ -33,7 +33,7 @@ const copyExtension = (): Plugin => ({
                 execSync('cp -rf extension/* dist/');
         }
     }
-})
+});
 
 const defineExtendedConfig = ({ plugins, ...options }: RollupOptions) => defineConfig({
     onwarn(warning, warn) {
@@ -60,7 +60,7 @@ const defineExtendedConfig = ({ plugins, ...options }: RollupOptions) => defineC
     ],
 
     ...options
-})
+});
 
 export default [
     defineExtendedConfig({
@@ -71,9 +71,19 @@ export default [
                 file: 'dist/index.js',
                 format: 'iife',
                 inlineDynamicImports: true,
-                strict: false,
+                strict: false
             }
         ],
+
+        plugins: [
+            typescriptPaths({
+                preserveExtensions: true,
+                nonRelative: process.platform === 'darwin' ? false : true
+            }),
+            json(),
+            esbuild({ minify: true, target: 'ES2020' }),
+            obfuscateCode()
+        ]
     }),
     defineExtendedConfig({
         input: 'src/loader/loader.ts',
@@ -83,7 +93,7 @@ export default [
                 file: 'dist/loader.js',
                 format: 'iife',
                 inlineDynamicImports: true,
-                strict: false,
+                strict: false
             }
         ],
     }),
@@ -95,7 +105,7 @@ export default [
                 file: 'dist/worker.js',
                 format: 'iife',
                 inlineDynamicImports: true,
-                strict: false,
+                strict: false
             }
         ],
     }),
@@ -124,4 +134,4 @@ export default [
             copyExtension()
         ]
     }),
-]
+];
