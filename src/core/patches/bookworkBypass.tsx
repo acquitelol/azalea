@@ -20,11 +20,10 @@ const { styles } = createStyleSheet({
     },
 
     imageContainer: {
-        maxWidth: '8%', 
-        aspectRatio: 1, 
-        display: 'flex', 
-        flexDirection: 'row', 
-        gap: '1em', 
+        display: 'flex',
+        flexDirection: 'column', 
+        justifyContent: 'space-between',
+        gap: '1em',
         marginBlock: '0.5em'
     }
 })
@@ -34,14 +33,14 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
         <h3 style={{ marginInline: '2em' }}>
             The most recent stored answers for this code are shown below:
         </h3>
-        <div style={commonStyles.merge(x => [x.flex, x.row, { justifyContent: 'space-around' }])}>
+        <div style={commonStyles.merge(x => [x.flex, x.row, { justifyContent: 'space-around', gap: '1em' }])}>
             {answers
                 .filter(store => Array.isArray(store.answers) && store.answers.length > 0)
                 .sort((a, b) => b.date - a.date)
                 .slice(0, 3)
                 .map(store => {
                     // Convert plain numbers to latex formatting and add spacing between answers with the join seperator
-                    const answers = store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`);
+                    const answers: any[] = store.answers.map(answer => isNaN(+answer) ? answer : `$${answer}$`);
                     const imageAnswers = answers.filter(answer => answer.includes('assets.sparxhomework.uk'));
                     const textAnswers = answers.filter(answer => !answer.includes('assets.sparxhomework.uk'));
 
@@ -59,12 +58,19 @@ const BookworkSection = ({ answers }: { answers: any[], azalea: boolean }) => {
                             <div>
                                 {imageAnswers.length > 0 && <div style={styles.imageContainer}>
                                     {imageAnswers.map(answer => (
-                                        <img src={answer} />
+                                        <img 
+                                            src={answer} 
+                                            style={{ 
+                                                maxWidth: '100%',
+                                                height: 'auto',
+                                                flexGrow: 1 
+                                            }}
+                                        />
                                     ))}
                                 </div>}
                                 {textAnswers.length > 0 && <TextWithMaths 
                                     text={textAnswers.join('$,\\;\\;$')}
-                                    style={{ margin: 0, padding: 0 }}
+                                    style={{ margin: 0, padding: 0, color: 'var(--palette-white)' }}
                                 />}
                             </div>
                         </div>
