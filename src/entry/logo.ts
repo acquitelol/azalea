@@ -10,10 +10,10 @@ async function initializeLogo() {
 
     preferences.set('originalLogoUrl', sparxLogo.src);
 
-    applyLogo(sparxLogo);
+    applyLogo(sparxLogo, {});
 }
 
-export function applyLogo(logo: HTMLImageElement, { url, size }: { url?: string, size?: string } = { url: preferences.get('customLogoUrl'), size: preferences.get('customLogoSize') }) {
+export function applyLogo(logo: HTMLImageElement, { url = preferences.get('customLogoUrl'), size = preferences.get('customLogoSize') }) {
     if (!logo) logo = document.querySelector('[class*="_SMLogo_"]').childNodes[0] as HTMLImageElement
 
     if (preferences.get('shouldUseCustomLogo')) {
