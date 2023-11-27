@@ -1,3 +1,7 @@
+:root {
+    --user-select-accessibility-setting: default !important;
+}
+
 html {
     overflow: hidden !important;
 }

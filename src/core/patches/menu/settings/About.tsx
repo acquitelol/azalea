@@ -90,7 +90,7 @@ export default () => {
                         <br />
                         <li>↝ Contact <strong>rosie.pie</strong> or <strong>rosie.nya</strong> via Discord</li>
                         <br />
-                        <li>↝ <a href={repository.plain + '/issues/new'}>Raise an issue</a> via the GitHub repository</li>
+                        <li>↝ <a href={repository.plain + '/issues/new'} target={'blank'}>Raise an issue</a> via the GitHub repository</li>
                     </ul>
                 </p>
             </div>
