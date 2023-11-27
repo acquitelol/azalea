@@ -81,14 +81,10 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
             await chrome.storage.local.set({ azaleaHash: null, azalea: null });
         }
 
-        const loader = await fetch(chrome.runtime.getURL('loader.js')).then(r => r.text());
         const { azalea } = await promisifiedGet('azalea');
 
         if (azalea) {
-            inject(
-                sender.tab.id,
-                loader.replace('INJECT_AZALEA_SOURCE', azalea),
-            );
+            inject(sender.tab.id, azalea);
         }
 
         if (update) {
