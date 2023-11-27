@@ -86,18 +86,6 @@ export default [
         ]
     }),
     defineExtendedConfig({
-        input: 'src/loader/loader.ts',
-
-        output: [
-            {
-                file: 'dist/loader.js',
-                format: 'iife',
-                inlineDynamicImports: true,
-                strict: false
-            }
-        ],
-    }),
-    defineExtendedConfig({
         input: 'src/loader/worker.ts',
 
         output: [
