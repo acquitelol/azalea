@@ -10,9 +10,9 @@ const { getImage } = utilities;
 
 export default () => {
     React.useEffect(() => {
-        applyLogo(null);
+        applyLogo(null, {});
 
-        return () => applyLogo(null);
+        return () => applyLogo(null, {});
     }, [])
     
     return <div style={commonStyles.merge(x => [x.flex, x.justify, x.wrap])}>
