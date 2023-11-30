@@ -4,9 +4,11 @@ import { useStorageValue } from '@core/hooks';
 import { createStyleSheet, commonStyles } from '@stylesheet';
 import { common } from '@core/modules';
 import { storages } from '@core/handlers/state';
+import { validateData, validateItem, validateAnswers } from '@core/handlers/bookwork';
 
 import Toggle from './Toggle';
 import Listing from './Listing';
+import logger from '@core/logger';
 
 const { React } = common;
 const { navigate } = utilities;
@@ -39,6 +41,13 @@ const { merge, styles } = createStyleSheet({
         fontSize: '1.25rem', 
         justifyContent: 'end',
         marginRight: '2em'
+    },
+
+    actions: {
+        justifyContent: 'start',
+        marginInline: '2em',
+        gap: '0.5em',
+        flexGrow: 1
     },
 
     paragraph: {
@@ -93,13 +102,108 @@ function Bookwork() {
 
         <components.Dividers.Small />
 
-        <div style={commonStyles.merge(x => [x.flex, x.row, styles.navigation, styles.answers])}>
-            <p style={styles.paragraph}>Total questions stored:</p>
-            <strong>
-                {Object.values(listing)
-                    .reduce((pre: any[], cur: any[]) => [...pre, ...cur], [])
-                    .filter(item => item.answers.length > 0).length}
-            </strong>
+        <div style={commonStyles.merge(x => [x.flex, x.row])}>
+            <div style={commonStyles.merge(x => [x.flex, x.row, styles.navigation, styles.actions])}>
+                <components.SolidButton 
+                    text={'Export'}
+                    onClick={() => {
+                        logger.log('Exporting bookwork codes...');
+                        const blob = new Blob([JSON.stringify({ azalea: true, listing })], { type: 'application/json' });
+                        const link = document.createElement('a');
+
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `azalea.export-${new Date().toLocaleDateString().replace(/\//g, '-')}.json`;
+
+                        link.click();
+                    }}
+                />
+                <components.SolidButton 
+                    text={'Import'}
+                    onClick={() => {
+                        logger.log('Importing bookwork codes...');
+                        const input = document.createElement('input');
+
+                        input.type = 'file';
+                        input.addEventListener('change', handleFileSelection);
+
+                        function handleFileSelection(event) {
+                            const file = event.target.files[0];
+                            const reader = new FileReader();
+
+                            reader.onload = (e) => {
+                                const contents = e.target.result as string;
+
+                                try {
+                                    logger.info('Parsing data...');
+                                    const maybeData: unknown = JSON.parse(contents);
+                                    const { valid, data } = validateData(maybeData);
+                                    
+                                    if (!valid) {
+                                        throw new Error('Data is invalid.');
+                                    };
+
+                                    for (const [key, value] of Object.entries(data.listing)) {
+                                        if (!(/^[1-9][A-Z]$/.test(key))) {
+                                            console.error('Code', key, 'is invalid.');
+                                            continue;
+                                        }
+
+                                        if (!Array.isArray(value)) {
+                                            console.error('Value', value, 'is invalid.');
+                                            continue;
+                                        }
+
+                                        value.forEach(maybeItem => {
+                                            const codeInfo: any[] = bookwork.get(key) ?? [];
+                                            const { valid: itemIsValid, item } = validateItem(maybeItem);
+
+                                            if (!itemIsValid) {
+                                                console.error('Item', maybeItem, 'is invalid.');
+                                                return;
+                                            }
+
+                                            const { valid: answersAreValid } = validateAnswers(item.answers);
+
+                                            if (!answersAreValid) {
+                                                console.error('Answers', item.answers, 'are invalid.');
+                                                return;
+                                            }
+
+                                            bookwork.set(key, [
+                                                ...codeInfo.filter(existingItem => existingItem.id !== item.id),
+                                                item
+                                            ]);
+                                        });
+                                    }
+
+                                    logger.info('Updating with new data...');
+                                    forceRender({});
+
+                                    logger.info('Cleaning up...');
+                                    input.removeEventListener('change', handleFileSelection);
+                                    input.remove();
+
+                                    logger.info('Done!');
+                                } catch(e) {
+                                    console.info('Failed to import bookwork codes:', e);
+                                }
+                            };
+
+                            reader.readAsText(file);
+                        }
+
+                        input.click();
+                    }}
+                />
+            </div>
+            <div style={commonStyles.merge(x => [x.flex, x.row, styles.navigation, styles.answers])}>
+                <p style={styles.paragraph}>Total questions stored:</p>
+                <strong>
+                    {Object.values(listing)
+                        .reduce((pre: any[], cur: any[]) => [...pre, ...cur], [])
+                        .filter(item => item.answers.length > 0).length}
+                </strong>
+            </div>
         </div>
 
         <div 

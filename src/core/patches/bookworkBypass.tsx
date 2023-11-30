@@ -88,6 +88,8 @@ function handler() {
 
     if (!WAC) return logger.debug('Failed to find React Fiber of WAC:', WAC);
 
+    const codeMap = new Map<string, any>([['code', ''], ['answers', []]]);
+
     patcher.after('render', WAC.type, (_, { props: { children } }) => {
         const topSection: any[] = findInReactTree(children, x => x?.find(y => y.props.className.includes('Bookwork')));
         const bookworkSection = topSection?.find(x => x.props?.className?.includes('Bookwork'))?.props?.children;
@@ -96,8 +98,17 @@ function handler() {
         if (!bookworkSection) return;
 
         const code = bookworkSection[1];
-        const baseAnswers = bookwork.get(code) ?? [];
-        const answers = Array.isArray(baseAnswers) ? baseAnswers.filter(x => Array.isArray(x.answers)) : [];
+
+        // Cache the answers to ensure we don't get the answers from localStorage every render
+        // A simple conditional is much less intensive than a localStorage + JSON.parse call
+        if (codeMap.get('code') !== code) {
+            logger.log('Caching answer for this bookwork check...');
+            
+            codeMap.set('code', code);
+            codeMap.set('answers', bookwork.get(code) ?? []);
+        }
+
+        const answers = Array.isArray(codeMap.get('answers')) ? codeMap.get('answers').filter(x => Array.isArray(x.answers)) : [];
     
         if (!topSection.find(x => x.props.azalea)) {
             topSection.push(<BookworkSection answers={answers} azalea />);

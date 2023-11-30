@@ -14,8 +14,7 @@ const { styles } = createStyleSheet({
     },
 
     images: {
-        maxWidth: '10%', 
-        aspectRatio: 1, 
+        maxWidth: '20%', 
         gap: '1em', 
         marginBlock: '0.5em'
     }
@@ -41,11 +40,11 @@ function Listing({ query, listing }: ListingProps) {
     );
 
     return entries.length > 0 ? entries.sort(sortCodes).map(([key, value]: [string, any[]]) => {
-        return value.length > 0 && <Section title={key}>
+        return value.length > 0 && <Section title={key} key={key}>
             {value
                 .filter(store => Array.isArray(store.answers) && store.answers.length > 0)
                 .sort((a, b) => b.date - a.date)
-                .map((store, i, array) => {
+                .map((store, index, array) => {
                     // Add 's' to the word 'Answer' if the amount of answers is more than 1
                     // You will never have 0 or -1 answers due to the filter above
                     // Therefore 'len > 1' is valid for this use case
@@ -56,7 +55,7 @@ function Listing({ query, listing }: ListingProps) {
                     const imageAnswers = answers.filter(answer => answer.includes('assets.sparxhomework.uk'));
                     const textAnswers = answers.filter(answer => !answer.includes('assets.sparxhomework.uk'));
 
-                    return <>
+                    return <React.Fragment key={index}>
                         <Row 
                             label={'Question:'}
                             sublabel={store.id}
@@ -78,19 +77,19 @@ function Listing({ query, listing }: ListingProps) {
                         <Row 
                             label={`Answer${plural}:`}
                             sublabel={<div>
-                                {imageAnswers.length > 0 && <div style={commonStyles.merge(x => [x.flex, x.row, styles.images])}>
-                                    {imageAnswers.map((answer, i) => (
-                                        <img src={answer} key={i} />
-                                    ))}
-                                </div>}
+                                {imageAnswers.length > 0 && (
+                                    <div style={commonStyles.merge(x => [x.flex, x.row, styles.images])}>
+                                        {imageAnswers.map((answer, idx) => <img src={answer} key={idx} />)}
+                                    </div>
+                                )}
                                 {textAnswers.length > 0 && <TextWithMaths 
                                     text={textAnswers.join('$,\\;\\;$')}
                                     style={{ margin: 0, padding: 0 }}
                                 />}
                             </div>}
                         />
-                        {i !== array.length - 1 && <Dividers.Large />}
-                    </>;
+                        {index !== array.length - 1 && <Dividers.Large />}
+                    </React.Fragment>;
                 })}
         </Section>;
     }) : <SectionBody style={styles.fallback}>
