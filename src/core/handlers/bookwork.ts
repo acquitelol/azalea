@@ -34,7 +34,9 @@ export function validateItem(item: unknown) {
 }
 
 export function validateAnswers(answers: unknown) {
-    if (!Array.isArray(answers) || !answers.every(answer => typeof answer === 'string')) {
+    if (!Array.isArray(answers)
+        || !answers.every(answer => typeof answer === 'string')
+    ) {
         return { valid: false, answers: null };
     }
 

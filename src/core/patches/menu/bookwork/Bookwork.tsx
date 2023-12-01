@@ -9,58 +9,18 @@ import { validateData, validateItem, validateAnswers } from '@core/handlers/book
 import Toggle from './Toggle';
 import Listing from './Listing';
 import logger from '@core/logger';
+import { merge, styles } from './bookwork.styles';
 
 const { React } = common;
 const { navigate } = utilities;
 const { bookwork } = storages;
-const { merge, styles } = createStyleSheet({
-    common: {
-        marginLeft: '1em'
-    },
 
-    input: {
-        borderRadius: '10em', 
-        height: 'auto'
-    },
-
-    message: {
-        marginInline: '2em',
-        background: 'var(--palette-light-blue-20)'
-    },
-
-    navigation: {
-        marginBlock: '1em'
-    },
-
-    collapsable: {
-        overflow: 'hidden',
-        transition: 'max-height 300ms ease, opacity 300ms ease'
-    },
-
-    answers: {
-        fontSize: '1.25rem', 
-        justifyContent: 'end',
-        marginRight: '2em'
-    },
-
-    actions: {
-        justifyContent: 'start',
-        marginInline: '2em',
-        gap: '0.5em',
-        flexGrow: 1
-    },
-
-    paragraph: {
-        marginBlock: 0, 
-        marginRight: '0.25em'
-    }
-});
 
 function Bookwork() {
     const [enabled, setEnabled] = useStorageValue<boolean>('autoBookwork', 'preferences');
     const [query, setQuery] = React.useState<string>('');
     const [force, forceRender] = React.useState({});
-    const listing = React.useMemo(() => bookwork.list(), [query, force]);
+    const listing = React.useMemo(() => bookwork.list(), [force]);
 
     return <>
         <div style={commonStyles.merge(x => [x.flex, x.justify, x.row, styles.navigation])}>
@@ -226,7 +186,7 @@ function Bookwork() {
             </components.SectionBody>
         </div>
 
-        <Listing query={query} force={force} listing={listing} />
+        <Listing query={query} listing={listing} forceRender={forceRender} />
     </>;
 }
 

@@ -114,8 +114,24 @@ declare module '@azalea/bookwork' {
 
     export type ListingProps = {
         query: string,
-        readonly force: Record<string, any>,
+        forceRender: (arg: AnyProps) => void,
         listing: ReturnType<typeof storages['bookwork']['list']>
+    }
+
+    type AnswerProps = {
+        store: AnyProps;
+        index: number;
+        array: AnyProps[];
+        code: string;
+        plural: string;
+        forceRender: (arg: AnyProps) => void;
+        answers: AnyProps<Record<string, any[]>>;
+    }
+
+    type AnswerSectionProps = {
+        code: string;
+        value: any[];
+        forceRender: (arg: AnyProps) => void;
     }
 }
 

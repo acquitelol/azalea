@@ -17,7 +17,7 @@ export const patterns = {
     hazardousComma: /(?<!\s)\\,/g,
     hazardousCharacters: /[&<>"']/,
     maths: /\$|(?:\\.|[^$])+/g,
-    bold: /\*\*(.*)\*\*/g
+    bold: /\*\*(.*?)\*\*/g
 };
 
 export const brackets = {
