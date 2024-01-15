@@ -1,6 +1,5 @@
 declare module '@azalea/types' {
     import { exfiltratedModules } from '@modules/data';
-    import { Navigation } from '@azalea/utilities';
 
     export type MenuItem = {
         text: string;

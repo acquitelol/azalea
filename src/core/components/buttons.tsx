@@ -21,9 +21,9 @@ export function SolidButton({ style, ...props }: Arguments<typeof BaseButton>[0]
     return <BaseButton 
         {...props}
         style={mergeStyles({ userSelect: 'none' }, style ?? {})}
-        className={'_ButtonBase_10evl_1 ' + '_FocusTarget_1nxry_1 '
-        + '_ButtonMd_10evl_27 ' + '_ButtonBlue_10evl_51 '
-        + '_ButtonContained_10evl_81 ' + (props.className ?? '')}
+        className={`_ButtonBase_19fx3_1 _FocusTarget_1nxry_1 
+            _ButtonMd_19fx3_27 _ButtonBlue_19fx3_90 
+            _ButtonContained_19fx3_122` + (props.className ?? '')}
     />;
 }
 
