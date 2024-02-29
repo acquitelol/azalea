@@ -9,3 +9,48 @@ html {
 [class*="_WACContent_"] {
     justify-content: space-evenly !important;
 }
+
+._AzaleaButton {
+    -webkit-text-fill-color: initial;
+    color: var(--spx-button-contained-color);
+    background: var(--spx-button-contained-background);
+    border-color: transparent;
+    --spx-button-contained-color: var(--colours-text-body-inverted);
+    --spx-button-contained-color-hover: var(--colours-text-body-inverted);
+    --spx-button-contained-background: var(--colours-interactable);
+    --spx-button-contained-background-hover: var(--colours-selected);
+    --spx-button-outlined-border-color: var(--colours-interactable);
+    --spx-button-outlined-color: var(--colours-interactable);
+    --spx-button-outlined-background: var(--colours-plain-background);
+    --spx-button-outlined-background-hover: var(--colours-regular-background);
+    --spx-button-plain-color: var(--colours-interactable);
+    --spx-button-plain-background: var(--colours-plain-background);
+    --spx-button-plain-background-hover: var(--colours-regular-background);
+    --spx-button-text-color: var(--colours-interactable);
+    --spx-button-text-color-hover: var(--colours-selected);
+    --spx-button-text-background: transparent;
+    --default-padding-y: var(--spx-unit-1);
+    --default-padding-x: var(--spx-unit-4);
+    padding-top: var(--spx-button-padding-t-md, var(--spx-button-padding-y-md, var(--spx-button-padding-md, var(--default-padding-y))));
+    padding-bottom: var(--spx-button-padding-b-md, var(--spx-button-padding-y-md, var(--spx-button-padding-md, var(--default-padding-y))));
+    padding-right: var(--spx-button-padding-r-md, var(--spx-button-padding-x-md, var(--spx-button-padding-md, var(--default-padding-x))));
+    padding-left: var(--spx-button-padding-l-md, var(--spx-button-padding-x-md, var(--spx-button-padding-md, var(--default-padding-x))));
+    font-size: var(--spx-font-size-xl);
+    text-align: center;
+    border-radius: var(--spx-button-border-radius, 1em);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: background-color .2s var(--spx-ease-1),border-color .2s var(--spx-ease-1),opacity .2s var(--spx-ease-1),color .2s var(--spx-ease-1);
+    cursor: pointer;
+    position: relative;
+    border: 1px solid white;
+    text-decoration: none;
+}
+
+._AzaleaButton:hover {
+    -webkit-text-fill-color: initial;
+    background: var(--spx-button-contained-background-hover);
+    color: var(--spx-button-contained-color-hover);
+}

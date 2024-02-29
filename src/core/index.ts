@@ -9,6 +9,7 @@ import initializePatches from '@patches';
 import validate from '@entry/validate';
 
 import { Navigation } from '@azalea/utilities';
+import { version } from '@extension/manifest.json';
 
 const generateAzalea = () => validate(() => ({
     modules,
@@ -18,7 +19,8 @@ const generateAzalea = () => validate(() => ({
     patches: initializePatches(),
     patcher,
     hooks,
-    navigation: null as Navigation
+    navigation: null as Navigation,
+    version
 }));
 
 export default generateAzalea;
